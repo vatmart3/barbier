@@ -1,5 +1,5 @@
 /**
- * ⚠️ AVIS DE DÉMONSTRATION — À REMPLACER PAR LES VRAIS AVIS DU CLIENT.
+ * AVIS DE DÉMONSTRATION — À REMPLACER PAR LES VRAIS AVIS DU CLIENT.
  * Ne jamais publier ces textes pour un vrai salon. Ne pas afficher de logo
  * ou de note « Google » : recopiez les avis réels avec l'accord de leurs auteurs.
  */

@@ -1,8 +1,11 @@
 // Interactions clés : menu, fidélité, configurateur, avant/après clavier, FAQ, question
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
+// Chromium de l'environnement si présent, sinon celui de Playwright (npx playwright install chromium)
+const chrome = () => process.env.CHROME_PATH || (existsSync("/opt/pw-browsers/chromium-1194/chrome-linux/chrome") ? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" : undefined);
 const base = process.argv[2] ?? "http://localhost:3200";
 const out = "/tmp/claude-0/shots";
-const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const b = await chromium.launch({ executablePath: chrome() });
 const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 await ctx.addInitScript(() => { sessionStorage.setItem("dg-seen", "1"); localStorage.setItem("dg-consent", '{"mesure":false}'); });
 const p = await ctx.newPage();

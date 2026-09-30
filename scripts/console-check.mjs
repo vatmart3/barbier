@@ -1,8 +1,11 @@
 // Vérifie les erreurs console / hydratation sur toutes les pages, mouvement normal et réduit
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
+// Chromium de l'environnement si présent, sinon celui de Playwright (npx playwright install chromium)
+const chrome = () => process.env.CHROME_PATH || (existsSync("/opt/pw-browsers/chromium-1194/chrome-linux/chrome") ? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" : undefined);
 const base = process.argv[2] ?? "http://localhost:3100";
 const pages = ["/", "/coupes", "/equipe", "/reserver", "/infos", "/mentions-legales", "/confidentialite", "/nexiste-pas"];
-const b = await chromium.launch({ executablePath: process.env.CHROME_PATH ?? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const b = await chromium.launch({ executablePath: chrome() });
 for (const mode of ["no-preference", "reduce"]) {
   const ctx = await b.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: mode });
   for (const path of pages) {

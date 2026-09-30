@@ -1,6 +1,9 @@
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
+// Chromium de l'environnement si présent, sinon celui de Playwright (npx playwright install chromium)
+const chrome = () => process.env.CHROME_PATH || (existsSync("/opt/pw-browsers/chromium-1194/chrome-linux/chrome") ? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" : undefined);
 const [,, url, out, w = "1440", h = "900", full = "0", wait = "1500", scrollY = "0"] = process.argv;
-const b = await chromium.launch({ executablePath: process.env.CHROME_PATH ?? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const b = await chromium.launch({ executablePath: chrome() });
 const p = await b.newPage({ viewport: { width: +w, height: +h }, deviceScaleFactor: 1 });
 p.on("pageerror", (e) => console.log("PAGEERROR", e.message));
 p.on("console", (m) => { if (m.type() === "error" || m.type() === "warning") console.log("CONSOLE", m.type(), m.text().slice(0, 300)); });

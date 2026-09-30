@@ -10,7 +10,7 @@ import { site, telHref } from "@/config/site";
 export const metadata: Metadata = pageMetadata({
   title: "Réserver chez votre barbier à Sète — Dégradé",
   description:
-    "Choisissez la coupe, le barbier et le créneau : réservation en moins d'une minute chez Dégradé, barbier à Sète. Confirmation immédiate, annulation gratuite.",
+    "Choisissez la coupe, le barbier et le créneau : réservation en moins d'une minute chez Dégradé, barbier à Sète. Confirmation immédiate, annulation libre.",
   path: "/reserver",
 });
 

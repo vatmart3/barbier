@@ -1,7 +1,10 @@
 // Journal des entrées LCP (CPU ×4, réseau lent) : node scripts/lcp.mjs url
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
+// Chromium de l'environnement si présent, sinon celui de Playwright (npx playwright install chromium)
+const chrome = () => process.env.CHROME_PATH || (existsSync("/opt/pw-browsers/chromium-1194/chrome-linux/chrome") ? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" : undefined);
 const url = process.argv[2];
-const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const b = await chromium.launch({ executablePath: chrome() });
 const ctx = await b.newContext({ viewport: { width: 412, height: 823 }, isMobile: true, hasTouch: true });
 const p = await ctx.newPage();
 const cdp = await ctx.newCDPSession(p);

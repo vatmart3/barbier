@@ -15,7 +15,7 @@ import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Horaires, accès et FAQ — Dégradé, barbier à Sète",
   description:
-    "Barbier Grand'Rue à Sète, à 15 min de Frontignan et 12 min de Balaruc. Horaires, nocturne du jeudi, parking, paiement, et réponses aux questions fréquentes.",
+    "Barbier Grand'Rue à Sète, à 15 min de Frontignan et 12 min de Balaruc. Horaires, nocturne du jeudi, parking, paiement et réponses aux questions fréquentes.",
   path: "/infos",
 });
 

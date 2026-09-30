@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DÉGRADÉ — Barbier, Sète
 
-## Getting Started
+Site vitrine de démonstration — portfolio **MJAGENCY** (site 02/10).
+Marque fictive traitée comme un vrai client : réservation fonctionnelle, configurateur de coupe, rasoir 3D, SEO local complet.
 
-First, run the development server:
+> Concept : **« la chaise »**. Le site se regarde depuis le fauteuil : les sections clés pivotent (défilement horizontal épinglé), le rasoir tranche l'écran au premier scroll, l'enseigne de barbier tourne au rythme de la page.
+
+---
+
+## Démarrer
+
+Prérequis : Node.js ≥ 20.9.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Autres commandes :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Commande | Rôle |
+|---|---|
+| `npm run build` | Build de production (TypeScript strict, 0 warning) |
+| `npm start` | Sert le build |
+| `npm run lint` | ESLint (config Next, règles React Compiler) |
+| `npm run typecheck` | TypeScript sans émission |
+| `npm run assets` | Régénère grain, favicons et placeholders photo |
+| `npm run test:e2e` | Parcours Playwright (réservation, interactions, console) sur un serveur lancé en :3000 |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Les tests e2e utilisent Playwright ; en local, installez d'abord son navigateur : `npx playwright install chromium`.
 
-## Learn More
+## Déployer sur Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. Poussez le dépôt sur GitHub, puis **Add New → Project** sur vercel.com et importez-le. Aucun réglage : Vercel détecte Next.js.
+2. Dans **Settings → Environment Variables**, renseignez (voir `.env.example`) :
+   - `NEXT_PUBLIC_SITE_URL` : l'URL définitive (`https://www.votre-domaine.fr`) — canonical, sitemap, Open Graph ;
+   - `RESEND_API_KEY`, `RESEND_FROM`, `SALON_EMAIL` pour recevoir réellement les réservations et questions.
+3. Redéployez. Sans clé Resend, le site tourne en **mode démo** : formulaires validés, écrans de succès, messages simplement journalisés côté serveur (logs Vercel).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Modifier le contenu
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Tout ce qui est propre au client est dans deux endroits :**
 
-## Deploy on Vercel
+| Fichier | Contenu |
+|---|---|
+| `src/config/site.ts` | Nom, adresse, téléphone, e-mail (NAP), coordonnées GPS, horaires, fermetures exceptionnelles, accès/parking, zones desservies, réseaux, mots-clés SEO |
+| `src/data/prestations.ts` | Coupes, prix, durées, entretien conseillé, options du configurateur, formule Coupe + barbe |
+| `src/data/barbiers.ts` | L'équipe : textes, jours travaillés, horaires particuliers, paramètres du portrait gravé |
+| `src/data/planning.ts` | Réglages de réservation (pas, délai minimum, horizon), pauses, habitués, absences |
+| `src/data/avis.ts` | **Avis de démonstration à remplacer** par de vrais avis (avec l'accord des clients) + chiffres |
+| `src/data/faq.ts` | Questions fréquentes (alimente aussi le JSON-LD `FAQPage`) |
+| `src/data/realisations.ts` | Avant / après (illustrations, ou vraies photos via le champ `photos`) |
+| `src/data/fidelite.ts` | Carte de fidélité |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Les prix modifiés se répercutent partout : pages, configurateur, réservation, e-mails, JSON-LD `Service`/`Offer`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Images
+
+- Placeholders : `public/images/*.jpg` — remplacez-les par de vraies photos **en gardant le même nom** (ou changez le `src` dans `src/app/equipe/page.tsx` et `src/app/infos/page.tsx`). Prompts et formats dans `ASSETS.md`.
+- Avant / après avec photos : dans `src/data/realisations.ts`, ajoutez `photos: { avant: "/images/xxx-avant.jpg", apres: "/images/xxx-apres.jpg", alt: "…" }`.
+- Favicons : modifiez `src/app/icon.svg` puis `npm run assets`.
+
+### Brancher un vrai agenda
+
+Le planning de démo est déterministe (habitués + remplissage simulé selon la date). Pour un vrai agenda, remplacez `getRendezVous()` dans `src/lib/slots.ts` (appel à une base, Google Agenda, Planity…) : l'affichage **et** la validation serveur de `/api/reservation` utilisent la même fonction.
+
+## Architecture
+
+```
+src/
+  app/                 routes (App Router), API, sitemap, robots, manifest, OG images
+  config/site.ts       identité du salon (NAP, horaires…)
+  data/                données métier
+  design/              tokens.css (design system) + motion.ts (easings/durées JS)
+  lib/                 heure de Paris, moteur de créneaux, tarifs, .ics, schémas zod, SEO, OG
+  components/
+    layout/            header, pastille « prochain créneau », enseigne, menu, CTA mobile, footer, loader, cookies, Lenis, révélateur
+    three/             rasoir coupe-chou (R3F, procédural) + enseigne (shader GLSL)
+    illustrations/     profil gravé paramétrique (statique serveur / animé), rasoir SVG, carte de Sète
+    home/ coupes/ equipe/ reservation/ infos/ ui/
+scripts/               génération d'assets + contrôles Playwright
+```
+
+**Stack** : Next.js 16 (App Router, statique), React 19, TypeScript strict, Tailwind CSS 4 (tokens en variables CSS), GSAP + ScrollTrigger (séquences épinglées), Motion (configurateur, tunnel), Lenis, React Three Fiber + drei, react-hook-form + zod (`zod/mini`), Resend.
+
+**Choix de performance** : Motion n'est chargé que là où il sert (configurateur, réservation) ; les révélations au scroll sont en CSS via un seul `IntersectionObserver` ; les profils gravés fixes sont rendus côté serveur ; la 3D est chargée en différé et remplacée par un SVG si WebGL manque, si l'appareil est modeste ou si `prefers-reduced-motion` est actif (forcer : `?3d=on` / `?3d=off`).
+
+## Checklist qualité (mesurée sur le build de production)
+
+- `npm run build` : 0 erreur, 0 warning — `npm run lint` et `tsc` propres.
+- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** sur toutes les pages ; Performance 91–95 sur les pages intérieures, ~88–92 sur l'accueil (variance de mesure). CLS ≤ 0,03.
+- Captures contrôlées à 320, 375, 768, 1024, 1280, 1440 et 1920 px ; `prefers-reduced-motion` testé (aucune erreur d'hydratation).
+
+## Mentions
+
+Pages `/mentions-legales` et `/confidentialite` : champs à compléter surlignés `[entre crochets]`. Bannière cookies conforme (refus aussi simple que l'acceptation, aucun traceur par défaut) ; `useConsent()` (`src/components/layout/CookieBanner.tsx`) permet de conditionner une mesure d'audience.
+
+---
+
+Site concept — design & développement [MJAGENCY](https://mjagency.eu), Sète.

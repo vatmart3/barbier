@@ -22,7 +22,7 @@ export const site = {
   baseline: "Barbier à Sète. Dégradés, taper, barbe au coupe-chou.",
   description:
     "Barbershop à Sète, Grand'Rue. Karim, Théo et Lucas : dégradés au sabot 0,5, taper, taille de barbe à la serviette chaude et au coupe-chou. Du mardi au samedi, nocturne le jeudi.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://degrade-barbier.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://barbier-5cs3.vercel.app",
   locale: "fr_FR",
 
   // ---- NAP : identique partout (header, footer, JSON-LD, mentions) --------

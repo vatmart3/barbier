@@ -7,6 +7,7 @@
  */
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { site } from "@/config/site";
 import { coupes, getCoupe, type CoupeId } from "@/data/prestations";
 import { useParisNow } from "@/hooks/useParisNow";
 import { addDays, diffDays, formatDateLongue, parisToUtc } from "@/lib/time";
@@ -40,7 +41,7 @@ export function Entretien() {
     const ics = creerIcs({
       uid: `rappel-${res.prochaine}-${coupeId}`,
       titre: `Rappel : ${c.nom} à rafraîchir (Dégradé)`,
-      description: `Votre ${c.nom.toLowerCase()} date de ${c.entretienSemaines} semaines. Réserver : https://degrade-barbier.vercel.app/reserver?coupe=${coupeId}`,
+      description: `Votre ${c.nom.toLowerCase()} date de ${c.entretienSemaines} semaines. Réserver : ${site.url}/reserver?coupe=${coupeId}`,
       debut,
       fin: new Date(debut.getTime() + 15 * 60_000),
     });

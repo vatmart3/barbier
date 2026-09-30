@@ -2,8 +2,8 @@
 
 /**
  * La tondeuse en vitrine (section « Les coupes ») : SVG immédiat, 3D chargée
- * quand le bloc approche de l'écran. En le traversant au scroll, le sabot
- * s'enlève, la tondeuse s'allume et pivote pour montrer la denture.
+ * quand le bloc approche de l'écran. En le traversant au scroll, la tondeuse
+ * s'allume (la lame vibre) et pivote pour montrer la denture.
  */
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";

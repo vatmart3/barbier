@@ -7,7 +7,7 @@ Le téléchargement de photos libres (Unsplash, Pexels, Wikimedia) est bloqué d
 
 | Visuel | Fichier | Technique |
 |---|---|---|
-| Tondeuse 3D (section « Les coupes ») | `src/components/three/TondeuseScene.tsx` | Corps en `LatheGeometry` laqué, bague et interrupteur or, lames chromées et dents en `InstancedMesh`, sabot à côtes extrudées, gravure en texture canvas, reflets Lightformer — aucun modèle ni HDR téléchargé |
+| Tondeuse 3D (section « Les coupes ») | `src/components/three/TondeuseScene.tsx` | Dessinée d'après une tondeuse de coupe moderne (référence fournie par le client, non reproduite) : corps `LatheGeometry` noir mat, capot laqué, liseré chromé en V (`TubeGeometry`), bouton ovale, levier, lames et dents en `InstancedMesh`, gravure en texture canvas, reflets Lightformer — aucun modèle ni HDR téléchargé |
 | Enseigne de barbier 3D (progression) | `src/components/three/EnseigneScene.tsx` | Cylindre + shader GLSL maison (spirale pilotée par le scroll) |
 | Intérieur du salon, le soir (fauteuils, miroirs en arche cerclés d'or, Sabot le chat) | `src/components/illustrations/IllustrationSalon.tsx` | SVG dessiné, aplats arrondis |
 | Devanture Grand'Rue, le soir (store festonné or, vitrine éclairée, vélo) | `src/components/illustrations/IllustrationDevanture.tsx` | SVG dessiné, aplats arrondis |

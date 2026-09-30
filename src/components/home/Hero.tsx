@@ -25,7 +25,7 @@ export function Hero() {
       {/* Lisibilité : sombre derrière le texte seulement, la photo reste claire */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(12_16_14/0.86)_0%,rgb(12_16_14/0.72)_45%,rgb(12_16_14/0.1)_72%,rgb(12_16_14/0.4)_100%)] lg:bg-[linear-gradient(90deg,rgb(12_16_14/0.9)_0%,rgb(12_16_14/0.72)_30%,rgb(12_16_14/0.2)_55%,transparent_70%),linear-gradient(0deg,rgb(17_21_19/0.9)_0%,transparent_22%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(12_16_14/0.86)_0%,rgb(12_16_14/0.72)_45%,rgb(12_16_14/0.1)_72%,rgb(12_16_14/0.4)_100%)] lg:bg-[linear-gradient(90deg,rgb(12_16_14/0.92)_0%,rgb(12_16_14/0.8)_34%,rgb(12_16_14/0.45)_50%,rgb(12_16_14/0.1)_64%,transparent_74%),linear-gradient(0deg,rgb(17_21_19/0.9)_0%,transparent_22%)]"
       />
 
       <div className="container-page flex min-h-[max(40rem,94svh)] items-start pb-24 pt-[calc(var(--header-h)+3rem)] lg:items-center lg:pt-[calc(var(--header-h)+2rem)]">

@@ -4,6 +4,7 @@ import { EnTete } from "@/components/ui/EnTete";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { ACompleter, Prose } from "@/components/ui/Prose";
 import { fullAddress, site } from "@/config/site";
+import { LICENCE, photos } from "@/data/galerie";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -49,9 +50,27 @@ export default function MentionsLegales() {
             </p>
             <h2>Propriété intellectuelle</h2>
             <p>
-              L&apos;ensemble des contenus (textes, illustrations, profils gravés, rasoir 3D, logo, mise en page) est protégé par le droit d&apos;auteur. Toute
-              reproduction sans autorisation écrite est interdite.
+              L&apos;ensemble des contenus (textes, illustrations, profils gravés, tondeuse 3D, logo, mise en page) est protégé par le droit d&apos;auteur. Toute
+              reproduction sans autorisation écrite est interdite, à l&apos;exception des photos ci-dessous, qui restent sous leur propre licence.
             </p>
+            <h2>Crédits photos</h2>
+            <p>
+              Galerie « Au fauteuil » : photos publiées sur Flickr sous licence{" "}
+              <a href={LICENCE.url} target="_blank" rel="noopener noreferrer">
+                {LICENCE.nom}
+              </a>
+              , recadrées et étalonnées :
+            </p>
+            <ul>
+              {photos.map((ph) => (
+                <li key={ph.src}>
+                  « {ph.legende} » :{" "}
+                  <a href={ph.source} target="_blank" rel="noopener noreferrer">
+                    {ph.auteur}
+                  </a>
+                </li>
+              ))}
+            </ul>
             <h2>Médiation de la consommation</h2>
             <p>
               Conformément à l&apos;article L612-1 du Code de la consommation, le client peut recourir gratuitement au médiateur :{" "}

@@ -21,7 +21,7 @@ function Etoiles() {
 
 export function Avis() {
   return (
-    <section aria-labelledby="avis-titre" className="clair bg-charbon-2 py-(--spacing-section) text-creme">
+    <section aria-labelledby="avis-titre" className="bg-charbon-2 py-(--spacing-section)">
       <div className="container-page">
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
           <div>

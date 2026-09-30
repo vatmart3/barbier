@@ -25,6 +25,22 @@ Le téléchargement de photos libres (Unsplash, Pexels, Wikimedia) est bloqué d
 |---|---|---|
 | Salon (hero, page L'équipe, images Open Graph) | `public/images/salon-hero.jpg` (1200 × 1500) | Image fournie par le client pour la démo, éclaircie (+14 %) et recompressée avec `sharp`. **Vérifier les droits d'usage** avant toute mise en ligne publique ; pour un vrai salon, la remplacer par une photo du lieu en gardant le même nom (cadrage : fauteuils au centre, zone sombre en haut pour le texte sur mobile). |
 
+### Galerie « Au fauteuil » (accueil, page L'équipe) — vraies photos, **CC BY 2.0**
+
+Photos Flickr trouvées via le jeu de données **Open Images** (Google), toutes sous licence [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/deed.fr) : réutilisation libre, **attribution obligatoire** (faite sous la galerie et dans les mentions légales). Modifications : étalonnage chaud commun (saturation −15 %, légère dominante chaude), recadrage à l'affichage, compression. Données et crédits : `src/data/galerie.ts`.
+
+| Fichier (`public/images/galerie/`) | Légende | Auteur | Source |
+|---|---|---|---|
+| `rasage-coupe-chou.jpg` | Rasage au coupe-chou | John Patrick Robichaud | https://www.flickr.com/photos/troismarteaux/16702534327 |
+| `salon-vintage.jpg` | Fauteuils d'époque | Meagan Fisher | https://www.flickr.com/photos/meaganfisher/7496351192 |
+| `tondeuse-sourire.jpg` | La tondeuse, et le sourire | LiteTouch Photography | https://www.flickr.com/photos/g_link/2882187790 |
+| `ciseaux-peigne.jpg` | Ciseaux et peigne | Jason White | https://www.flickr.com/photos/jasonwhite/8288802599 |
+| `contours-peigne.jpg` | Le dessus, au peigne | OXLAEY.com | https://www.flickr.com/photos/oxlaey/20092078730 |
+| `serviette-chaude.jpg` | Serviette chaude | piotr mamnaimie | https://www.flickr.com/photos/mamnaimie/6273361040 |
+| `coupe-atelier.jpg` | Entre deux blagues | Jason Scott | https://www.flickr.com/photos/textfiles/8465434157 |
+
+Ces personnes sont réelles : elles ne sont **jamais** présentées comme l'équipe de Dégradé (pas de prénom, pas de citation). Les fiches des barbiers restent des portraits gravés tant que le salon ne fournit pas ses propres photos. Pour un vrai client, remplacer la galerie par des photos du salon (avec l'accord écrit des personnes visibles, droit à l'image).
+
 ## 2. Polices
 
 Toutes sous **SIL Open Font License 1.1** (fichiers et licence dans `src/assets/fonts/`, sinon servies par `next/font/google`, auto-hébergées au build) :

@@ -7,6 +7,7 @@ import { Lignes } from "@/components/ui/Lignes";
 import { Bouton } from "@/components/ui/Bouton";
 import { IconFleche } from "@/components/ui/Icons";
 import Image from "next/image";
+import { Galerie } from "@/components/home/Galerie";
 import { EquipeHorizontal } from "@/components/equipe/EquipeHorizontal";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { site } from "@/config/site";
@@ -85,6 +86,7 @@ export default function EquipePage() {
           </ol>
         </div>
       </section>
+      <Galerie ton="sombre" lienReserver="/reserver" />
     </Page>
   );
 }

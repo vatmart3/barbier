@@ -7,6 +7,7 @@ import { Atouts } from "@/components/home/Atouts";
 import { CoupesHorizontal } from "@/components/home/CoupesHorizontal";
 import { Barbiers } from "@/components/home/Barbiers";
 import { MotDuPatron } from "@/components/home/MotDuPatron";
+import { Galerie } from "@/components/home/Galerie";
 import { AvantApres } from "@/components/home/AvantApres";
 import { Tarifs } from "@/components/home/Tarifs";
 import { Fidelite } from "@/components/home/Fidelite";
@@ -34,7 +35,7 @@ export default function Accueil() {
       <Suspense>
         <Barbiers />
       </Suspense>
-      <MotDuPatron />
+      <Galerie />
       <Suspense>
         <AvantApres />
       </Suspense>
@@ -44,6 +45,7 @@ export default function Accueil() {
       <Suspense>
         <Fidelite />
       </Suspense>
+      <MotDuPatron />
       <Suspense>
         <Avis />
       </Suspense>

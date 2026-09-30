@@ -16,6 +16,9 @@ const display = Big_Shoulders({
   axes: ["opsz"],
   display: "swap",
   variable: "--font-big-shoulders",
+  // Pas de métriques de repli connues pour cette famille : repli explicite
+  adjustFontFallback: false,
+  fallback: ["Arial Narrow", "Roboto Condensed", "sans-serif"],
 });
 
 const text = Schibsted_Grotesk({

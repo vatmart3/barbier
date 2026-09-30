@@ -18,6 +18,8 @@ interface Common {
   className?: string;
   /** Effet magnétique discret (pointeur fin uniquement) */
   magnetic?: boolean;
+  /** Pleine largeur */
+  pleine?: boolean;
 }
 
 type LinkProps = Common & { href: string; external?: boolean } & Omit<ComponentProps<"a">, "href" | "children" | "className">;
@@ -36,7 +38,7 @@ const sizes = {
 };
 
 export function Bouton(props: LinkProps | ButtonProps) {
-  const { variant = "rouge", size = "md", icon, iconEnd, children, className, magnetic = true } = props;
+  const { variant = "rouge", size = "md", icon, iconEnd, children, className, magnetic = true, pleine = false } = props;
   const fine = useFinePointer();
   const reduce = useReducedMotionPref();
   const active = magnetic && fine && !reduce;
@@ -74,6 +76,7 @@ export function Bouton(props: LinkProps | ButtonProps) {
     "group relative isolate inline-flex items-center justify-center overflow-hidden rounded-xs uppercase transition-colors duration-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50",
     variants[variant],
     sizes[size],
+    pleine && "w-full",
     className,
   );
 
@@ -95,7 +98,7 @@ export function Bouton(props: LinkProps | ButtonProps) {
     );
 
   return (
-    <motion.span ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} style={active ? { x, y } : undefined} className="inline-flex">
+    <motion.span ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} style={active ? { x, y } : undefined} className={pleine ? "flex w-full" : "inline-flex"}>
       {content}
     </motion.span>
   );
@@ -103,7 +106,7 @@ export function Bouton(props: LinkProps | ButtonProps) {
 
 function stripCommon<T extends Common>(p: T) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { variant, size, icon, iconEnd, children, className, magnetic, ...rest } = p as T & { external?: boolean; href?: string };
+  const { variant, size, icon, iconEnd, children, className, magnetic, pleine, ...rest } = p as T & { external?: boolean; href?: string };
   const r = rest as Record<string, unknown>;
   delete r.external;
   delete r.href;

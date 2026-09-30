@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "assets": "node scripts/grain.mjs && node scripts/icons.mjs && node scripts/placeholders.mjs",
+    "assets": "node scripts/icons.mjs && node scripts/placeholders.mjs",
     "test:e2e": "node scripts/e2e-reservation.mjs http://localhost:3000 && node scripts/e2e-interactions.mjs http://localhost:3000 && node scripts/console-check.mjs http://localhost:3000"
   },
   "dependencies": {

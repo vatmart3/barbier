@@ -14,14 +14,13 @@ Le téléchargement de photos libres (Unsplash, Pexels) était bloqué dans l'en
 | Carte de Sète | `src/components/illustrations/CarteSete.tsx` | SVG stylisé (étang de Thau, canal royal, Mont Saint-Clair en courbes de niveau) — pas de carte tierce |
 | Pictos | `src/components/ui/Icons.tsx` | SVG maison, trait 1,5 px |
 | Tampons de fidélité | `src/components/home/Fidelite.tsx` | SVG |
-| Grain photo animé | `public/textures/grain.png` | Bruit généré (`scripts/grain.mjs`) |
 | Favicons / icônes PWA | `src/app/icon.svg`, `favicon.ico`, `apple-icon.png`, `public/icons/*` | `scripts/icons.mjs` |
 | Images Open Graph (1 par page) | `src/app/**/opengraph-image.tsx` | `next/og`, générées au build |
 
 ## 2. Polices
 
 Le site utilise la **police système** de l'appareil (SF Pro sur Apple, Segoe UI sur Windows, Roboto sur Android) : aucune police web n'est téléchargée.
-Seules les images Open Graph embarquent deux polices (`src/assets/fonts/`, SIL Open Font License 1.1) : Big Shoulders et Schibsted Grotesk.
+Seules les images Open Graph embarquent une police (`src/assets/fonts/`, SIL Open Font License 1.1) : Schibsted Grotesk (Medium et Bold).
 
 ## 3. Photos à remplacer
 

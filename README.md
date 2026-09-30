@@ -26,7 +26,7 @@ Autres commandes :
 | `npm start` | Sert le build |
 | `npm run lint` | ESLint (config Next, règles React Compiler) |
 | `npm run typecheck` | TypeScript sans émission |
-| `npm run assets` | Régénère grain, favicons et placeholders photo |
+| `npm run assets` | Régénère favicons et placeholders photo |
 | `npm run test:e2e` | Parcours Playwright (réservation, interactions, console) sur un serveur lancé en :3000 |
 
 Les tests e2e utilisent Playwright ; en local, installez d'abord son navigateur : `npx playwright install chromium`.

@@ -90,7 +90,6 @@
   --breakpoint-3xl: 120rem;
 
   /* ---- Animations utilitaires ------------------------------------------ */
-  --animate-grain: grain 0.9s steps(6) infinite;
   --animate-blink: blink 1.6s var(--ease-comb) infinite;
 }
 
@@ -104,16 +103,6 @@
     currentColor 0 1px,
     transparent 1px 7px
   );
-}
-
-@keyframes grain {
-  0% { transform: translate3d(0, 0, 0); }
-  17% { transform: translate3d(-4%, 3%, 0); }
-  33% { transform: translate3d(3%, -5%, 0); }
-  50% { transform: translate3d(-6%, -2%, 0); }
-  67% { transform: translate3d(5%, 4%, 0); }
-  83% { transform: translate3d(-2%, 6%, 0); }
-  100% { transform: translate3d(0, 0, 0); }
 }
 
 @keyframes blink {

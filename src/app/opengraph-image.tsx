@@ -5,5 +5,5 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function Image() {
-  return ogImage({ eyebrow: "Dégradé — Barbier à Sète", titre: ["Dégradé,", "barbier à Sète."], repere: "0,5" });
+  return ogImage({ eyebrow: "Dégradé · Barbier à Sète", titre: ["Dégradé,", "barbier à Sète."] });
 }

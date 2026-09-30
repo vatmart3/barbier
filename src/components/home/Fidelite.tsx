@@ -129,7 +129,7 @@ export function Fidelite() {
               <button
                 type="button"
                 onClick={() => (complet ? (setExtra(0), setAuto(0)) : setExtra((e) => e + 1))}
-                className="min-h-11 border border-charbon px-4 text-sm font-semibold transition-colors hover:bg-charbon hover:text-creme active:scale-[0.97]"
+                className="min-h-11 rounded-full border border-charbon px-5 text-sm font-semibold transition-colors hover:bg-charbon hover:text-creme active:scale-[0.97]"
               >
                 {complet ? "Nouvelle carte" : "Tamponner"}
               </button>

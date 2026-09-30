@@ -35,7 +35,7 @@ export function Acces({ n = "08", as = "h2" }: { n?: string; as?: "h2" | "h1" })
             <p className="mt-3 text-sm text-acier">{site.address.landmark}</p>
           </address>
 
-          <p className="mt-6 inline-flex min-h-11 items-center gap-3 border border-creme/15 px-4 text-sm" aria-live="polite">
+          <p className="mt-6 inline-flex min-h-11 items-center gap-3 rounded-full border border-creme/15 px-4 text-sm" aria-live="polite">
             <span aria-hidden className={cn("size-2 rounded-full", statut?.ouvert ? "bg-[#3fb36b]" : "bg-acier")} />
             {!statut || !now
               ? "…"

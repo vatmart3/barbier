@@ -55,7 +55,7 @@ export function Succes({ confirmation: c }: { confirmation: Confirmation }) {
           <button
             type="button"
             onClick={() => telechargerIcs(`rdv-degrade-${c.date}.ics`, creerIcs({ uid: c.reference, ...evt, rappelMinutes: 120 }))}
-            className="inline-flex min-h-12 items-center gap-2.5 bg-creme px-5 text-sm font-semibold text-charbon transition-colors hover:bg-creme-2"
+            className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-creme px-5 text-sm font-semibold text-charbon transition-colors hover:bg-creme-2"
           >
             <IconTelecharger size={18} />
             Ajouter au calendrier (.ics)
@@ -64,7 +64,7 @@ export function Succes({ confirmation: c }: { confirmation: Confirmation }) {
             href={lienGoogleAgenda(evt)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center gap-2.5 border border-creme/30 px-5 text-sm font-semibold transition-colors hover:border-creme"
+            className="inline-flex min-h-12 items-center gap-2.5 rounded-full border border-creme/30 px-5 text-sm font-semibold transition-colors hover:border-creme"
           >
             <IconCalendrier size={18} />
             Google Agenda
@@ -73,7 +73,7 @@ export function Succes({ confirmation: c }: { confirmation: Confirmation }) {
             href={directionsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center gap-2.5 border border-creme/30 px-5 text-sm font-semibold transition-colors hover:border-creme"
+            className="inline-flex min-h-12 items-center gap-2.5 rounded-full border border-creme/30 px-5 text-sm font-semibold transition-colors hover:border-creme"
           >
             <IconRoute size={18} />
             Itinéraire

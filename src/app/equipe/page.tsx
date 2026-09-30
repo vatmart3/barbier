@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Page } from "@/components/layout/Page";
 import { EnTete } from "@/components/ui/EnTete";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -59,6 +60,17 @@ export default function EquipePage() {
               </Bouton>
             </div>
           </div>
+          <figure className="col-span-12 lg:order-last" data-reveal="clip-bas">
+            <Image
+              src="/images/salon-fauteuils.jpg"
+              alt="Les trois fauteuils de barbier de Dégradé face aux miroirs, salon Grand'Rue à Sète"
+              width={1600}
+              height={1100}
+              sizes="(min-width: 1920px) 1840px, 100vw"
+              className="h-auto w-full"
+            />
+            <figcaption className="eyebrow mt-3 text-acier-fonce">Trois fauteuils de 1968, Grand&apos;Rue, Sète.</figcaption>
+          </figure>
           <ol className="col-span-12 border-t border-charbon/15 lg:col-span-6 lg:col-start-7">
             {REGLES.map((r) => (
               <li key={r.n} className="grid grid-cols-[4rem_1fr] gap-4 border-b border-charbon/15 py-8">

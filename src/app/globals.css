@@ -439,7 +439,7 @@ html:not([data-seen]) [data-reveal="lignes-auto"] .ligne-in {
     visibility 0s linear 600ms;
 }
 .menu[data-ouvert] {
-  clip-path: polygon(-60% 0, 100% 0, 100% 160%, 100% 160%);
+  clip-path: polygon(-60% 0, 100% 0, 100% 160%, -60% 160%);
   visibility: visible;
   transition:
     clip-path 600ms var(--ease-blade),

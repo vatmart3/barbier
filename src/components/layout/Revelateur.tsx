@@ -11,11 +11,15 @@ import { useEffect } from "react";
 export function Revelateur() {
   const pathname = usePathname();
   useEffect(() => {
+    // Un élément entièrement rogné (clip-path) n'intersecte jamais : on observe
+    // alors son parent, et on révèle l'élément quand le parent entre à l'écran.
+    const cibles = new Map<Element, Element[]>();
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.setAttribute("data-vu", "");
+            (cibles.get(e.target) ?? [e.target]).forEach((el) => el.setAttribute("data-vu", ""));
+            cibles.delete(e.target);
             io.unobserve(e.target);
           }
         }),
@@ -26,7 +30,10 @@ export function Revelateur() {
       raf = 0;
       document.querySelectorAll("[data-reveal]:not([data-vu]):not([data-observe])").forEach((el) => {
         el.setAttribute("data-observe", "");
-        io.observe(el);
+        const rogne = /^(clip|monte)/.test(el.getAttribute("data-reveal") ?? "");
+        const obs = rogne && el.parentElement ? el.parentElement : el;
+        if (obs !== el) cibles.set(obs, [...(cibles.get(obs) ?? []), el]);
+        io.observe(obs);
       });
     };
     scan();

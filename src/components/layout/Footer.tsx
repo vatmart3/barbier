@@ -13,12 +13,12 @@ export function Footer() {
   const annee = new Date().getFullYear();
   return (
     <footer className="relative border-t border-creme/8 bg-[#0c100e] pb-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+1.5rem)] text-sm text-creme lg:pb-0">
-      <div className="container-page grid gap-x-8 gap-y-12 pb-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1.2fr_1fr]">
-        <div>
+      <div className="container-page grid grid-cols-2 gap-x-6 gap-y-10 pb-10 pt-14 sm:gap-x-8 sm:gap-y-12 sm:pb-12 sm:pt-16 lg:grid-cols-[1.4fr_0.8fr_1fr_1.2fr_1fr]">
+        <div className="col-span-2 lg:col-span-1">
           <Link href="/" className="inline-flex items-center gap-3">
             <IconCiseaux size={30} className="text-rouge-fonce" />
             <span className="leading-none">
-              <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.28em] text-creme-2">Barbier · Sète</span>
+              <span className="block text-xs font-semibold uppercase tracking-[0.2em] text-creme-2">Barbier · Sète</span>
               <span className="font-display mt-1 block text-[1.5rem]">Dégradé</span>
               <span className="sr-only">, accueil</span>
             </span>
@@ -73,7 +73,7 @@ export function Footer() {
           </ul>
         </div>
 
-        <address className="not-italic">
+        <address className="col-span-2 not-italic sm:col-span-1">
           <h2 className={titre}>Contact</h2>
           <ul className="space-y-1">
             <li>
@@ -102,9 +102,9 @@ export function Footer() {
           </ul>
         </address>
 
-        <div>
+        <div className="col-span-2 sm:col-span-1">
           <h2 className={titre}>Horaires</h2>
-          <dl className="space-y-3">
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-1">
             {groupes.map((g) => (
               <div key={g.jours}>
                 <dt className="text-creme-2">{g.jours}</dt>

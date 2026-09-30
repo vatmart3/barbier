@@ -132,9 +132,9 @@ export function Reservation() {
                       style={{ transform: `scaleX(${faite ? 1 : etape === n ? 0.5 : 0})` }}
                     />
                   </span>
-                  <span className={cn("mt-3 flex min-h-8 items-baseline gap-2 text-sm", etape === n ? "text-creme" : "text-acier group-enabled:group-hover:text-creme")}>
-                    <span className="tabular text-xs">{n}</span>
-                    <span className="font-semibold">{label}</span>
+                  <span className={cn("mt-3 flex min-h-8 min-w-0 items-baseline gap-2 text-[0.8125rem] sm:text-sm", etape === n ? "text-creme" : "text-acier group-enabled:group-hover:text-creme")}>
+                    <span className="tabular text-xs max-[359px]:hidden">{n}</span>
+                    <span className="truncate font-semibold">{label}</span>
                   </span>
                 </button>
               </li>

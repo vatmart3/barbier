@@ -58,11 +58,11 @@ export function toHHMM(minutes: number): string {
   return `${pad(Math.floor(minutes / 60))}:${pad(minutes % 60)}`;
 }
 
-/** 1050 → "17 h 30" ; 1020 → "17 h" (typographie française) */
+/** 1050 → "17 h 30" ; 1020 → "17 h" (typographie française, espaces insécables : jamais coupé en fin de ligne) */
 export function formatHeure(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
-  return m === 0 ? `${h} h` : `${h} h ${pad(m)}`;
+  return m === 0 ? `${h}\u00a0h` : `${h}\u00a0h\u00a0${pad(m)}`;
 }
 
 function parseDate(date: string) {

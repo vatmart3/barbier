@@ -53,7 +53,7 @@ const moisDecale = (mois: string, n: number) => {
 
 function Colonne({ icone, titre, children, className }: { icone: ReactNode; titre: string; children: ReactNode; className?: string }) {
   return (
-    <fieldset className={cn("min-w-0 p-5 sm:p-6", className)}>
+    <fieldset className={cn("min-w-0 p-4 sm:p-6", className)}>
       <legend className="float-left mb-5 flex w-full items-center gap-3 text-[1.0625rem] font-medium">
         <span className="text-rouge-fonce">{icone}</span>
         {titre}
@@ -106,7 +106,7 @@ export function ReservationExpress() {
   return (
     <section id="reserver-express" aria-labelledby="express-titre" className="relative z-10 scroll-mt-20 pb-16">
       <div className="container-page">
-        <div className="rounded-[1.75rem] border border-creme/8 bg-charbon-2 p-5 sm:p-8 lg:p-10">
+        <div className="-mx-2 rounded-[1.75rem] border border-creme/8 bg-charbon-2 p-4 sm:mx-0 sm:p-8 lg:p-10">
           {/* En-tête */}
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div>
@@ -133,7 +133,7 @@ export function ReservationExpress() {
           </div>
 
           {/* Étapes */}
-          <ol className="mt-10 grid grid-cols-2 gap-x-4 gap-y-5 md:grid-cols-4" aria-label="Étapes">
+          <ol className="mt-10 hidden gap-x-4 gap-y-5 md:grid md:grid-cols-4" aria-label="Étapes">
             {etapes.map((e, i) => {
               const courante = !e.ok && etapes.slice(0, i).every((x) => x.ok);
               return (
@@ -157,7 +157,7 @@ export function ReservationExpress() {
           </ol>
 
           {/* Les quatre colonnes */}
-          <div className="mt-8 grid rounded-[1.25rem] bg-charbon/60 lg:grid-cols-[1fr_1fr_1.2fr_1fr] lg:divide-x lg:divide-creme/8">
+          <div className="mt-6 grid divide-y divide-creme/8 rounded-[1.25rem] bg-charbon/60 md:mt-8 lg:grid-cols-[1fr_1fr_1.2fr_1fr] lg:divide-x lg:divide-y-0">
             <Colonne icone={<IconCiseaux size={22} />} titre="La prestation">
               <div className="space-y-2.5">
                 {SERVICES.map((s) => {
@@ -167,7 +167,7 @@ export function ReservationExpress() {
                     <label
                       key={s.id}
                       className={cn(
-                        "flex min-h-16 cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-3 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-rouge",
+                        "flex min-h-14 cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-2.5 lg:min-h-16 lg:py-3 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-rouge",
                         actif ? "border-rouge bg-rouge/8" : "border-creme/10 hover:border-creme/25",
                       )}
                     >
@@ -197,7 +197,7 @@ export function ReservationExpress() {
             </Colonne>
 
             <Colonne icone={<IconPersonne size={22} />} titre="Le barbier">
-              <div className="space-y-2.5">
+              <div className="grid grid-cols-2 gap-2 lg:block lg:space-y-2.5">
                 {[{ id: "premier" as const, prenom: "Le premier libre", detail: "Le plus rapide" }, ...barbiers.map((b) => ({ id: b.id, prenom: b.prenom, detail: b.specialite }))].map((b) => {
                   const actif = choix === b.id;
                   const fiche = b.id === "premier" ? null : getBarbier(b.id);
@@ -205,7 +205,7 @@ export function ReservationExpress() {
                     <label
                       key={b.id}
                       className={cn(
-                        "flex min-h-16 cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-rouge",
+                        "flex min-h-14 cursor-pointer items-center gap-2.5 rounded-xl border px-2.5 py-2 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-rouge lg:min-h-16 lg:gap-3 lg:px-3 lg:py-2.5",
                         actif ? "border-rouge bg-rouge/8" : "border-creme/10 hover:border-creme/25",
                       )}
                     >
@@ -222,18 +222,27 @@ export function ReservationExpress() {
                       />
                       <span
                         aria-hidden
-                        className="font-display grid size-11 shrink-0 place-items-center rounded-full border border-rouge/35 text-lg text-rouge-fonce"
+                        className="font-display grid size-9 shrink-0 place-items-center rounded-full border border-rouge/35 text-base text-rouge-fonce lg:size-11 lg:text-lg"
                         style={{ background: fiche?.teinte ?? "var(--color-charbon-3)" }}
                       >
                         {fiche ? fiche.prenom[0] : "?"}
                       </span>
                       <span className="min-w-0 flex-1 leading-snug">
-                        <span className="block text-[0.9375rem]">{b.prenom}</span>
-                        <span className="block truncate text-xs text-acier">{b.detail}</span>
+                        <span className="block text-[0.875rem] leading-tight lg:text-[0.9375rem]">
+                          {b.id === "premier" ? (
+                            <>
+                              <span className="lg:hidden">Premier libre</span>
+                              <span className="hidden lg:inline">{b.prenom}</span>
+                            </>
+                          ) : (
+                            b.prenom
+                          )}
+                        </span>
+                        <span className="hidden truncate text-xs text-acier lg:block">{b.detail}</span>
                       </span>
                       <span
                         aria-hidden
-                        className={cn("grid size-5 shrink-0 place-items-center rounded-full border", actif ? "border-rouge bg-rouge text-sur-accent" : "border-creme/30")}
+                        className={cn("hidden size-5 shrink-0 place-items-center rounded-full border lg:grid", actif ? "border-rouge bg-rouge text-sur-accent" : "border-creme/30")}
                       >
                         {actif ? <IconCheck size={12} strokeWidth={2.5} /> : null}
                       </span>
@@ -247,7 +256,7 @@ export function ReservationExpress() {
             </Colonne>
 
             <Colonne icone={<IconCalendrier size={22} />} titre="La date">
-              <div className="rounded-xl border border-creme/10 p-3">
+              <div className="rounded-xl border border-creme/10 p-2 sm:p-3">
                 <div className="flex items-center justify-between">
                   <button
                     type="button"
@@ -296,7 +305,7 @@ export function ReservationExpress() {
                             aria-pressed={actif}
                             aria-label={`${formatDateLongue(jour)}${ok ? "" : " : indisponible"}`}
                             className={cn(
-                              "tabular mx-auto grid size-9 place-items-center rounded-full text-sm transition-colors",
+                              "tabular mx-auto grid aspect-square w-full max-w-10 place-items-center rounded-full text-sm transition-colors",
                               actif ? "bg-rouge font-semibold text-sur-accent" : ok ? "hover:bg-creme/8" : "text-creme/25",
                             )}
                           >
@@ -304,7 +313,7 @@ export function ReservationExpress() {
                           </button>
                         );
                       })
-                    : Array.from({ length: 35 }, (_, i) => <span key={i} className="mx-auto size-9 animate-pulse rounded-full bg-creme/5" />)}
+                    : Array.from({ length: 35 }, (_, i) => <span key={i} className="mx-auto aspect-square w-full max-w-10 animate-pulse rounded-full bg-creme/5" />)}
                 </div>
               </div>
 
@@ -341,7 +350,7 @@ export function ReservationExpress() {
               ) : null}
             </Colonne>
 
-            <div className="p-5 sm:p-6">
+            <div className="p-4 sm:p-6">
               <p className="mb-5 flex items-center gap-3 text-[1.0625rem] font-medium">
                 <span className="text-rouge-fonce">
                   <IconCalendrier size={22} />

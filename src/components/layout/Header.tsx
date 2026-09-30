@@ -24,11 +24,11 @@ export function Header() {
         Aller au contenu
       </a>
       <header className="verre fixed inset-x-0 top-0 z-50 h-(--header-h) border-b border-creme/8 text-creme">
-        <div className="container-page flex h-full items-center gap-4">
-          <Link href="/" className="mr-auto flex items-center gap-3 lg:mr-0">
-            <IconCiseaux size={30} className="shrink-0 text-rouge-fonce" />
+        <div className="container-page flex h-full items-center gap-2 sm:gap-4">
+          <Link href="/" className="mr-auto flex min-h-11 shrink-0 items-center gap-2.5 lg:mr-0">
+            <IconCiseaux size={28} className="shrink-0 text-rouge-fonce" />
             <span className="leading-none">
-              <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.28em] text-creme-2">Barbier · Sète</span>
+              <span className="block text-xs font-semibold uppercase tracking-[0.2em] text-creme-2">Barbier · Sète</span>
               <span className="font-display mt-1 block text-[1.5rem] leading-none">Dégradé</span>
               <span className="sr-only">, accueil</span>
             </span>
@@ -56,7 +56,7 @@ export function Header() {
             </ul>
           </nav>
 
-          <span className="contents lg:hidden">
+          <span className="contents max-[359px]:hidden lg:hidden">
             <ProchainCreneauPastille compact />
           </span>
 

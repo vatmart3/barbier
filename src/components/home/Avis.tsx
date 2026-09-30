@@ -35,8 +35,8 @@ export function Avis() {
           {avis.map((a, i) => {
             const b = getBarbier(a.barbier);
             return (
-              <li key={a.auteur} className="mb-4 break-inside-avoid" data-reveal="monte" style={{ ["--d" as string]: `${(i % 3) * 80}ms` }}>
-                <figure className="rounded-[1.75rem] bg-charbon p-6">
+              <li key={a.auteur} className={`mb-4 break-inside-avoid${i >= 3 ? " max-sm:hidden" : ""}`} data-reveal="monte" style={{ ["--d" as string]: `${(i % 3) * 80}ms` }}>
+                <figure className="rounded-[1.75rem] bg-charbon p-5 sm:p-6">
                   <Etoiles />
                   <blockquote className="mt-4 text-[1.0625rem] leading-relaxed">« {a.texte} »</blockquote>
                   <figcaption className="mt-6 flex items-center gap-3">

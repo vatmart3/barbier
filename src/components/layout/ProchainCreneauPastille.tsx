@@ -27,7 +27,7 @@ export function ProchainCreneauPastille({ className, compact = false }: { classN
     <Link
       href={href}
       className={cn(
-        "group relative inline-flex min-h-8 shrink-0 items-center after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-[''] gap-2 rounded-full bg-creme/[0.07] px-3 text-xs text-creme transition-colors duration-200 hover:bg-creme/[0.12] sm:px-3.5",
+        "group relative inline-flex min-h-10 shrink-0 items-center after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-[''] gap-2 rounded-full bg-creme/[0.07] px-3 text-xs text-creme transition-colors duration-200 hover:bg-creme/[0.12] sm:px-3.5",
         className,
       )}
     >

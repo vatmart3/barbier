@@ -8,7 +8,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { directionsUrl, fullAddress, nav, site, telHref } from "@/config/site";
-import { IconFermer } from "@/components/ui/Icons";
+import { IconCiseaux, IconFermer } from "@/components/ui/Icons";
 import { useLenis } from "./SmoothScroll";
 
 export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -69,7 +69,13 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
       data-lenis-prevent
     >
       <div className="container-page flex h-(--header-h) items-center justify-between">
-        <span className="text-[1.1875rem] font-semibold tracking-tight">Dégradé</span>
+        <span className="flex items-center gap-2.5" aria-hidden>
+          <IconCiseaux size={28} className="shrink-0 text-rouge-fonce" />
+          <span className="leading-none">
+            <span className="block text-xs font-semibold uppercase tracking-[0.2em] text-creme-2">Barbier · Sète</span>
+            <span className="font-display mt-1 block text-[1.5rem] leading-none">Dégradé</span>
+          </span>
+        </span>
         <button type="button" onClick={onClose} className="-mr-2 inline-flex size-11 items-center justify-center" aria-label="Fermer le menu">
           <IconFermer size={24} />
         </button>

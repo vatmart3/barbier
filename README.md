@@ -28,6 +28,7 @@ Autres commandes :
 | `npm run typecheck` | TypeScript sans émission |
 | `npm run assets` | Régénère les favicons et icônes PWA |
 | `npm run test:e2e` | Parcours Playwright (réservation, réservation express, interactions, console) sur un serveur lancé en :3000 |
+| `node scripts/audit-mobile.mjs http://localhost:3000` | Audit téléphone : débordements de 320 à 430 px, textes et zones tactiles trop petits |
 
 Les tests e2e utilisent Playwright ; en local, installez d'abord son navigateur : `npx playwright install chromium`.
 

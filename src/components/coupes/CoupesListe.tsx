@@ -37,9 +37,9 @@ export function CoupesListe() {
                     ["Durée", `${c.duree} min`],
                     ["À refaire", `${c.entretienSemaines} sem.`],
                   ].map(([t, v]) => (
-                    <div key={t} className="rounded-2xl bg-charbon px-4 py-3">
+                    <div key={t} className="min-w-0 rounded-2xl bg-charbon px-3 py-3 sm:px-4">
                       <dt className="text-sm text-acier">{t}</dt>
-                      <dd className="font-display tabular mt-0.5 text-2xl sm:text-3xl">{v}</dd>
+                      <dd className="font-display tabular mt-0.5 whitespace-nowrap text-xl sm:text-3xl">{v}</dd>
                     </div>
                   ))}
                 </dl>

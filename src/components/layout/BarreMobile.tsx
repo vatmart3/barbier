@@ -40,7 +40,7 @@ export function BarreMobile() {
           <IconCalendrier size={18} />
           Réserver
         </Link>
-        <a href={telHref} aria-label="Appeler le salon" className="flex h-full min-w-14 flex-col items-center justify-center gap-0.5 rounded-full px-3 text-[0.6875rem] text-creme active:bg-creme/10">
+        <a href={telHref} aria-label="Appeler le salon" className="flex h-full min-w-14 flex-col items-center justify-center gap-0.5 rounded-full px-3 text-xs text-creme active:bg-creme/10">
           <IconTel size={18} />
           Appeler
         </a>
@@ -49,7 +49,7 @@ export function BarreMobile() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Itinéraire vers le salon"
-          className="flex h-full min-w-14 flex-col items-center justify-center gap-0.5 rounded-full px-3 text-[0.6875rem] text-creme active:bg-creme/10"
+          className="flex h-full min-w-14 flex-col items-center justify-center gap-0.5 rounded-full px-3 text-xs text-creme active:bg-creme/10"
         >
           <IconRoute size={18} />
           Itinéraire

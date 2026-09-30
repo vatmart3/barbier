@@ -283,17 +283,17 @@ export function Configurateur() {
 
         {/* Récapitulatif */}
         {d ? (
-          <div className="papier mt-8 rounded-[2rem] border border-rouge/40 bg-creme p-7 text-charbon">
-            <div className="flex items-end justify-between gap-6">
+          <div className="papier mt-8 rounded-[2rem] border border-rouge/40 bg-creme p-5 text-charbon sm:p-7">
+            <div className="flex items-end justify-between gap-4 sm:gap-6">
               <div>
                 <p className="eyebrow text-acier">Total</p>
-                <p className="font-display text-7xl leading-none text-rouge-fonce">
+                <p className="font-display whitespace-nowrap text-[3.25rem] leading-none text-rouge-fonce sm:text-7xl">
                   <Compteur value={d.prix} duration={600} /> €
                 </p>
               </div>
               <div className="text-right">
                 <p className="eyebrow text-acier">Au fauteuil</p>
-                <p className="font-display text-5xl leading-none">
+                <p className="font-display whitespace-nowrap text-[2.25rem] leading-none sm:text-5xl">
                   <Compteur value={d.duree} duration={600} /> min
                 </p>
               </div>

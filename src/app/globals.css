@@ -219,6 +219,13 @@
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+  &:not(:focus-visible) {
+    left: 0 !important;
+    top: 0 !important;
+    padding: 0 !important;
+    margin: -1px;
+    border: 0;
+  }
   &:focus-visible {
     position: fixed;
     width: auto;

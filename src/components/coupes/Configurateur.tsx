@@ -203,17 +203,17 @@ export function Configurateur() {
         </div>
 
         <AnimatePresence mode="wait" initial={false}>
-          <motion.fieldset
+          <motion.div
             key={etape}
             id={`etape-${etape}`}
             role="tabpanel"
             aria-labelledby={`tab-etape-${etape}`}
-            className="space-y-2"
             initial={{ x: 30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -30, opacity: 0 }}
             transition={transition(reduce, { duration: 0.35, ease: ease.outCut })}
           >
+            <fieldset className="space-y-2">
             <legend className="sr-only">{ETAPES[etape]}</legend>
             {etape === 0
               ? coupes.map((x) => (
@@ -260,7 +260,8 @@ export function Configurateur() {
                       aside={x.prixFormule ? `+${euros(x.prixFormule)}` : "—"}
                     />
                   ))}
-          </motion.fieldset>
+            </fieldset>
+          </motion.div>
         </AnimatePresence>
 
         <div className="mt-4 flex justify-end">

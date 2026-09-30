@@ -69,7 +69,7 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
       data-lenis-prevent
     >
       <div className="container-page flex h-(--header-h) items-center justify-between">
-        <span className="font-display text-[1.9rem] leading-none">Dégradé</span>
+        <span className="metal font-display text-[1.45rem] leading-none [font-variation-settings:'wdth'_125]">Dégradé</span>
         <button type="button" onClick={onClose} className="-mr-2 inline-flex size-11 items-center justify-center" aria-label="Fermer le menu">
           <IconFermer size={24} />
         </button>

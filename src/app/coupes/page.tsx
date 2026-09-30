@@ -37,7 +37,7 @@ export default function CoupesPage() {
         }
       />
 
-      <section id="configurateur" aria-labelledby="conf-titre" className="scroll-mt-16 bg-creme py-(--spacing-section) text-charbon">
+      <section id="configurateur" aria-labelledby="conf-titre" className="salon scroll-mt-16 bg-creme py-(--spacing-section) text-charbon">
         <div className="container-page">
           <Etiquette n="01" className="text-acier-fonce">
             Configurateur
@@ -55,7 +55,7 @@ export default function CoupesPage() {
 
       <Tarifs n="02" />
 
-      <section id="entretien" aria-labelledby="ent-titre" className="scroll-mt-16 border-t border-charbon/10 bg-creme py-(--spacing-section) text-charbon">
+      <section id="entretien" aria-labelledby="ent-titre" className="salon scroll-mt-16 border-t border-charbon/10 bg-creme py-(--spacing-section) text-charbon">
         <div className="container-page">
           <Etiquette n="03" className="text-acier-fonce">
             Entretien — offert, sans inscription

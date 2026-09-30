@@ -20,7 +20,7 @@ export default function Confidentialite() {
     <Page>
       <JsonLd data={breadcrumbJsonLd(ARIANE)} />
       <EnTete ariane={ARIANE} titre={["Vos données,", "en clair."]} intro={<p>Le strict nécessaire pour vous couper les cheveux à l&apos;heure prévue. Rien de plus.</p>} />
-      <section className="bg-creme py-20 text-charbon">
+      <section className="salon bg-creme py-20 text-charbon">
         <div className="container-page">
           <Prose>
             <h2>Responsable du traitement</h2>

@@ -19,7 +19,7 @@ export default function MentionsLegales() {
     <Page>
       <JsonLd data={breadcrumbJsonLd(ARIANE)} />
       <EnTete ariane={ARIANE} titre={["Mentions", "légales."]} />
-      <section className="bg-creme py-20 text-charbon">
+      <section className="salon bg-creme py-20 text-charbon">
         <div className="container-page">
           <Prose>
             <p>

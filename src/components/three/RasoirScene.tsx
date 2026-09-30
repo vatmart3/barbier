@@ -170,12 +170,12 @@ function Rasoir({ onReady }: { onReady?: () => void }) {
     const w = viewport.width;
     const h = viewport.height;
     const portrait = w < h;
-    const scale = portrait ? w * 0.125 : Math.min(w * 0.062, h * 0.11);
+    const scale = portrait ? w * 0.125 : Math.min(w * 0.075, h * 0.115);
     g.scale.setScalar(scale);
 
     // 1. Ouverture de la lame (0 → 0.3)
     const open = easeInOut(range(p, 0, 0.3));
-    b.rotation.z = THREE.MathUtils.lerp(1.25, Math.PI * 1.03, open);
+    b.rotation.z = THREE.MathUtils.lerp(2.55, Math.PI * 1.03, open);
 
     // 2. Coup diagonal (0.3 → 0.56) : le rasoir suit la ligne de coupe
     const cut = easeInOut(range(p, 0.3, 0.56));
@@ -185,12 +185,13 @@ function Rasoir({ onReady }: { onReady?: () => void }) {
     const aim = Math.atan2(dir.y, dir.x) - Math.PI; // la lame (côté -x local) mène le geste
     const start = R.clone().addScaledVector(dir, -0.12);
     const end = R.clone().addScaledVector(dir, 1.45);
-    const rest = new THREE.Vector3(portrait ? 0.02 * w : 0.2 * w, portrait ? 0.22 * h : 0.03 * h, 0);
+    const rest = new THREE.Vector3(portrait ? 0.02 * w : -0.28 * w, portrait ? 0.24 * h : -0.02 * h, 0);
+    const restZ = portrait ? 0.35 : 0.95;
 
     if (p < 0.3) {
       g.position.copy(rest);
       g.position.y += Math.sin(t * 1.1) * 0.05 * scale;
-      g.rotation.set(0.15 + sm.rx + Math.sin(t * 0.7) * 0.05, -0.35 + sm.ry, 0.12 + Math.sin(t * 0.5) * 0.03);
+      g.rotation.set(0.15 + sm.rx + Math.sin(t * 0.7) * 0.05, -0.35 + sm.ry, restZ + Math.sin(t * 0.5) * 0.03);
     } else {
       // Élan vers le coin haut droit, puis traversée de l'écran
       const windup = easeInOut(range(p, 0.3, 0.37));
@@ -199,7 +200,7 @@ function Rasoir({ onReady }: { onReady?: () => void }) {
       g.rotation.set(
         THREE.MathUtils.lerp(0.15 + sm.rx, 0, windup),
         THREE.MathUtils.lerp(-0.35 + sm.ry, 0, windup),
-        THREE.MathUtils.lerp(0.12, aim, windup),
+        THREE.MathUtils.lerp(restZ, aim, windup),
       );
     }
     g.visible = p < 0.62;
@@ -239,7 +240,7 @@ export default function RasoirScene({ active, onReady }: { active: boolean; onRe
     >
       <ambientLight intensity={0.25} />
       <directionalLight position={[3, 4, 5]} intensity={1.6} />
-      <directionalLight position={[-4, -2, 3]} intensity={0.5} color="#c8102e" />
+      <directionalLight position={[-4, -2, 3]} intensity={0.7} color="#e8a04a" />
       <Environment resolution={256} frames={1}>
         {/* Fond d'atelier gris : l'acier ne tombe jamais dans le noir */}
         <color attach="background" args={["#3a3a3a"]} />
@@ -251,7 +252,7 @@ export default function RasoirScene({ active, onReady }: { active: boolean; onRe
         <Lightformer form="rect" intensity={2} position={[-5, 0, 2]} rotation-y={Math.PI / 2} scale={[8, 1.4, 1]} />
         <Lightformer form="rect" intensity={1.4} position={[5, -1, 1]} rotation-y={-Math.PI / 2} scale={[8, 0.6, 1]} />
         <Lightformer form="ring" color="#f2ede4" intensity={2.5} position={[0, 0, -6]} scale={3} />
-        <Lightformer form="rect" color="#c8102e" intensity={1.2} position={[0, -4, 1]} rotation-x={Math.PI / 2} scale={[6, 0.4, 1]} />
+        <Lightformer form="rect" color="#e8a04a" intensity={1.6} position={[0, -4, 1]} rotation-x={Math.PI / 2} scale={[6, 0.4, 1]} />
       </Environment>
       <Rasoir onReady={onReady} />
     </Canvas>

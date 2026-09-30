@@ -43,7 +43,7 @@ export function EquipeHorizontal() {
                   Fauteuil {i + 1} · {b.role} · depuis {b.depuis}
                 </p>
                 <div id={`nom-${b.id}`}>
-                  <Grave as="h2" text={b.prenom} className="mt-4 text-[clamp(6rem,3rem+13vw,17rem)] leading-none" />
+                  <Grave as="h2" text={b.prenom} className="mt-4 text-[clamp(4rem,2rem+8vw,10.5rem)] leading-none" />
                 </div>
               </div>
               <div className={cn("mt-8 w-2/3 max-w-sm self-start lg:mt-0 lg:w-[48%]", i === 1 && "-scale-x-100")}>

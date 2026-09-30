@@ -49,7 +49,7 @@ function Pole({ progress }: { progress: { current: number } }) {
         fragmentShader: fragment,
         uniforms: {
           uProgress: { value: 0 },
-          uRed: { value: new THREE.Color("#c8102e") },
+          uRed: { value: new THREE.Color("#b8661a") },
           uCream: { value: new THREE.Color("#f2ede4") },
           uSteel: { value: new THREE.Color("#9aa0a6") },
         },

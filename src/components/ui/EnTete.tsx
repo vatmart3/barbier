@@ -20,7 +20,7 @@ export function EnTete({ ariane, titre, intro, repere, children, className }: Pr
       {repere ? (
         <p
           aria-hidden
-          className="pointer-events-none absolute -right-[0.04em] top-[calc(var(--header-h)-0.1em)] select-none font-display text-[clamp(12rem,6rem+30vw,34rem)] leading-[0.8] text-transparent [-webkit-text-stroke:1px_rgb(242_237_228/0.14)]"
+          className="pointer-events-none absolute -right-[0.04em] top-[calc(var(--header-h)-0.1em)] select-none font-display text-[clamp(7rem,3rem+17vw,21rem)] leading-[0.8] text-transparent [-webkit-text-stroke:1px_rgb(242_237_228/0.14)]"
         >
           {repere}
         </p>

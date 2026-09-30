@@ -125,3 +125,29 @@ export const IconTelecharger = ({ size, ...p }: P) => (
     <path d="M12 3.5v12M6.5 10 12 15.5 17.5 10M4 20.5h16" />
   </svg>
 );
+
+export const IconInstagram = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const IconFacebook = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="M14 21v-7.5h2.6l.4-3H14V8.7c0-.9.3-1.5 1.6-1.5H17V4.5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.2H8.3v3h2.6V21" strokeLinecap="round" />
+  </svg>
+);
+
+export const IconTiktok = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="M14 3.5v11.2a3.3 3.3 0 1 1-3.3-3.3M14 3.5c.4 2.6 2.2 4.4 5 4.6" strokeLinecap="round" />
+  </svg>
+);
+
+export const IconChevron = ({ size, dir = "droite", ...p }: P & { dir?: "gauche" | "droite" }) => (
+  <svg {...base(size)} {...p}>
+    <path d={dir === "droite" ? "M9 5l7 7-7 7" : "M15 5l-7 7 7 7"} />
+  </svg>
+);

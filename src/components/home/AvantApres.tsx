@@ -27,7 +27,7 @@ function Lame() {
       <path d="M8 6C14 2 22 4 22 10V104C22 112 16 116 10 114C6 112 4 106 4 100L6 14C6 10 6 8 8 6Z" fill="url(#lame-acier)" stroke="#111" strokeWidth="1" />
       <path d="M5 16L5 98" stroke="#fff" strokeWidth="1" opacity="0.8" />
       <path d="M14 30v60" stroke="#111" strokeOpacity="0.25" strokeWidth="6" strokeLinecap="round" />
-      <circle cx="14" cy="60" r="2.2" fill="#c8102e" />
+      <circle cx="14" cy="60" r="2.2" fill="#e8a04a" />
     </svg>
   );
 }
@@ -132,7 +132,7 @@ export function AvantApres() {
           <div
             ref={stage}
             data-reveal="clip-bas"
-            className="relative aspect-[5/6] w-full touch-pan-y select-none overflow-hidden bg-creme text-charbon sm:aspect-[4/3]"
+            className="salon relative aspect-[5/6] w-full touch-pan-y select-none overflow-hidden bg-creme text-charbon sm:aspect-[4/3]"
             style={{ ["--paper" as string]: "var(--color-creme)" }}
             onPointerDown={(e) => {
               dragging.current = true;

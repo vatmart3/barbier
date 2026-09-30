@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Big_Shoulders, Schibsted_Grotesk } from "next/font/google";
+import { Archivo, Kaushan_Script, Schibsted_Grotesk } from "next/font/google";
 import { site } from "@/config/site";
 import { hairSalonJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -12,14 +12,20 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Revelateur } from "@/components/layout/Revelateur";
 import "./globals.css";
 
-const display = Big_Shoulders({
+const display = Archivo({
   subsets: ["latin"],
-  axes: ["opsz"],
+  axes: ["wdth"],
   display: "swap",
-  variable: "--font-big-shoulders",
-  // Pas de métriques de repli connues pour cette famille : repli explicite
-  adjustFontFallback: false,
-  fallback: ["Arial Narrow", "Roboto Condensed", "sans-serif"],
+  variable: "--font-archivo",
+});
+
+const script = Kaushan_Script({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-kaushan",
+  // Police d'accent, jamais critique pour le premier affichage
+  preload: false,
 });
 
 const text = Schibsted_Grotesk({
@@ -41,7 +47,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#111111",
+  themeColor: "#0f0d0c",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -50,7 +56,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr-FR" className={`${display.variable} ${text.variable}`} suppressHydrationWarning>
+    <html lang="fr-FR" className={`${display.variable} ${script.variable} ${text.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: loaderScript }} />
       </head>

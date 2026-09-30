@@ -77,8 +77,11 @@ export const site = {
   /** Zones desservies (SEO local + JSON-LD areaServed) */
   areaServed: ["Sète", "Frontignan", "Balaruc-les-Bains", "Balaruc-le-Vieux", "Mèze", "Marseillan", "Bouzigues", "Poussan", "Bassin de Thau"],
 
+  /** Réseaux (à remplacer par les comptes du salon) */
   social: {
     instagram: "https://www.instagram.com/",
+    facebook: "https://www.facebook.com/",
+    tiktok: "https://www.tiktok.com/",
   },
 
   /** Signature agence (footer) */

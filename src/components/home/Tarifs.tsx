@@ -29,7 +29,7 @@ function Ligne({ nom, detail, duree, prix, href }: { nom: string; detail?: strin
 export function Tarifs({ n = "05", titre = true }: { n?: string; titre?: boolean }) {
   const economie = formuleVedette.prixSepare - formuleVedette.prix;
   return (
-    <section id="tarifs" aria-labelledby="tarifs-titre" className="cv-auto scroll-mt-20 bg-creme py-(--spacing-section) text-charbon">
+    <section id="tarifs" aria-labelledby="tarifs-titre" className="salon cv-auto scroll-mt-20 bg-creme py-(--spacing-section) text-charbon">
       <div className="container-page grid-page gap-y-14">
         <div className="col-span-12">
           <Etiquette n={n} className="text-acier-fonce">

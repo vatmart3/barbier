@@ -41,7 +41,7 @@ export function ProchainCreneauPastille({ className, compact = false }: { classN
           <span className="tabular whitespace-nowrap">
             <span className="text-acier">{jour === "aujourd'hui" ? "Auj." : jour === "demain" ? "Demain" : jour} </span>
             <strong className="font-semibold">{formatHeure(slot.start)}</strong>
-            <span className="text-acier max-[359px]:hidden"> · {barbier.prenom}</span>
+            <span className="text-acier max-[399px]:hidden"> · {barbier.prenom}</span>
           </span>
         ) : (
           <span className="tabular whitespace-nowrap">

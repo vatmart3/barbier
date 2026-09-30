@@ -13,7 +13,7 @@ const OFFSETS = ["md:col-start-1", "md:col-start-5", "md:col-start-2"];
 export function Barbiers() {
   const annee = new Date().getFullYear();
   return (
-    <section aria-labelledby="barbiers-titre" className="cv-auto bg-creme py-(--spacing-section) text-charbon" style={{ ["--paper" as string]: "var(--color-creme)" }}>
+    <section aria-labelledby="barbiers-titre" className="salon cv-auto bg-creme py-(--spacing-section) text-charbon" style={{ ["--paper" as string]: "var(--color-creme)" }}>
       <div className="container-page">
         <div className="grid-page gap-y-6">
           <Etiquette n="03" className="col-span-12 text-acier-fonce">

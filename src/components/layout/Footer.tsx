@@ -67,7 +67,7 @@ export function Footer() {
 
       {/* Mot décoratif en SVG : pas de faux positif de contraste, jamais lu */}
       <svg aria-hidden viewBox="0 0 1000 250" className="pointer-events-none block w-full select-none px-(--spacing-gutter)">
-        <text x="0" y="238" textLength="1000" lengthAdjust="spacingAndGlyphs" fontSize="330" fill="rgb(242 237 228 / 0.06)" style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontVariationSettings: '"opsz" 72' }}>
+        <text x="0" y="238" textLength="1000" lengthAdjust="spacingAndGlyphs" fontSize="330" fill="rgb(242 237 228 / 0.06)" style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontVariationSettings: '"wdth" 112' }}>
           DÉGRADÉ
         </text>
       </svg>

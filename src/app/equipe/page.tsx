@@ -43,7 +43,7 @@ export default function EquipePage() {
       />
       <EquipeHorizontal />
 
-      <section aria-labelledby="regles-titre" className="bg-creme py-(--spacing-section) text-charbon">
+      <section aria-labelledby="regles-titre" className="salon bg-creme py-(--spacing-section) text-charbon">
         <div className="container-page grid-page gap-y-12">
           <div className="col-span-12 lg:col-span-5">
             <Etiquette n="02" className="text-acier-fonce">

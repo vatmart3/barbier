@@ -7,6 +7,7 @@
 
 @layer base {
   html {
+    color-scheme: dark;
     background: var(--color-charbon);
     color: var(--color-creme);
     -webkit-text-size-adjust: 100%;
@@ -25,13 +26,13 @@
     overflow-x: clip;
   }
 
-  /* Big Shoulders : on force l'optique "Display" (opsz 72) */
+  /* Archivo, largeur étendue : capitales larges et lourdes, façon enseigne */
   .font-display,
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    font-variation-settings: "opsz" 72;
+    font-variation-settings: "wdth" 112;
     font-weight: 800;
     letter-spacing: -0.01em;
     text-transform: uppercase;
@@ -460,4 +461,101 @@ html:not([data-seen]) [data-reveal="lignes-auto"] .ligne-in {
     transform: translateY(24px);
     opacity: 0;
   }
+}
+
+/* ==========================================================================
+   Style « salon » : sections sombres chaudes, titres métal, script cuivre
+   ========================================================================== */
+
+/* Les anciennes sections papier passent en sombre : on remappe les tokens.
+   Les composants gardent leurs classes (bg-creme, text-charbon…). */
+.salon {
+  --color-creme: #16120f;
+  --color-creme-2: #1e1814;
+  --color-creme-3: #3a3029;
+  --color-charbon: #f2ede4;
+  --color-acier-fonce: #b3aaa0;
+  --color-rouge-fonce: #e8a04a;
+  /* dans une section salon, les encadrés « charbon » deviennent clairs :
+     le texte secondaire y reste lisible */
+  --color-acier: #5c5650;
+  color-scheme: dark;
+}
+/* Mais le papier (carte, ticket) reste du papier, même dans un salon */
+.salon .papier {
+  --color-creme: #f2ede4;
+  --color-creme-2: #e7e0d3;
+  --color-charbon: #0f0d0c;
+  --color-acier-fonce: #5c5650;
+  --color-rouge-fonce: #8a4810;
+}
+
+/* Titres en dégradé métal (acier poli) */
+.metal,
+:is(h1, h2) .ligne-in {
+  background: linear-gradient(180deg, #ffffff 0%, #e9e6e1 38%, #8b8783 52%, #d8d4ce 70%, #fbfaf8 100%);
+  /* marge haute : les accents restent dans la zone peinte */
+  padding-top: 0.16em;
+  margin-top: -0.16em;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Deuxième ligne d'un titre : script cuivre, comme une signature d'enseigne */
+:is(h1, h2) :is(.text-acier, .text-acier-fonce),
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-variation-settings: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  -webkit-text-fill-color: var(--color-ambre);
+  color: var(--color-ambre);
+  background: none;
+}
+
+:is(h1, h2) .ligne-in :is(.text-acier, .text-acier-fonce) {
+  font-size: 0.86em;
+}
+
+/* Boutons et pastilles cuivre : léger dégradé de lumière */
+.bg-rouge {
+  background-image: linear-gradient(180deg, var(--color-ambre-2) 0%, var(--color-rouge) 58%, #7c400e 100%);
+}
+
+/* Fond d'ambiance du salon (hero) : plafonniers flous, briques, comptoir */
+.ambiance {
+  background:
+    radial-gradient(ellipse 9% 5% at 22% 4%, rgb(255 250 240 / 0.95), transparent 70%),
+    radial-gradient(ellipse 9% 5% at 54% 3%, rgb(255 250 240 / 0.9), transparent 70%),
+    radial-gradient(ellipse 9% 5% at 84% 5%, rgb(255 250 240 / 0.95), transparent 70%),
+    radial-gradient(ellipse 22% 16% at 22% 6%, rgb(255 214 150 / 0.22), transparent 70%),
+    radial-gradient(ellipse 22% 16% at 54% 5%, rgb(255 214 150 / 0.18), transparent 70%),
+    radial-gradient(ellipse 22% 16% at 84% 7%, rgb(255 214 150 / 0.22), transparent 70%),
+    radial-gradient(circle at 8% 88%, rgb(232 160 74 / 0.35), transparent 22%),
+    radial-gradient(circle at 96% 70%, rgb(232 160 74 / 0.22), transparent 18%),
+    radial-gradient(circle at 70% 96%, rgb(255 200 120 / 0.14), transparent 20%),
+    linear-gradient(180deg, #2a221c 0%, #17120f 45%, #0f0d0c 100%);
+}
+.ambiance::before {
+  /* murs de briques, flous comme à l'arrière-plan d'une photo */
+  content: "";
+  position: absolute;
+  inset: 12% 0 34% 0;
+  background:
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.35) 0 2px, transparent 2px 26px),
+    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.25) 0 2px, transparent 2px 64px),
+    linear-gradient(90deg, #3a2c22, #2a211b 40%, #3b2d23);
+  filter: blur(5px);
+  opacity: 0.55;
+  mask-image: linear-gradient(180deg, transparent, #000 25%, #000 70%, transparent);
+}
+.ambiance::after {
+  /* poussière dans la lumière + vignettage */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 40%, rgb(0 0 0 / 0.7) 100%);
+  pointer-events: none;
 }

@@ -22,10 +22,11 @@ Le téléchargement de photos libres (Unsplash, Pexels) était bloqué dans l'en
 
 | Police | Usage | Licence |
 |---|---|---|
-| Big Shoulders (axe `opsz` 72 = Display) — Patric King | Titres | SIL Open Font License 1.1 |
+| Archivo (axe de largeur, étendu) — Omnibus-Type | Titres métal | SIL Open Font License 1.1 |
+| Kaushan Script — Impallari Type | Signatures en script cuivre | SIL Open Font License 1.1 |
 | Schibsted Grotesk — Schibsted | Texte | SIL Open Font License 1.1 |
 
-Chargées via `next/font/google` (auto-hébergées au build). Copies TTF dans `src/assets/fonts/` uniquement pour les images Open Graph.
+Chargées via `next/font/google` (auto-hébergées au build). Copies TTF dans `src/assets/fonts/` (Big Shoulders, Schibsted) utilisées uniquement pour les images Open Graph.
 
 ## 3. Photos à remplacer
 

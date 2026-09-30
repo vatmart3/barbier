@@ -36,7 +36,7 @@ export function ProchainCreneau() {
   const barbier = p ? getBarbier(p.barbier) : null;
 
   return (
-    <section aria-labelledby="creneau-titre" className="relative flex h-full min-h-svh flex-col bg-creme text-charbon">
+    <section aria-labelledby="creneau-titre" className="salon relative flex h-full min-h-svh flex-col bg-creme text-charbon">
       <div className="container-page flex flex-1 flex-col justify-center pb-10 pt-[calc(var(--header-h)+2rem)]">
         <div className="grid-page gap-y-10">
           <div className="col-span-12 lg:col-span-7">

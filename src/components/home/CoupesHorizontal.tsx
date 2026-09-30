@@ -71,7 +71,7 @@ export function CoupesHorizontal() {
             </div>
 
             <div className="relative mt-auto max-w-[26rem]">
-              <h3 id={`coupe-${c.id}`} className="text-[clamp(2.5rem,1.8rem+2.5vw,4.5rem)] leading-[0.9]">
+              <h3 id={`coupe-${c.id}`} className="text-[clamp(1.9rem,1.4rem+1.6vw,3rem)] leading-[1]">
                 {c.nom}
               </h3>
               <p className="mt-3 text-lg text-creme/85">{c.accroche}</p>
@@ -102,7 +102,7 @@ export function CoupesHorizontal() {
         ))}
 
         {/* Dernier panneau : entrée du configurateur (micro-engagement) */}
-        <div className="flex w-[88vw] shrink-0 flex-col justify-center gap-8 border-l border-creme/10 bg-creme px-(--spacing-gutter) pb-24 pt-[calc(var(--header-h)+1.5rem)] text-charbon sm:w-[60vw] lg:w-[40vw] motion-reduce:snap-start">
+        <div className="flex w-[88vw] shrink-0 flex-col justify-center gap-8 salon border-l border-creme/10 bg-creme px-(--spacing-gutter) pb-24 pt-[calc(var(--header-h)+1.5rem)] text-charbon sm:w-[60vw] lg:w-[40vw] motion-reduce:snap-start">
           <p className="eyebrow text-acier-fonce">Étape 1 sur 3</p>
           <p className="font-display text-d1 uppercase">Pas sûr ? Composez la vôtre.</p>
           <p className="max-w-sm text-charbon/80">Hauteur du dégradé, longueur du dessus, barbe. Le prix et la durée se calculent au fur et à mesure.</p>

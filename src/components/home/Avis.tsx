@@ -11,7 +11,7 @@ import { cn } from "@/lib/cn";
 
 export function Avis() {
   return (
-    <section aria-labelledby="avis-titre" className="cv-auto bg-creme py-(--spacing-section) text-charbon">
+    <section aria-labelledby="avis-titre" className="salon cv-auto bg-creme py-(--spacing-section) text-charbon">
       <div className="container-page">
         <div className="grid-page gap-y-10">
           <div className="col-span-12 lg:col-span-6">
@@ -49,7 +49,7 @@ export function Avis() {
                     {a.clientDepuis ? <span className="mt-1 block text-xs text-acier-fonce">Client depuis {a.clientDepuis}</span> : null}
                   </figcaption>
                   <blockquote className={cn("col-span-12 md:col-span-8", droite ? "md:col-start-1" : "md:col-start-5")}>
-                    <p className="font-display text-[clamp(2rem,1.2rem+3.2vw,4.75rem)] uppercase leading-[0.92]">« {a.extrait} »</p>
+                    <p className="font-display text-[clamp(2rem,1.2rem+3.2vw,4.75rem)] uppercase leading-[1.05]">« {a.extrait} »</p>
                     <p className="mt-4 max-w-xl text-charbon/75">{a.texte}</p>
                     <p className="eyebrow mt-3 text-acier-fonce">{a.date}</p>
                   </blockquote>

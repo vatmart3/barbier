@@ -7,12 +7,12 @@
  * « Prochain créneau ». Même effet au premier swipe (défilement tactile).
  */
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { site } from "@/config/site";
 import { Bouton } from "@/components/ui/Bouton";
-import { IconFleche } from "@/components/ui/Icons";
+import { IconFacebook, IconFleche, IconInstagram, IconTiktok } from "@/components/ui/Icons";
+import { VitrineCoupes } from "./VitrineCoupes";
 import { RasoirSVG } from "@/components/illustrations/RasoirSVG";
 import { useDeviceTier } from "@/hooks/useDeviceTier";
 import { loaderDelay } from "@/components/layout/Loader";
@@ -24,75 +24,62 @@ const RasoirScene = dynamic(() => import("@/components/three/RasoirScene"), { ss
 const CLIP_A = `polygon(0 0, 100% 0, 100% ${CUT.right}%, 0 ${CUT.left}%)`;
 // La moitié B déborde de 2 px sur A : pas de couture visible au repos
 const CLIP_B = `polygon(100% calc(${CUT.right}% - 2px), 100% 100%, 0 100%, 0 calc(${CUT.left}% - 2px))`;
-const SABOTS = ["0", "0,5", "1", "1,5", "2", "3", "4"];
-
 function HeroFace() {
   return (
-    <div className="relative flex h-full flex-col bg-charbon text-creme">
-      {/* Traces de tondeuse en fond */}
-      <div aria-hidden className="absolute inset-x-0 top-[34%] h-[30%] text-creme/[0.05] traces" />
+    <div className="ambiance relative h-full overflow-hidden text-creme">
+      {/* Réseaux, en colonne à gauche */}
+      <ul aria-label="Réseaux sociaux" className="absolute left-(--spacing-gutter) top-1/2 z-10 hidden -translate-y-1/2 flex-col gap-2 md:flex" data-hero-in>
+        {[
+          { href: site.social.instagram, label: "Instagram", Icon: IconInstagram },
+          { href: site.social.facebook, label: "Facebook", Icon: IconFacebook },
+          { href: site.social.tiktok, label: "TikTok", Icon: IconTiktok },
+        ].map(({ href, label, Icon }) => (
+          <li key={label}>
+            <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${site.name} sur ${label}`} className="grid size-11 place-items-center text-creme/85 transition-colors hover:text-ambre">
+              <Icon size={20} />
+            </a>
+          </li>
+        ))}
+      </ul>
 
-      <div className="container-page relative flex h-full flex-col pb-8 pt-[calc(var(--header-h)+1.5rem)] md:pb-10">
-        <div className="grid-page flex-1 content-start gap-y-6">
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <p className="eyebrow text-acier" data-hero-in>
-              {site.address.street.replace(/^\d+\s/, "")} · {site.address.city}
+      <div className="container-page relative flex h-full flex-col justify-center pb-10 pt-[calc(var(--header-h)+1rem)] md:pl-24">
+        <div className="grid-page items-center">
+          <div className="col-span-12 flex flex-col items-center text-center md:col-span-7 md:col-start-6 md:items-end md:text-right lg:col-span-7 lg:col-start-6">
+            <h1 className="flex flex-col items-center md:items-end">
+              <span className="eyebrow mb-3 text-acier-clair" data-hero-in>
+                {site.address.street.replace(/^\d+\s/, "")} · {site.address.city}
+              </span>
+              <span
+                data-hero-word
+                className="metal block pt-[0.18em] -mt-[0.18em] font-display text-[min(15vw,19svh)] leading-[0.95] tracking-[0.01em] [font-variation-settings:'wdth'_125] md:text-[min(10.5vw,19svh)]"
+              >
+                Dégradé
+              </span>
+              <span data-hero-in className="script -mt-[0.1em] block text-[min(10vw,10svh)] leading-[1.05] md:text-[min(6.2vw,10svh)]">
+                Barbier à Sète
+              </span>
+            </h1>
+            <p data-hero-in className="mt-4 font-display text-[clamp(1rem,0.8rem+0.9vw,1.6rem)] normal-case text-ambre [font-variation-settings:'wdth'_100]">
+              Fade, taper &amp; barbe au coupe-chou
             </p>
-          </div>
-          <div className="col-span-12 hidden justify-end md:col-span-6 md:flex lg:col-span-8" data-hero-in>
-            <p className="eyebrow max-w-[22ch] text-right text-acier">Mardi → samedi · nocturne le jeudi jusqu&apos;à 21 h</p>
-          </div>
-        </div>
-
-        {/* Échelle des sabots, verticale, à droite */}
-        <ol aria-hidden className="absolute right-(--spacing-gutter) top-1/2 hidden -translate-y-1/2 flex-col items-end gap-3 lg:flex" data-hero-in>
-          {SABOTS.map((s, i) => (
-            <li key={s} className="flex items-center gap-3">
-              <span className={cn("tabular text-xs", i === 1 ? "text-creme" : "text-acier")}>{s}</span>
-              <span className={cn("h-px bg-current", i === 1 ? "w-10 bg-rouge" : "w-5 text-acier/60")} />
-            </li>
-          ))}
-        </ol>
-
-        <div className="grid-page items-end gap-y-8">
-          <div className="col-span-12 max-w-md sm:col-span-8 md:col-span-5 lg:col-span-4" data-hero-in>
-            <p className="text-base text-creme/85 md:text-lg">
-              Trois fauteuils, Grand&apos;Rue. Des dégradés sans marche, des barbes finies au coupe-chou. Réserver prend moins d&apos;une minute.
-              La coupe, un peu plus.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <div data-hero-in className="mt-7 flex flex-wrap items-center justify-center gap-3 md:justify-end">
               <Bouton href="/reserver" size="lg" iconEnd={<IconFleche size={22} />}>
                 Prendre place
               </Bouton>
-              <Link
-                href="/coupes#configurateur"
-                className="group inline-flex min-h-11 items-center gap-2 text-sm text-creme/80 underline decoration-creme/30 underline-offset-[6px] transition-colors hover:text-creme hover:decoration-rouge"
-              >
-                Composer sa coupe
-              </Link>
+              <Bouton href="/coupes" variant="ligne" size="lg">
+                Voir les coupes
+              </Bouton>
             </div>
+            <p data-hero-in className="tabular mt-5 text-xs tracking-wide text-creme/80 sm:text-sm">
+              {site.phone.display} <span className="text-ambre">·</span> mar → sam, nocturne jeudi 21 h
+            </p>
           </div>
         </div>
+      </div>
 
-        <h1 className="relative mt-6 md:mt-8">
-          <span className="eyebrow mb-7 block text-acier md:mb-4" data-hero-in>
-            Barbier à Sète — fade, taper, barbe au coupe-chou
-          </span>
-          <span className="relative -mb-[0.1em] -mt-[0.12em] block select-none font-display text-[min(30vw,40svh)] leading-[0.74] tracking-[-0.02em]">
-            {/* Le mot « DÉGRADÉ » est lui-même un dégradé : plein à gauche, traces à droite.
-                Le padding haut garde les accents dans la zone peinte (background-clip / mask). */}
-            <span data-hero-word className="block bg-[repeating-linear-gradient(180deg,var(--color-creme)_0_2px,transparent_2px_6px)] bg-clip-text pt-[0.3em] text-transparent">
-              Dégradé
-            </span>
-            <span
-              aria-hidden
-              data-hero-word
-              className="absolute inset-x-0 top-0 block pt-[0.3em] text-creme [mask-image:linear-gradient(90deg,#000_28%,transparent_78%)]"
-            >
-              Dégradé
-            </span>
-          </span>
-        </h1>
+      {/* Mini-carrousel des coupes */}
+      <div className="absolute bottom-8 right-(--spacing-gutter) z-10 hidden lg:block" data-hero-in>
+        <VitrineCoupes />
       </div>
     </div>
   );
@@ -163,10 +150,13 @@ export function Hero({ children }: { children: ReactNode }) {
       const mm = gsap.matchMedia();
       const delay = loaderDelay();
 
-      // Clone de la face A dans la moitié B (décor : aucun titre, aucun élément focalisable)
-      const faceA = root.current?.querySelector("[data-half-a] [data-face]");
-      const halfB = root.current?.querySelector("[data-half-b]");
-      if (faceA && halfB && !halfB.firstChild) {
+      // Clone de la face A dans la moitié B (décor : aucun titre, aucun élément focalisable).
+      // Au repos la face A est entière et interactive ; les deux moitiés n'existent
+      // qu'au moment de la coupe (le clone est refait à cet instant, à l'état courant).
+      const cloner = () => {
+        const faceA = root.current?.querySelector("[data-half-a] [data-face]");
+        const halfB = root.current?.querySelector("[data-half-b]");
+        if (!faceA || !halfB) return;
         const clone = faceA.cloneNode(true) as HTMLElement;
         clone.querySelectorAll("h1").forEach((h) => {
           const p = document.createElement("p");
@@ -175,10 +165,9 @@ export function Hero({ children }: { children: ReactNode }) {
           h.replaceWith(p);
         });
         clone.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
-        halfB.appendChild(clone);
-      }
-      const halfA = root.current?.querySelector<HTMLElement>("[data-half-a]");
-      if (halfA && halfB?.firstChild) halfA.style.clipPath = CLIP_A;
+        halfB.replaceChildren(clone);
+      };
+      cloner();
 
       // Entrée
       mm.add("(prefers-reduced-motion: no-preference)", () => {
@@ -204,6 +193,9 @@ export function Hero({ children }: { children: ReactNode }) {
           .to("[data-scroll-hint]", { opacity: 0, duration: 0.08 }, 0)
           .fromTo("[data-cut-line]", { scaleX: 0 }, { scaleX: 1, duration: 0.2, ease: "power2.in" }, 0.32)
           .to("[data-rasoir-svg]", { x: "-120vw", y: "40vh", rotate: -28, duration: 0.26, ease: "power2.in" }, 0.3)
+          .call(cloner, [], 0.5)
+          .set("[data-half-a]", { clipPath: CLIP_A }, 0.505)
+          .set("[data-half-b]", { visibility: "visible" }, 0.505)
           .to("[data-half-a]", { xPercent: -14, yPercent: -62, rotate: -2, duration: 0.46, ease: "power2.inOut" }, 0.52)
           .to("[data-half-b]", { xPercent: 14, yPercent: 62, rotate: -2, duration: 0.46, ease: "power2.inOut" }, 0.52)
           .to("[data-cut-line]", { opacity: 0, duration: 0.1 }, 0.56)
@@ -234,7 +226,7 @@ export function Hero({ children }: { children: ReactNode }) {
           </div>
         </div>
         {/* Moitié B : copie décorative de la face, clonée côté client (HTML initial plus léger) */}
-        <div data-half-b aria-hidden inert className="absolute inset-0 z-10 will-change-transform motion-reduce:hidden" style={{ clipPath: CLIP_B }} />
+        <div data-half-b aria-hidden inert className="pointer-events-none invisible absolute inset-0 z-10 will-change-transform motion-reduce:hidden" style={{ clipPath: CLIP_B }} />
         {/* Motion-reduce : la moitié A doit être entière */}
         <style>{`@media (prefers-reduced-motion: reduce){[data-half-a]{clip-path:none!important}}`}</style>
 
@@ -244,7 +236,7 @@ export function Hero({ children }: { children: ReactNode }) {
             className="absolute right-0 block h-[2px] origin-right"
             style={{ top: `${CUT.right}%`, width: "var(--cut-len, 100%)", transform: "rotate(var(--cut-angle, 0deg))" }}
           >
-            <span data-cut-line className="block h-full w-full origin-right scale-x-0 bg-rouge shadow-[0_0_12px_rgba(200,16,46,0.6)]" />
+            <span data-cut-line className="block h-full w-full origin-right scale-x-0 bg-ambre shadow-[0_0_14px_rgba(232,160,74,0.8)]" />
           </span>
         </div>
 
@@ -253,7 +245,7 @@ export function Hero({ children }: { children: ReactNode }) {
           <div
             data-rasoir-svg
             className={cn(
-              "absolute left-1/2 top-[27%] w-[72vw] max-w-[640px] -translate-x-1/2 -translate-y-1/2 -rotate-12 transition-opacity duration-700 md:left-[62%] md:top-[40%] md:w-[44vw]",
+              "absolute left-1/2 top-[20%] w-[64vw] max-w-[760px] -translate-x-1/2 -translate-y-1/2 -rotate-[20deg] transition-opacity duration-700 md:left-[20%] md:top-[56%] md:w-[38vw] md:-rotate-[55deg]",
               ready3d && "opacity-0",
             )}
           >
@@ -267,8 +259,8 @@ export function Hero({ children }: { children: ReactNode }) {
         </div>
 
         {/* Invitation au scroll */}
-        <p aria-hidden data-scroll-hint className="eyebrow absolute bottom-6 right-(--spacing-gutter) z-20 hidden items-center gap-3 text-acier md:flex motion-reduce:hidden" data-hero-in>
-          <span className="inline-block h-8 w-px animate-pulse bg-rouge" />
+        <p aria-hidden data-scroll-hint className="eyebrow absolute bottom-6 left-(--spacing-gutter) z-20 hidden items-center gap-3 text-acier md:flex motion-reduce:hidden" data-hero-in>
+          <span className="inline-block h-8 w-px animate-pulse bg-ambre" />
           Faites défiler : la lame s&apos;ouvre
         </p>
       </div>

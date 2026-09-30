@@ -3,6 +3,8 @@
 Site vitrine de démonstration — portfolio **MJAGENCY** (site 02/10).
 Marque fictive traitée comme un vrai client : réservation fonctionnelle, configurateur de coupe, rasoir 3D, SEO local complet.
 
+> Direction visuelle : **salon sombre et chaud** (lumières de plafond floues, briques), titres larges en dégradé métal, signatures en script cuivre, accents cuivre.
+>
 > Concept : **« la chaise »**. Le site se regarde depuis le fauteuil : les sections clés pivotent (défilement horizontal épinglé), le rasoir tranche l'écran au premier scroll, l'enseigne de barbier tourne au rythme de la page.
 
 ---
@@ -52,6 +54,8 @@ Les tests e2e utilisent Playwright ; en local, installez d'abord son navigateur 
 | `src/data/realisations.ts` | Avant / après (illustrations, ou vraies photos via le champ `photos`) |
 | `src/data/fidelite.ts` | Carte de fidélité |
 
+Couleurs et polices : `src/design/tokens.css` (palette cuivre, `--font-display`, `--font-script`) et `src/app/globals.css` (section « Style salon » : `.salon`, `.metal`, `.script`, `.ambiance`).
+
 Les prix modifiés se répercutent partout : pages, configurateur, réservation, e-mails, JSON-LD `Service`/`Offer`.
 
 ### Images
@@ -88,7 +92,7 @@ scripts/               génération d'assets + contrôles Playwright
 ## Checklist qualité (mesurée sur le build de production)
 
 - `npm run build` : 0 erreur, 0 warning — `npm run lint` et `tsc` propres.
-- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** sur toutes les pages ; Performance 91–95 sur les pages intérieures, ~88–92 sur l'accueil (variance de mesure). CLS ≤ 0,03.
+- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** sur toutes les pages ; Performance 90–91 sur les pages intérieures, ~85 sur l'accueil (fond d'ambiance + police variable). CLS ≤ 0,03.
 - Captures contrôlées à 320, 375, 768, 1024, 1280, 1440 et 1920 px ; `prefers-reduced-motion` testé (aucune erreur d'hydratation).
 
 ## Mentions

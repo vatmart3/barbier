@@ -84,7 +84,7 @@ export function Fidelite() {
 
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
           <div data-reveal="monte">
-          <div className="relative mx-auto max-w-xl rotate-[-2deg] bg-creme p-5 text-charbon shadow-paper sm:p-8">
+          <div className="relative mx-auto max-w-xl papier rotate-[-2deg] bg-creme p-5 text-charbon shadow-paper sm:p-8">
             <div className="flex items-baseline justify-between border-b border-charbon/20 pb-3">
               <p className="font-display text-3xl leading-none">Dégradé</p>
               <p className="eyebrow text-acier-fonce">Carte n° 0427</p>

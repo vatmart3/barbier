@@ -37,12 +37,11 @@ export function Header() {
       >
         <div className="container-page flex h-full items-center gap-3 sm:gap-4">
           <Link href="/" className="group mr-auto flex items-baseline gap-2.5 lg:mr-0" aria-label="Dégradé, barbier à Sète — accueil">
-            <span className="font-display text-[1.9rem] leading-none tracking-tight">Dégradé</span>
-            <span className="eyebrow hidden text-acier xl:inline">Barbier · Sète</span>
+            <span className="metal font-display text-[1.05rem] leading-none tracking-tight [font-variation-settings:'wdth'_125] sm:text-[1.45rem]">Dégradé</span>
           </Link>
 
           <div className="flex min-w-0 items-center gap-2 sm:gap-3 lg:ml-8 lg:mr-auto">
-            <Enseigne />
+            <Enseigne className="max-[359px]:hidden" />
             <span className="hidden xl:contents">
               <ProchainCreneauPastille />
             </span>

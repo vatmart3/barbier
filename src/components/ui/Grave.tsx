@@ -71,7 +71,7 @@ export function Grave({ text, className, as: Tag = "h3", delay = 0 }: Props) {
           className="font-display"
           style={{
             fontFamily: "var(--font-display)",
-            fontVariationSettings: '"opsz" 72',
+            fontVariationSettings: '"wdth" 112',
             fontWeight: 800,
             fill: "currentColor",
             fillOpacity: go ? 1 : 0,

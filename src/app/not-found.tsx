@@ -8,7 +8,7 @@ export default function NotFound() {
     <Page>
       <section className="container-page flex min-h-svh flex-col justify-center pb-24 pt-[calc(var(--header-h)+2rem)]">
         <p className="eyebrow text-acier">Erreur 404</p>
-        <h1 className="mt-6 font-display text-[clamp(8rem,4rem+22vw,26rem)] leading-[0.8]">
+        <h1 className="mt-6 font-display text-[clamp(6rem,3rem+14vw,16rem)] leading-[0.8]">
           4<span className="text-transparent [-webkit-text-stroke:2px_var(--color-creme)]">0</span>4
         </h1>
         <p className="mt-8 max-w-md text-xl">Cette page a été rasée de trop près. Il n&apos;en reste rien.</p>

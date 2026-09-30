@@ -22,10 +22,10 @@ interface Og {
 
 export async function ogImage({ eyebrow, titre, repere }: Og) {
   const [display, text] = await fonts;
-  const charbon = "#111111";
+  const charbon = "#0F0D0C";
   const creme = "#F2EDE4";
   const acier = "#9AA0A6";
-  const rouge = "#C8102E";
+  const rouge = "#B8661A";
 
   return new ImageResponse(
     (

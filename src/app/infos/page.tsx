@@ -54,13 +54,13 @@ export default function InfosPage() {
         </div>
       </figure>
 
-      <section aria-labelledby="faq-titre" className="bg-creme py-(--spacing-section) text-charbon">
+      <section aria-labelledby="faq-titre" className="salon bg-creme py-(--spacing-section) text-charbon">
         <div className="container-page grid-page gap-y-12">
           <div className="col-span-12 lg:col-span-4">
             <Etiquette n="02" className="text-acier-fonce">
               FAQ
             </Etiquette>
-            <Lignes id="faq-titre" className="mt-6 text-d2" lines={["Ce qu'on", "nous demande", <span key="c" className="text-acier-fonce">au comptoir.</span>]} />
+            <Lignes id="faq-titre" className="mt-6 text-d1 xl:text-[3.6rem]" lines={["Ce qu'on", "nous demande", <span key="c" className="text-acier-fonce">au comptoir.</span>]} />
           </div>
           <div className="col-span-12 lg:col-span-7 lg:col-start-6">
             <Faq items={faq} />
@@ -68,7 +68,7 @@ export default function InfosPage() {
         </div>
       </section>
 
-      <section aria-labelledby="question-titre" className="border-t border-charbon/10 bg-creme-2 py-(--spacing-section) text-charbon">
+      <section aria-labelledby="question-titre" className="salon border-t border-charbon/10 bg-creme-2 py-(--spacing-section) text-charbon">
         <div className="container-page grid-page gap-y-12">
           <div className="col-span-12 lg:col-span-4">
             <Etiquette n="03" className="text-acier-fonce">

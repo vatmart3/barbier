@@ -123,8 +123,8 @@ export function Succes({ confirmation: c }: { confirmation: Confirmation }) {
         </div>
         {/* Perforation */}
         <div aria-hidden className="relative h-4">
-          <span className="absolute -left-2 top-1/2 size-4 -translate-y-1/2 rounded-full bg-[#0f0f0f]" />
-          <span className="absolute -right-2 top-1/2 size-4 -translate-y-1/2 rounded-full bg-[#0f0f0f]" />
+          <span className="absolute -left-2 top-1/2 size-4 -translate-y-1/2 rounded-full bg-[#111513]" />
+          <span className="absolute -right-2 top-1/2 size-4 -translate-y-1/2 rounded-full bg-[#111513]" />
           <span className="absolute inset-x-4 top-1/2 border-t border-dashed border-charbon/30" />
         </div>
         <div className="flex items-center justify-between gap-4 p-6 pt-3 text-sm">

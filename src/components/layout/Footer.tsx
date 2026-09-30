@@ -12,7 +12,7 @@ export function Footer() {
   const groupes = horairesGroupes();
   const annee = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-creme/8 bg-[#0b0b0b] pb-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+1.5rem)] text-sm text-creme lg:pb-0">
+    <footer className="relative border-t border-creme/8 bg-[#0c100e] pb-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+1.5rem)] text-sm text-creme lg:pb-0">
       <div className="container-page grid gap-x-8 gap-y-12 pb-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1.2fr_1fr]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">

@@ -7,7 +7,7 @@ Le téléchargement de photos libres (Unsplash, Pexels, Wikimedia) est bloqué d
 
 | Visuel | Fichier | Technique |
 |---|---|---|
-| Tondeuse 3D (hero) | `src/components/three/TondeuseScene.tsx` | Corps en `LatheGeometry` laqué, bague et interrupteur or, lames chromées et dents en `InstancedMesh`, sabot à côtes extrudées, gravure en texture canvas, reflets Lightformer — aucun modèle ni HDR téléchargé |
+| Tondeuse 3D (section « Les coupes ») | `src/components/three/TondeuseScene.tsx` | Corps en `LatheGeometry` laqué, bague et interrupteur or, lames chromées et dents en `InstancedMesh`, sabot à côtes extrudées, gravure en texture canvas, reflets Lightformer — aucun modèle ni HDR téléchargé |
 | Enseigne de barbier 3D (progression) | `src/components/three/EnseigneScene.tsx` | Cylindre + shader GLSL maison (spirale pilotée par le scroll) |
 | Intérieur du salon, le soir (fauteuils, miroirs en arche cerclés d'or, Sabot le chat) | `src/components/illustrations/IllustrationSalon.tsx` | SVG dessiné, aplats arrondis |
 | Devanture Grand'Rue, le soir (store festonné or, vitrine éclairée, vélo) | `src/components/illustrations/IllustrationDevanture.tsx` | SVG dessiné, aplats arrondis |
@@ -18,6 +18,12 @@ Le téléchargement de photos libres (Unsplash, Pexels, Wikimedia) est bloqué d
 | Tampons de fidélité | `src/components/home/Fidelite.tsx` | SVG |
 | Favicons / icônes PWA | `src/app/icon.svg`, `favicon.ico`, `apple-icon.png`, `public/icons/*` | `scripts/icons.mjs` |
 | Images Open Graph (1 par page) | `src/app/**/opengraph-image.tsx` | `next/og`, générées au build |
+
+## 1 bis. Photo
+
+| Visuel | Fichier | Origine |
+|---|---|---|
+| Salon (hero, page L'équipe, images Open Graph) | `public/images/salon-hero.jpg` (1200 × 1500) | Image fournie par le client pour la démo, éclaircie (+14 %) et recompressée avec `sharp`. **Vérifier les droits d'usage** avant toute mise en ligne publique ; pour un vrai salon, la remplacer par une photo du lieu en gardant le même nom (cadrage : fauteuils au centre, zone sombre en haut pour le texte sur mobile). |
 
 ## 2. Polices
 

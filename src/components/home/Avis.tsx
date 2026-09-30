@@ -21,7 +21,7 @@ function Etoiles() {
 
 export function Avis() {
   return (
-    <section aria-labelledby="avis-titre" className="bg-charbon-2 py-(--spacing-section)">
+    <section aria-labelledby="avis-titre" className="clair bg-charbon-2 py-(--spacing-section) text-creme">
       <div className="container-page">
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
           <div>
@@ -42,8 +42,7 @@ export function Avis() {
                   <figcaption className="mt-6 flex items-center gap-3">
                     <span
                       aria-hidden
-                      className="font-display grid size-11 shrink-0 place-items-center rounded-full text-lg"
-                      style={{ background: b?.teinte ?? "var(--color-charbon-2)" }}
+                      className="font-display grid size-11 shrink-0 place-items-center rounded-full bg-rouge/15 text-lg text-rouge-fonce"
                     >
                       {a.auteur[0]}
                     </span>

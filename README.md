@@ -3,9 +3,9 @@
 Site vitrine de démonstration — portfolio **MJAGENCY** (site 02/10).
 Marque fictive traitée comme un vrai client : réservation fonctionnelle, configurateur de coupe, tondeuse 3D, SEO local complet.
 
-> Direction visuelle : **salon de nuit, anthracite et or**. Grands titres serif fins en deux tons (blanc chaud puis or), sur-titres en capitales espacées, boutons or, panneaux et cartes arrondis. Titres en **Fraunces « SOFT »** (empattements ronds), texte en **Figtree**, répliques et signature écrites à la main en **Caveat**. Le salon et la devanture sont **dessinés** de nuit (aplats arrondis, avec Sabot, le chat de la maison).
+> Direction visuelle : **vert bouteille profond, noyer, crème et or**. Hero en photo plein cadre du salon (lumineuse, dégradé sombre seulement derrière le texte), sections sombres et sections crème en alternance, grands titres serif fins en deux tons, sur-titres en capitales espacées, boutons or, panneaux et cartes arrondis. Titres en **Fraunces « SOFT »** (empattements ronds), texte en **Figtree**, répliques et signature écrites à la main en **Caveat**. Le salon et la devanture sont **dessinés** de nuit (aplats arrondis, avec Sabot, le chat de la maison).
 >
-> Concept : **« la chaise »**. On réserve dès l'accueil (prestation, barbier, date et heure, récapitulatif côte à côte, pré-remplis avec le prochain créneau réel), la tondeuse perd son sabot et s'allume au scroll, les coupes défilent en carrousel, les barbiers parlent avec leurs mots, le patron signe à la main, et l'enseigne de barbier tourne au rythme de la page.
+> Concept : **« la chaise »**. On réserve dès l'accueil (prestation, barbier, date et heure, récapitulatif côte à côte, pré-remplis avec le prochain créneau réel), dans « Les coupes », la tondeuse 3D perd son sabot et s'allume au scroll, les coupes défilent en carrousel, les barbiers parlent avec leurs mots, le patron signe à la main, et l'enseigne de barbier tourne au rythme de la page.
 
 ---
 

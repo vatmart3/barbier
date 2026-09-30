@@ -8,7 +8,7 @@ import { Lignes } from "@/components/ui/Lignes";
 
 export function MotDuPatron() {
   return (
-    <section aria-labelledby="mot-titre" className="bg-charbon-2 py-(--spacing-section)">
+    <section aria-labelledby="mot-titre" className="clair bg-charbon-2 py-(--spacing-section) text-creme">
       <div className="container-page grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <figure data-reveal="monte">
           <IllustrationSalon

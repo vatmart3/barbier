@@ -108,22 +108,40 @@
    Portées de couleur
    ========================================================================== */
 
-/* Sections alternées : un ton au-dessus du fond */
+/* Sections crème (rôles inversés hérités : bg-creme = surface, text-charbon = encre) */
 .salon {
-  --color-creme: #141414;       /* surface de la section                   */
-  --color-creme-2: #1b1b1b;     /* cartes posées sur la section            */
-  --color-creme-3: #8b857c;
-  --color-charbon: #f2eee8;     /* encre                                   */
-  --color-acier-fonce: #a39d93;
-  --color-acier: #a39d93;
-  --color-rouge-fonce: #d6b47d;
+  --color-creme: #f3eee6;       /* surface de la section                   */
+  --color-creme-2: #fbf8f2;     /* cartes posées sur la section            */
+  --color-creme-3: #8a8378;
+  --color-charbon: #1b211e;     /* encre                                   */
+  --color-acier-fonce: #5c574f;
+  --color-acier: #5c574f;
+  --color-rouge-fonce: #7f5b24; /* or bruni, lisible sur crème (5,6:1)     */
+  --color-ambre: #7f5b24;
+  color-scheme: light;
+}
+
+/* Sections crème (rôles standard : bg-charbon* = fonds, text-creme* = encres) */
+.clair {
+  --color-charbon: #fffdf9;     /* cartes                                  */
+  --color-charbon-2: #f3eee6;   /* surface de la section                   */
+  --color-charbon-3: #e4ddd1;   /* traits, boutons ronds                   */
+  --color-creme: #1b211e;
+  --color-creme-2: #3e4540;
+  --color-creme-3: #8a8378;
+  --color-acier: #5c574f;
+  --color-acier-clair: #5c574f;
+  --color-acier-fonce: #5c574f;
+  --color-rouge-fonce: #7f5b24;
+  --color-ambre: #7f5b24;
+  color-scheme: light;
 }
 
 /* Hero : noir profond */
 .nuit {
-  --color-charbon: #0a0a0a;
-  --color-charbon-2: #161616;
-  --color-charbon-3: #2a2a2a;
+  --color-charbon: #0c100e;
+  --color-charbon-2: #18201c;
+  --color-charbon-3: #2a332e;
   --color-creme: #f2eee8;
   --color-creme-2: #cbc5bb;
   --color-acier: #a39d93;
@@ -135,11 +153,14 @@
 
 /* Cartes (carte de fidélité, ticket, récapitulatifs) */
 .papier {
-  --color-creme: #1b1b1b;
-  --color-creme-2: #232323;
+  --color-creme: #1a221e;
+  --color-creme-2: #222b26;
   --color-charbon: #f2eee8;
-  --color-acier-fonce: #a39d93;
+  --color-acier: #a8a398;
+  --color-acier-fonce: #a8a398;
   --color-rouge-fonce: #d6b47d;
+  --color-ambre: #d6b47d;
+  color-scheme: dark;
 }
 
 /* Titres en deux tons : la seconde ligne en or */
@@ -217,7 +238,7 @@
 
 /* Matériau translucide (barres, pastilles) */
 @utility verre {
-  background: color-mix(in oklab, var(--color-charbon) 72%, transparent);
+  background: color-mix(in oklab, var(--color-charbon) 90%, transparent);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
@@ -424,5 +445,24 @@ html.js [data-reveal="carte"]:not([data-vu]) [data-epingle] {
   from {
     transform: translateY(40px);
     opacity: 0;
+  }
+}
+
+/* Photo du hero : léger zoom au fil du scroll (CSS pur, navigateurs compatibles) */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-photo {
+      animation: hero-zoom linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12) translateY(3%);
   }
 }

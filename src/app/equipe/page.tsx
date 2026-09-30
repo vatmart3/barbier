@@ -6,7 +6,7 @@ import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
 import { Bouton } from "@/components/ui/Bouton";
 import { IconFleche } from "@/components/ui/Icons";
-import { IllustrationSalon } from "@/components/illustrations/IllustrationSalon";
+import Image from "next/image";
 import { EquipeHorizontal } from "@/components/equipe/EquipeHorizontal";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { site } from "@/config/site";
@@ -61,11 +61,16 @@ export default function EquipePage() {
             </div>
           </div>
           <figure className="col-span-12 lg:order-last" data-reveal="clip-bas">
-            <IllustrationSalon
-              title="Les trois fauteuils de barbier de Dégradé face aux miroirs en arche, salon Grand'Rue à Sète"
-              className="h-auto w-full rounded-[2rem]"
-            />
-            <figcaption className="eyebrow mt-3 text-acier-fonce">Trois fauteuils de 1968, Grand&apos;Rue, Sète. Le chat, c&apos;est Sabot.</figcaption>
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[2rem]">
+              <Image
+                src="/images/salon-hero.jpg"
+                alt="Les trois fauteuils de barbier en cuir face aux miroirs en arche, mur en tasseaux de noyer, salon Dégradé à Sète"
+                fill
+                sizes="(min-width: 80rem) 76rem, 100vw"
+                className="object-cover object-[50%_66%]"
+              />
+            </div>
+            <figcaption className="eyebrow mt-3 text-acier-fonce">Trois fauteuils cuir, trois miroirs, Grand&apos;Rue, Sète.</figcaption>
           </figure>
           <ol className="col-span-12 border-t border-charbon/15 lg:col-span-6 lg:col-start-7">
             {REGLES.map((r) => (

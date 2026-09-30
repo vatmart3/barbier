@@ -1,5 +1,5 @@
 /* ==========================================================================
-   DÉGRADÉ — Design system (salon de nuit : anthracite, encre chaude, or)
+   DÉGRADÉ — Design system (vert bouteille profond, noyer, crème et or)
    Source unique des tokens visuels. Les équivalents JS (easings, durées)
    sont dans src/design/motion.ts et DOIVENT rester alignés avec ce fichier.
 
@@ -7,21 +7,21 @@
    --color-charbon*  = FONDS   (anthracite, panneaux, traits)
    --color-creme*    = ENCRES  (texte principal, puis nuances)
    --color-rouge*    = ACCENT  (or : fonds de boutons, puis texte)
-   Les portées .salon (sections alternées), .nuit (hero) et .papier
-   (cartes) redéfinissent ces rôles localement — voir globals.css.
+   Les portées .clair et .salon (sections crème), .nuit (hero) et .papier
+   (cartes sombres) redéfinissent ces rôles localement — voir globals.css.
    ========================================================================== */
 
 @theme {
   /* ---- Couleurs ---------------------------------------------------------- */
-  --color-charbon: #0f0f0f;     /* fond principal                           */
-  --color-charbon-2: #171717;   /* panneaux, cartes                         */
-  --color-charbon-3: #2a2a2a;   /* traits, cases                            */
+  --color-charbon: #111513;     /* fond principal : noir vert bouteille      */
+  --color-charbon-2: #18201c;   /* panneaux, cartes                         */
+  --color-charbon-3: #2a332e;   /* traits, cases                            */
   --color-creme: #f2eee8;       /* encre principale (blanc chaud)           */
   --color-creme-2: #cbc5bb;
   --color-creme-3: #8b857c;
-  --color-acier: #a39d93;       /* texte secondaire (6,9:1 sur #171717)     */
-  --color-acier-clair: #a39d93;
-  --color-acier-fonce: #a39d93;
+  --color-acier: #a8a398;       /* texte secondaire (7:1 sur #18201c)       */
+  --color-acier-clair: #a8a398;
+  --color-acier-fonce: #a8a398;
   --color-rouge: #c9a064;       /* ACCENT or : fonds de boutons             */
   --color-rouge-fonce: #d6b47d; /* accent en texte sur fond sombre (9:1)    */
   --color-ambre: #d6b47d;

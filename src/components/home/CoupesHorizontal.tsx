@@ -9,21 +9,23 @@ import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
 import { Carrousel } from "@/components/ui/Carrousel";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
+import { TondeuseVitrine } from "./TondeuseVitrine";
 
 export function CoupesHorizontal() {
   return (
-    <section id="coupes" aria-labelledby="coupes-titre" className="scroll-mt-12 bg-charbon-2 py-(--spacing-section)">
-      <div className="container-page">
-        <Etiquette>Les coupes</Etiquette>
-        <div className="mt-4 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
-          <Lignes id="coupes-titre" className="text-d2" lines={["Six coupes.", <span key="b" className="text-acier">Aucune au hasard.</span>]} />
-          <p className="max-w-sm text-acier">
+    <section id="coupes" aria-labelledby="coupes-titre" className="clair scroll-mt-12 bg-charbon-2 py-(--spacing-section) text-creme">
+      <div className="container-page grid items-center gap-x-10 lg:grid-cols-[1fr_1fr]">
+        <div>
+          <Etiquette>Les coupes</Etiquette>
+          <Lignes id="coupes-titre" className="mt-4 text-d2" lines={["Six coupes.", <span key="b" className="text-acier">Aucune au hasard.</span>]} />
+          <p className="mt-5 max-w-md text-acier">
             Du sabot 0 au peigne seul. Chaque coupe a son geste, sa durée et son rythme d&apos;entretien.
           </p>
+          <p aria-hidden className="font-script mt-5 inline-block -rotate-2 text-2xl text-rouge-fonce">
+            la plus demandée ? le fade moyen, de loin.
+          </p>
         </div>
-        <p aria-hidden className="font-script mt-5 inline-block -rotate-2 text-2xl text-rouge-fonce">
-          la plus demandée ? le fade moyen, de loin.
-        </p>
+        <TondeuseVitrine className="mt-6 h-56 sm:h-72 lg:mt-0 lg:h-80" />
       </div>
 
       <Carrousel label="Les six coupes" className="mt-10">

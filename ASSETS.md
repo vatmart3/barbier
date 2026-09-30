@@ -7,11 +7,11 @@ Le téléchargement de photos libres (Unsplash, Pexels, Wikimedia) est bloqué d
 
 | Visuel | Fichier | Technique |
 |---|---|---|
-| Rasoir coupe-chou 3D (hero) | `src/components/three/RasoirScene.tsx` | Géométries extrudées procédurales, acier `MeshPhysicalMaterial`, corne en texture canvas, reflets Lightformer — aucun modèle ni HDR téléchargé |
+| Tondeuse 3D (hero) | `src/components/three/TondeuseScene.tsx` | Corps en `LatheGeometry` laqué, bague et interrupteur or, lames chromées et dents en `InstancedMesh`, sabot à côtes extrudées, gravure en texture canvas, reflets Lightformer — aucun modèle ni HDR téléchargé |
 | Enseigne de barbier 3D (progression) | `src/components/three/EnseigneScene.tsx` | Cylindre + shader GLSL maison (spirale pilotée par le scroll) |
 | Intérieur du salon, le soir (fauteuils, miroirs en arche cerclés d'or, Sabot le chat) | `src/components/illustrations/IllustrationSalon.tsx` | SVG dessiné, aplats arrondis |
 | Devanture Grand'Rue, le soir (store festonné or, vitrine éclairée, vélo) | `src/components/illustrations/IllustrationDevanture.tsx` | SVG dessiné, aplats arrondis |
-| Rasoir SVG (repli sans WebGL) | `src/components/illustrations/RasoirSVG.tsx` | SVG dessiné à la main |
+| Tondeuse SVG (premier affichage, repli sans WebGL) | `src/components/illustrations/TondeuseSVG.tsx` | SVG dessiné à la main |
 | Profils gravés (coupes, configurateur, avant/après, portraits) | `src/components/illustrations/profil-*.ts(x)` | SVG paramétrique : hachures « traces de tondeuse », masque de fondu, morphing |
 | Carte de Sète | `src/components/illustrations/CarteSete.tsx` | SVG stylisé (étang de Thau, canal royal, Mont Saint-Clair en courbes de niveau) — pas de carte tierce |
 | Pictos | `src/components/ui/Icons.tsx` | SVG maison, trait 1,5 px |

@@ -2,8 +2,8 @@
 
 /**
  * HERO — bannière de salon : texte à gauche (sur-titre or, grand titre serif
- * en deux tons, bouton or), rasoir coupe-chou éclairé à droite. En sortant du
- * hero, la lame s'ouvre et l'objet pivote. 3D chargée en différé, SVG en attendant.
+ * en deux tons, bouton or), tondeuse éclairée à droite. En sortant du hero,
+ * le sabot s'enlève, la tondeuse s'allume et pivote. 3D chargée en différé, SVG en attendant.
  */
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -11,12 +11,12 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { Bouton } from "@/components/ui/Bouton";
 import { IconCalendrier } from "@/components/ui/Icons";
-import { RasoirSVG } from "@/components/illustrations/RasoirSVG";
+import { TondeuseSVG } from "@/components/illustrations/TondeuseSVG";
 import { useDeviceTier } from "@/hooks/useDeviceTier";
 import { cn } from "@/lib/cn";
 import { heroState } from "./heroState";
 
-const RasoirScene = dynamic(() => import("@/components/three/RasoirScene"), { ssr: false });
+const TondeuseScene = dynamic(() => import("@/components/three/TondeuseScene"), { ssr: false });
 
 export function Hero() {
   const root = useRef<HTMLDivElement>(null);
@@ -43,7 +43,7 @@ export function Hero() {
     };
   }, [tier]);
 
-  // Pointeur → rasoir
+  // Pointeur → tondeuse
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
       heroState.px = (e.clientX / window.innerWidth) * 2 - 1;
@@ -78,7 +78,7 @@ export function Hero() {
             },
           },
         });
-        tl.to("[data-rasoir-svg]", { rotate: 0, scale: 1.1, duration: 0.6, ease: "power2.inOut" }, 0);
+        tl.to("[data-objet-svg]", { rotate: 0, scale: 1.1, duration: 0.6, ease: "power2.inOut" }, 0);
         return () => {
           heroState.p = 0;
         };
@@ -90,7 +90,7 @@ export function Hero() {
 
   return (
     <div id="hero" ref={root} className="nuit relative overflow-hidden bg-charbon text-creme">
-      {/* Lumière chaude côté rasoir, comme un projecteur de salon */}
+      {/* Lumière chaude côté tondeuse, comme un projecteur de salon */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_45%_60%_at_72%_55%,rgb(214_180_125/0.16),transparent_70%),radial-gradient(ellipse_80%_70%_at_75%_50%,rgb(255_255_255/0.05),transparent_70%)]"
@@ -118,20 +118,20 @@ export function Hero() {
           </div>
         </div>
 
-        {/* L'objet : SVG immédiat, 3D en surcouche quand prête */}
-        <div data-rasoir className="entree-objet relative h-[34svh] min-h-60 lg:h-[64svh]">
+        {/* La tondeuse : SVG immédiat, 3D en surcouche quand prête */}
+        <div data-objet className="entree-objet relative h-[34svh] min-h-60 lg:h-[64svh]">
           <div
-            data-rasoir-svg
+            data-objet-svg
             className={cn(
               "absolute left-1/2 top-1/2 w-[92%] max-w-[640px] -translate-x-1/2 -translate-y-1/2 -rotate-[14deg] transition-opacity duration-700",
               ready3d && "opacity-0",
             )}
           >
-            <RasoirSVG className="w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.7)]" />
+            <TondeuseSVG className="w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.7)]" />
           </div>
           {load3d ? (
-            <div className={cn("pointer-events-none absolute -inset-x-10 -inset-y-16 transition-opacity duration-700", ready3d ? "opacity-100" : "opacity-0")}>
-              <RasoirScene active={active} centre onReady={() => setReady3d(true)} />
+            <div className={cn("pointer-events-none absolute inset-x-0 -inset-y-16 transition-opacity lg:-inset-x-10 duration-700", ready3d ? "opacity-100" : "opacity-0")}>
+              <TondeuseScene active={active} centre onReady={() => setReady3d(true)} />
             </div>
           ) : null}
         </div>

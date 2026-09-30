@@ -1,11 +1,11 @@
 # DÉGRADÉ — Barbier, Sète
 
 Site vitrine de démonstration — portfolio **MJAGENCY** (site 02/10).
-Marque fictive traitée comme un vrai client : réservation fonctionnelle, configurateur de coupe, rasoir 3D, SEO local complet.
+Marque fictive traitée comme un vrai client : réservation fonctionnelle, configurateur de coupe, tondeuse 3D, SEO local complet.
 
 > Direction visuelle : **salon de nuit, anthracite et or**. Grands titres serif fins en deux tons (blanc chaud puis or), sur-titres en capitales espacées, boutons or, panneaux et cartes arrondis. Titres en **Fraunces « SOFT »** (empattements ronds), texte en **Figtree**, répliques et signature écrites à la main en **Caveat**. Le salon et la devanture sont **dessinés** de nuit (aplats arrondis, avec Sabot, le chat de la maison).
 >
-> Concept : **« la chaise »**. On réserve dès l'accueil (prestation, barbier, date et heure, récapitulatif côte à côte, pré-remplis avec le prochain créneau réel), le rasoir s'ouvre au scroll, les coupes défilent en carrousel, les barbiers parlent avec leurs mots, le patron signe à la main, et l'enseigne de barbier tourne au rythme de la page.
+> Concept : **« la chaise »**. On réserve dès l'accueil (prestation, barbier, date et heure, récapitulatif côte à côte, pré-remplis avec le prochain créneau réel), la tondeuse perd son sabot et s'allume au scroll, les coupes défilent en carrousel, les barbiers parlent avec leurs mots, le patron signe à la main, et l'enseigne de barbier tourne au rythme de la page.
 
 ---
 
@@ -79,8 +79,8 @@ src/
   lib/                 heure de Paris, moteur de créneaux, tarifs, .ics, schémas zod, SEO, OG
   components/
     layout/            header, pastille « prochain créneau », enseigne, menu, CTA mobile, footer, cookies, Lenis, révélateur
-    three/             rasoir coupe-chou (R3F, procédural) + enseigne (shader GLSL)
-    illustrations/     profil gravé paramétrique (statique serveur / animé), rasoir SVG, carte de Sète
+    three/             tondeuse (R3F, procédurale) + enseigne (shader GLSL)
+    illustrations/     profil gravé paramétrique (statique serveur / animé), tondeuse SVG, salon et devanture, carte de Sète
     home/ coupes/ equipe/ reservation/ infos/ ui/
 scripts/               génération d'assets + contrôles Playwright
 ```
@@ -92,7 +92,7 @@ scripts/               génération d'assets + contrôles Playwright
 ## Checklist qualité (mesurée sur le build de production)
 
 - `npm run build` : 0 erreur, 0 warning — `npm run lint` et `tsc` propres.
-- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** ; Performance **90 à 97** (accueil 90–93, pages 93–96, mentions 97) ; LCP 2,4 à 3,0 s, CLS ≤ 0,01.
+- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** ; Performance **90 à 97** (accueil 90–93, pages 93–96, mentions 97) ; LCP 2,4 à 3,1 s, CLS ≤ 0,01.
 - Captures contrôlées à 320, 375, 768, 1024, 1280, 1440 et 1920 px ; `prefers-reduced-motion` testé (aucune erreur d'hydratation).
 
 ## Mentions

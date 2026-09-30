@@ -16,7 +16,10 @@ export function Loader() {
     try {
       sessionStorage.setItem(LOADER_FLAG, "1");
     } catch {}
-    const t = window.setTimeout(() => setDone(true), 1500);
+    const t = window.setTimeout(() => {
+      document.documentElement.setAttribute("data-seen", "");
+      setDone(true);
+    }, 1500);
     return () => window.clearTimeout(t);
   }, []);
   if (done) return null;
@@ -40,7 +43,7 @@ export function Loader() {
 }
 
 /** Script inline : masque le loader dès le premier octet si déjà vu. */
-export const loaderScript = `try{if(sessionStorage.getItem("${LOADER_FLAG}"))document.documentElement.setAttribute("data-seen","")}catch(e){}`;
+export const loaderScript = `document.documentElement.classList.add("js");try{if(sessionStorage.getItem("${LOADER_FLAG}"))document.documentElement.setAttribute("data-seen","")}catch(e){}`;
 
 /** Le loader a-t-il été affiché à ce chargement ? (pour décaler l'intro du hero) */
 export const loaderDelay = () =>

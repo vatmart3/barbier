@@ -1,71 +1,24 @@
-"use client";
-
 /**
  * « Les coupes » — le fauteuil pivote : section épinglée, le scroll vertical
- * devient un déplacement horizontal. Un panneau par coupe : numéro de sabot
- * géant, profil gravé, prix et durée en compteur mécanique, entretien.
+ * devient un déplacement horizontal (composant serveur + <Epingle> client).
+ * Un panneau par coupe : numéro de sabot géant, profil gravé, prix et durée en compteur mécanique, entretien.
  */
 import Link from "next/link";
-import { useRef } from "react";
 import { coupes } from "@/data/prestations";
-import { gsap, useGSAP } from "@/lib/gsap";
-import { ProfilTete } from "@/components/illustrations/ProfilTete";
+import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
+import { Epingle } from "@/components/ui/Epingle";
 import { Compteur } from "@/components/ui/Compteur";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { IconFleche } from "@/components/ui/Icons";
 
 export function CoupesHorizontal() {
-  const section = useRef<HTMLElement>(null);
-  const track = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const el = track.current!;
-        const distance = () => el.scrollWidth - window.innerWidth;
-        const tween = gsap.to(el, {
-          x: () => -distance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: section.current,
-            start: "top top",
-            end: () => `+=${distance()}`,
-            pin: true,
-            scrub: 0.8,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              section.current?.style.setProperty("--pivot", String(self.progress));
-              const deg = section.current?.querySelector("[data-deg]");
-              if (deg) deg.textContent = `${Math.round(self.progress * 180)}°`;
-            },
-          },
-        });
-        // Chaque panneau : le profil glisse en parallaxe à l'intérieur du panneau
-        gsap.utils.toArray<HTMLElement>("[data-profil]").forEach((p) => {
-          gsap.fromTo(
-            p,
-            { xPercent: 12, rotate: 3 },
-            {
-              xPercent: -12,
-              rotate: -2,
-              ease: "none",
-              scrollTrigger: { trigger: p.closest("[data-panel]"), containerAnimation: tween, start: "left right", end: "right left", scrub: true },
-            },
-          );
-        });
-      });
-      return () => mm.revert();
-    },
-    { scope: section },
-  );
-
   return (
-    <section ref={section} aria-labelledby="coupes-titre" className="relative overflow-hidden bg-charbon text-creme">
-      <div
-        ref={track}
-        className="flex h-svh w-max items-stretch motion-reduce:w-full motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:overflow-x-auto"
-      >
+    <Epingle
+      aria-labelledby="coupes-titre"
+      className="bg-charbon text-creme"
+      trackClassName="flex h-svh w-max items-stretch motion-reduce:w-full motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:overflow-x-auto"
+      railClassName="bottom-8"
+    >
         {/* Panneau d'ouverture */}
         <div className="flex w-[88vw] shrink-0 flex-col justify-between px-(--spacing-gutter) pb-24 pt-[calc(var(--header-h)+2.5rem)] sm:w-[60vw] lg:w-[42vw] motion-reduce:snap-start">
           <Etiquette n="02" className="text-acier">
@@ -108,7 +61,13 @@ export function CoupesHorizontal() {
             </div>
 
             <div className="pointer-events-none absolute right-[2%] top-[calc(var(--header-h)+1rem)] w-[52%] max-w-[400px] opacity-90 sm:w-[42%] lg:top-[16%]" data-profil>
-              <ProfilTete {...c.profil} dessus={c.dessusPossibles.includes("court") ? "court" : c.dessusPossibles[0]} barbe="aucune" className="w-full text-creme" />
+              <ProfilStatique
+                id={`h-${c.id}`}
+                {...c.profil}
+                dessus={c.dessusPossibles.includes("court") ? "court" : c.dessusPossibles[0]}
+                barbe="aucune"
+                className="w-full text-creme"
+              />
             </div>
 
             <div className="relative mt-auto max-w-[26rem]">
@@ -164,12 +123,6 @@ export function CoupesHorizontal() {
             })}
           </ul>
         </div>
-      </div>
-
-      {/* Rail de progression : le pivot du fauteuil */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-(--spacing-gutter) bottom-8 h-px bg-creme/15 motion-reduce:hidden">
-        <span className="absolute inset-y-0 left-0 w-full origin-left bg-rouge" style={{ transform: "scaleX(var(--pivot, 0))" }} />
-      </div>
-    </section>
+    </Epingle>
   );
 }

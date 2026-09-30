@@ -4,12 +4,10 @@
  * Carte de fidélité (démo) : les tampons tombent au rythme du scroll, puis
  * on peut tamponner soi-même jusqu'à la 10ᵉ coupe offerte.
  */
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { fidelite } from "@/data/fidelite";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 
 const ROT = [-8, 5, -3, 9, -6, 2, -10, 6, -4, 0];
@@ -34,21 +32,40 @@ function Tampon({ n }: { n: number }) {
 
 export function Fidelite() {
   const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
   const [auto, setAuto] = useState(0);
   const [extra, setExtra] = useState(0);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.8", "center 0.5"] });
 
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const n = Math.round(Math.min(1, Math.max(0, v)) * fidelite.tamponsDemo);
-    setAuto((prev) => (prev === n ? prev : Math.max(prev, n)));
-  });
+  // Les tampons tombent au rythme du scroll (de l'entrée de la section à son milieu)
+  useEffect(() => {
+    let raf = 0;
+    const compute = () => {
+      raf = 0;
+      const el = ref.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const debut = vh * 0.8;
+      const fin = vh * 0.5 - r.height / 2;
+      const v = Math.min(1, Math.max(0, (debut - r.top) / (debut - fin)));
+      const n = Math.round(v * fidelite.tamponsDemo);
+      setAuto((prev) => Math.max(prev, n));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(compute);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const total = Math.min(fidelite.cases, auto + extra);
   const complet = total >= fidelite.cases;
 
   return (
-    <section ref={ref} aria-labelledby="fid-titre" className="overflow-hidden bg-charbon py-(--spacing-section) text-creme">
+    <section ref={ref} aria-labelledby="fid-titre" className="cv-auto overflow-hidden bg-charbon py-(--spacing-section) text-creme">
       <div className="container-page grid-page items-center gap-y-14">
         <div className="col-span-12 lg:col-span-5">
           <Etiquette n="06" className="text-acier">
@@ -66,13 +83,8 @@ export function Fidelite() {
         </div>
 
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-          <motion.div
-            className="relative mx-auto max-w-xl rotate-[-2deg] bg-creme p-5 text-charbon shadow-paper sm:p-8"
-            initial={{ y: 60, rotate: -8, opacity: 0 }}
-            whileInView={{ y: 0, rotate: -2, opacity: 1 }}
-            viewport={{ once: true, margin: "0px 0px -15% 0px" }}
-            transition={transition(reduce, { duration: 1, ease: ease.outCut })}
-          >
+          <div data-reveal="monte">
+          <div className="relative mx-auto max-w-xl rotate-[-2deg] bg-creme p-5 text-charbon shadow-paper sm:p-8">
             <div className="flex items-baseline justify-between border-b border-charbon/20 pb-3">
               <p className="font-display text-3xl leading-none">Dégradé</p>
               <p className="eyebrow text-acier-fonce">Carte n° 0427</p>
@@ -94,19 +106,11 @@ export function Fidelite() {
                         {last ? "offerte" : i + 1}
                       </span>
                     ) : null}
-                    <AnimatePresence>
-                      {filled ? (
-                        <motion.span
-                          className="absolute -inset-1 text-rouge mix-blend-multiply"
-                          initial={{ scale: 1.9, opacity: 0, rotate: ROT[i] - 20 }}
-                          animate={{ scale: 1, opacity: 0.92, rotate: ROT[i] }}
-                          exit={{ opacity: 0 }}
-                          transition={transition(reduce, { duration: 0.38, ease: ease.thud })}
-                        >
-                          <Tampon n={i + 1} />
-                        </motion.span>
-                      ) : null}
-                    </AnimatePresence>
+                    {filled ? (
+                      <span className="tampon absolute -inset-1 text-rouge mix-blend-multiply" style={{ "--r": `${ROT[i]}deg` } as CSSProperties}>
+                        <Tampon n={i + 1} />
+                      </span>
+                    ) : null}
                   </li>
                 );
               })}
@@ -130,21 +134,18 @@ export function Fidelite() {
                 {complet ? "Nouvelle carte" : "Tamponner"}
               </button>
             </div>
-            <AnimatePresence>
-              {complet ? (
-                <motion.p
-                  aria-hidden
-                  className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-4 border-rouge px-5 py-2 font-display text-6xl text-rouge mix-blend-multiply"
-                  initial={{ scale: 2.4, opacity: 0, rotate: -24 }}
-                  animate={{ scale: 1, opacity: 0.9, rotate: -12 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.45, ease: ease.thud }}
+            {complet ? (
+              <p aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <span
+                  className="tampon block border-4 border-rouge px-5 py-2 font-display text-6xl text-rouge mix-blend-multiply"
+                  style={{ "--r": "-12deg" } as CSSProperties}
                 >
                   Offerte
-                </motion.p>
-              ) : null}
-            </AnimatePresence>
-          </motion.div>
+                </span>
+              </p>
+            ) : null}
+          </div>
+          </div>
           <p className="mt-6 text-center text-xs text-acier">Démo interactive. Au salon, la carte est en carton épais, et on se souvient de vous.</p>
         </div>
       </div>

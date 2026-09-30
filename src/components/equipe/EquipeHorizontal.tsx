@@ -1,14 +1,11 @@
-"use client";
-
 /**
  * Fiches barbiers. Desktop : le fauteuil pivote d'un poste à l'autre
  * (pin + défilement horizontal). Mobile / mouvement réduit : fiches empilées.
  */
 import Link from "next/link";
-import { useRef } from "react";
 import { barbiers } from "@/data/barbiers";
-import { gsap, useGSAP } from "@/lib/gsap";
-import { ProfilTete } from "@/components/illustrations/ProfilTete";
+import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
+import { Epingle } from "@/components/ui/Epingle";
 import { Grave } from "@/components/ui/Grave";
 import { Bouton } from "@/components/ui/Bouton";
 import { IconFleche } from "@/components/ui/Icons";
@@ -18,39 +15,17 @@ import { cn } from "@/lib/cn";
 const JOURS_COURTS: Record<string, string> = { mardi: "mar", mercredi: "mer", jeudi: "jeu", vendredi: "ven", samedi: "sam" };
 
 export function EquipeHorizontal() {
-  const section = useRef<HTMLElement>(null);
-  const track = useRef<HTMLDivElement>(null);
   const annee = new Date().getFullYear();
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
-        const el = track.current!;
-        const distance = () => el.scrollWidth - window.innerWidth;
-        gsap.to(el, {
-          x: () => -distance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: section.current,
-            start: "top top",
-            end: () => `+=${distance()}`,
-            pin: true,
-            scrub: 0.8,
-            snap: { snapTo: 1 / (barbiers.length - 1), duration: { min: 0.2, max: 0.6 }, ease: "power2.inOut" },
-            invalidateOnRefresh: true,
-            onUpdate: (self) => section.current?.style.setProperty("--pivot", String(self.progress)),
-          },
-        });
-      });
-      return () => mm.revert();
-    },
-    { scope: section },
-  );
-
   return (
-    <section ref={section} aria-label="Les barbiers" className="relative overflow-hidden bg-charbon text-creme">
-      <div ref={track} className="flex flex-col lg:h-svh lg:w-max lg:flex-row motion-reduce:lg:h-auto motion-reduce:lg:w-full motion-reduce:lg:flex-col">
+    <Epingle
+      aria-label="Les barbiers"
+      className="bg-charbon text-creme"
+      media="(min-width: 1024px) and (prefers-reduced-motion: no-preference)"
+      snapPanels={barbiers.length}
+      trackClassName="flex flex-col lg:h-svh lg:w-max lg:flex-row motion-reduce:lg:h-auto motion-reduce:lg:w-full motion-reduce:lg:flex-col"
+      railClassName="bottom-6 hidden lg:block"
+    >
         {barbiers.map((b, i) => (
           <article
             key={b.id}
@@ -72,7 +47,7 @@ export function EquipeHorizontal() {
                 </div>
               </div>
               <div className={cn("mt-8 w-2/3 max-w-sm self-start lg:mt-0 lg:w-[48%]", i === 1 && "-scale-x-100")}>
-                <ProfilTete {...b.portrait} title={b.alt} className="w-full text-creme" />
+                <ProfilStatique id={`e-${b.id}`} {...b.portrait} title={b.alt} className="w-full text-creme" />
               </div>
             </div>
 
@@ -119,10 +94,6 @@ export function EquipeHorizontal() {
             </div>
           </article>
         ))}
-      </div>
-      <div aria-hidden className="pointer-events-none absolute inset-x-(--spacing-gutter) bottom-6 hidden h-px bg-creme/15 lg:block motion-reduce:hidden">
-        <span className="absolute inset-y-0 left-0 w-full origin-left bg-rouge" style={{ transform: "scaleX(var(--pivot, 0))" }} />
-      </div>
-    </section>
+    </Epingle>
   );
 }

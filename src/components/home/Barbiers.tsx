@@ -3,7 +3,7 @@ import { barbiers } from "@/data/barbiers";
 import { Grave } from "@/components/ui/Grave";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { ProfilTete } from "@/components/illustrations/ProfilTete";
+import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
 import { IconFleche } from "@/components/ui/Icons";
 import { cn } from "@/lib/cn";
 
@@ -13,7 +13,7 @@ const OFFSETS = ["md:col-start-1", "md:col-start-5", "md:col-start-2"];
 export function Barbiers() {
   const annee = new Date().getFullYear();
   return (
-    <section aria-labelledby="barbiers-titre" className="bg-creme py-(--spacing-section) text-charbon" style={{ ["--paper" as string]: "var(--color-creme)" }}>
+    <section aria-labelledby="barbiers-titre" className="cv-auto bg-creme py-(--spacing-section) text-charbon" style={{ ["--paper" as string]: "var(--color-creme)" }}>
       <div className="container-page">
         <div className="grid-page gap-y-6">
           <Etiquette n="03" className="col-span-12 text-acier-fonce">
@@ -38,7 +38,7 @@ export function Barbiers() {
                 <div className="flex items-end gap-6">
                   <Grave text={b.prenom} className="text-[clamp(5rem,3rem+10vw,13rem)] leading-none" delay={i * 120} />
                   <div className={cn("hidden w-40 shrink-0 sm:block lg:w-52", i === 1 && "-scale-x-100")}>
-                    <ProfilTete {...b.portrait} title={b.alt} className="w-full" />
+                    <ProfilStatique id={`b-${b.id}`} {...b.portrait} title={b.alt} className="w-full" />
                   </div>
                 </div>
                 <div className="mt-6 grid gap-6 border-t border-charbon/15 pt-6 sm:grid-cols-2">

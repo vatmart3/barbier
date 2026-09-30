@@ -4,17 +4,15 @@
  * FAQ en accordéon : <details>/<summary> natifs (fonctionne sans JS, accessible),
  * ouverture animée en hauteur, un trait de tondeuse qui se trace à l'ouverture.
  */
-import { useReducedMotion } from "motion/react";
 import { useRef } from "react";
 import type { QuestionFaq } from "@/data/faq";
 
 function Item({ q, i }: { q: QuestionFaq; i: number }) {
   const ref = useRef<HTMLDetailsElement>(null);
-  const reduce = useReducedMotion();
 
   const onClick = (e: React.MouseEvent) => {
     const el = ref.current;
-    if (!el || reduce) return;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const body = el.querySelector<HTMLElement>("[data-corps]");
     if (!body) return;
     e.preventDefault();

@@ -1,11 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useMotionValue, useSpring } from "motion/react";
 import { useRef, type ComponentProps, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { spring } from "@/design/motion";
-import { useFinePointer, useReducedMotionPref } from "@/hooks/useMedia";
 
 type Variant = "rouge" | "creme" | "ligne" | "ligne-sombre";
 
@@ -16,7 +13,7 @@ interface Common {
   iconEnd?: ReactNode;
   children: ReactNode;
   className?: string;
-  /** Effet magnétique discret (pointeur fin uniquement) */
+  /** Effet magnétique discret (pointeur fin, mouvement autorisé) */
   magnetic?: boolean;
   /** Pleine largeur */
   pleine?: boolean;
@@ -37,24 +34,24 @@ const sizes = {
   lg: "min-h-14 px-5 text-sm gap-3 sm:px-7 sm:text-base sm:gap-4",
 };
 
+const peutAimanter = () =>
+  window.matchMedia("(hover: hover) and (pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export function Bouton(props: LinkProps | ButtonProps) {
   const { variant = "rouge", size = "md", icon, iconEnd, children, className, magnetic = true, pleine = false } = props;
-  const fine = useFinePointer();
-  const reduce = useReducedMotionPref();
-  const active = magnetic && fine && !reduce;
   const ref = useRef<HTMLSpanElement>(null);
-  const x = useSpring(useMotionValue(0), spring.magnetic);
-  const y = useSpring(useMotionValue(0), spring.magnetic);
 
+  // Aimant : le bouton suit légèrement le pointeur (transition CSS, pas de bibliothèque)
   const onMove = (e: React.PointerEvent) => {
-    if (!active || !ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    x.set((e.clientX - (r.left + r.width / 2)) * 0.18);
-    y.set((e.clientY - (r.top + r.height / 2)) * 0.28);
+    const el = ref.current;
+    if (!magnetic || !el || e.pointerType !== "mouse" || !peutAimanter()) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - (r.left + r.width / 2)) * 0.18;
+    const y = (e.clientY - (r.top + r.height / 2)) * 0.28;
+    el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
   };
   const onLeave = () => {
-    x.set(0);
-    y.set(0);
+    if (ref.current) ref.current.style.transform = "";
   };
 
   const inner = (
@@ -98,9 +95,14 @@ export function Bouton(props: LinkProps | ButtonProps) {
     );
 
   return (
-    <motion.span ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} style={active ? { x, y } : undefined} className={pleine ? "flex w-full" : "inline-flex"}>
+    <span
+      ref={ref}
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+      className={cn("transition-transform duration-500 ease-(--ease-out-cut) will-change-transform", pleine ? "flex w-full" : "inline-flex")}
+    >
       {content}
-    </motion.span>
+    </span>
   );
 }
 

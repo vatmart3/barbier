@@ -310,3 +310,154 @@ html[data-seen] .loader {
     visibility: hidden;
   }
 }
+
+/* Sections sous la ligne de flottaison : rendu différé par le navigateur */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+}
+
+/* ==========================================================================
+   Révélations au scroll — CSS pur. Un seul IntersectionObserver
+   (components/layout/Revelateur) pose [data-vu]. Sans JS, rien n'est masqué
+   (la classe .js est posée par le script inline du <head>).
+   ========================================================================== */
+
+/* Masques de lignes : chaque ligne remonte de sous sa propre arête */
+.ligne {
+  display: block;
+  overflow: hidden;
+  margin-top: -0.2em;
+  padding-top: 0.2em;
+  margin-bottom: -0.08em;
+  padding-bottom: 0.08em;
+}
+.ligne-in {
+  display: block;
+  transition:
+    transform 900ms var(--ease-out-cut),
+    opacity 450ms linear;
+  transition-delay: calc(var(--d, 0ms) + var(--i, 0) * 85ms);
+}
+html.js [data-reveal="lignes"]:not([data-vu]) .ligne-in {
+  transform: translateY(108%) rotate(1.5deg);
+  opacity: 0;
+}
+
+/* Révélations au clip-path */
+[data-reveal^="clip"],
+[data-reveal="monte"] {
+  transition:
+    clip-path 1000ms var(--ease-out-cut),
+    transform 1000ms var(--ease-out-cut),
+    opacity 350ms linear;
+  transition-delay: var(--d, 0ms);
+}
+[data-reveal="clip-bas"] {
+  transition-duration: 1100ms, 1100ms, 350ms;
+  transition-timing-function: var(--ease-blade), var(--ease-blade), linear;
+}
+html.js [data-reveal="clip-bas"]:not([data-vu]) {
+  clip-path: inset(100% 0 0 0);
+  opacity: 0;
+}
+html.js [data-reveal="clip-gauche"]:not([data-vu]) {
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-40px);
+  opacity: 0;
+}
+html.js [data-reveal="clip-droite"]:not([data-vu]) {
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(40px);
+  opacity: 0;
+}
+html.js [data-reveal="monte"]:not([data-vu]) {
+  transform: translateY(60px) rotate(-6deg);
+  opacity: 0;
+}
+
+/* Tracés qui se dessinent (carte) : pathLength="1" sur chaque tracé */
+[data-trace] {
+  stroke-dasharray: 1;
+  transition:
+    stroke-dashoffset 1600ms var(--ease-comb),
+    fill-opacity 900ms linear;
+  transition-delay: calc(100ms + var(--i, 0) * 80ms);
+}
+html.js [data-reveal="carte"]:not([data-vu]) [data-trace] {
+  stroke-dashoffset: 1;
+  fill-opacity: 0;
+}
+[data-epingle] {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition:
+    transform 500ms var(--ease-thud) 1400ms,
+    opacity 300ms linear 1400ms;
+}
+html.js [data-reveal="carte"]:not([data-vu]) [data-epingle] {
+  transform: scale(0);
+  opacity: 0;
+}
+
+/* Tampon de fidélité */
+@keyframes tamponner {
+  from {
+    transform: scale(1.9) rotate(calc(var(--r, 0deg) - 20deg));
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(var(--r, 0deg));
+    opacity: 0.92;
+  }
+}
+.tampon {
+  transform: rotate(var(--r, 0deg));
+  opacity: 0.92;
+  animation: tamponner 380ms var(--ease-thud) both;
+}
+@keyframes ligne-entree {
+  from {
+    transform: translateY(108%) rotate(1.5deg);
+  }
+}
+[data-reveal="lignes-auto"] .ligne-in {
+  animation: ligne-entree 1000ms var(--ease-out-cut) both;
+  animation-delay: calc(var(--d, 0ms) + 120ms + var(--i, 0) * 90ms);
+}
+/* Premier chargement : on attend la fin du loader */
+html:not([data-seen]) [data-reveal="lignes-auto"] .ligne-in {
+  animation-delay: calc(1150ms + var(--i, 0) * 90ms);
+}
+
+/* Menu plein écran : coupe diagonale depuis le coin haut droit */
+.menu {
+  clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
+  visibility: hidden;
+  transition:
+    clip-path 600ms var(--ease-blade),
+    visibility 0s linear 600ms;
+}
+.menu[data-ouvert] {
+  clip-path: polygon(-60% 0, 100% 0, 100% 160%, 100% 160%);
+  visibility: visible;
+  transition:
+    clip-path 600ms var(--ease-blade),
+    visibility 0s;
+}
+.menu-item {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 700ms var(--ease-out-cut);
+  transition-delay: calc(180ms + var(--i, 0) * 50ms);
+}
+.menu[data-ouvert] .menu-item {
+  transform: none;
+}
+
+@keyframes monte-doux {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}

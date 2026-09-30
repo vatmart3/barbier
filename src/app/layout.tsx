@@ -9,10 +9,11 @@ import { BarreMobile } from "@/components/layout/BarreMobile";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { Loader, loaderScript } from "@/components/layout/Loader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { Revelateur } from "@/components/layout/Revelateur";
 import "./globals.css";
 
 const display = Big_Shoulders({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   axes: ["opsz"],
   display: "swap",
   variable: "--font-big-shoulders",
@@ -22,7 +23,7 @@ const display = Big_Shoulders({
 });
 
 const text = Schibsted_Grotesk({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   display: "swap",
   variable: "--font-schibsted",
 });
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Footer />
           <BarreMobile />
           <CookieBanner />
+          <Revelateur />
         </SmoothScroll>
         <div className="grain" aria-hidden />
       </body>

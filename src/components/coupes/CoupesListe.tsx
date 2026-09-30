@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { coupes } from "@/data/prestations";
-import { ProfilTete } from "@/components/illustrations/ProfilTete";
+import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
 import { Compteur } from "@/components/ui/Compteur";
 import { IconFleche } from "@/components/ui/Icons";
 import { cn } from "@/lib/cn";
@@ -21,7 +21,8 @@ export function CoupesListe() {
                 <p aria-hidden className="absolute -top-4 left-0 font-display text-[clamp(7rem,4rem+10vw,14rem)] leading-none text-transparent [-webkit-text-stroke:1px_rgb(242_237_228/0.35)]">
                   {c.repere}
                 </p>
-                <ProfilTete
+                <ProfilStatique
+                  id={`l-${c.id}`}
                   {...c.profil}
                   dessus={c.dessusPossibles.includes("court") ? "court" : c.dessusPossibles[0]}
                   barbe="aucune"

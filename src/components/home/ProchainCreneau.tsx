@@ -61,17 +61,17 @@ export function ProchainCreneau() {
               <Bouton href={p ? lien(p) : "/reserver"} size="lg" iconEnd={<IconFleche size={22} />}>
                 Prendre ce créneau
               </Bouton>
-              {data ? (
-                <p className="text-sm text-acier-fonce">
-                  {data.statut.ouvert
+              <p className="min-h-[2.8em] max-w-sm text-sm text-acier-fonce">
+                {data
+                  ? data.statut.ouvert
                     ? data.restants > 0
                       ? `Encore ${data.restants} créneau${data.restants > 1 ? "x" : ""} aujourd'hui, ouvert jusqu'à ${formatHeure(data.statut.jusqua ?? 0)}.`
                       : "Plus rien aujourd'hui. Demain matin, en revanche…"
                     : data.statut.prochaine
                       ? `Fermé pour l'instant. Réouverture ${formatJourRelatif(data.statut.prochaine.date, now!.date)} à ${formatHeure(data.statut.prochaine.start)}.`
-                      : null}
-                </p>
-              ) : null}
+                      : null
+                  : null}
+              </p>
             </div>
           </div>
 

@@ -18,7 +18,7 @@ import { formatDateCourte, formatDateLongue, formatHeure, formatJourRelatif, dif
 import { planningConfig } from "@/data/planning";
 import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
-import { ProfilTete } from "@/components/illustrations/ProfilTete";
+import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
 import { IconFleche } from "@/components/ui/Icons";
 import { Formulaire, type Confirmation } from "./Formulaire";
 import { Succes } from "./Succes";
@@ -361,7 +361,7 @@ function EtapePrestation({
             {barbiers.map((b) => (
               <Carte key={b.id} name="barbier" value={b.id} checked={choix === b.id} onSelect={() => onChoix(b.id)} className="flex-col items-start justify-between">
                 <span className="block w-14" style={{ ["--paper" as string]: choix === b.id ? "var(--color-creme)" : "var(--color-charbon)" }}>
-                  <ProfilTete {...b.portrait} cape={false} className="w-full" />
+                  <ProfilStatique id={`r-${b.id}`} {...b.portrait} cape={false} className="w-full" />
                 </span>
                 <span>
                   <span className="block font-semibold">{b.prenom}</span>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Page } from "@/components/layout/Page";
 import { Hero } from "@/components/home/Hero";
 import { ProchainCreneau } from "@/components/home/ProchainCreneau";
@@ -24,13 +25,28 @@ export default function Accueil() {
       <Hero>
         <ProchainCreneau />
       </Hero>
-      <CoupesHorizontal />
-      <Barbiers />
-      <AvantApres />
-      <Tarifs />
-      <Fidelite />
-      <Avis />
-      <Acces />
+      {/* Une frontière Suspense par section : hydratation sélective, en tâches courtes */}
+      <Suspense>
+        <CoupesHorizontal />
+      </Suspense>
+      <Suspense>
+        <Barbiers />
+      </Suspense>
+      <Suspense>
+        <AvantApres />
+      </Suspense>
+      <Suspense>
+        <Tarifs />
+      </Suspense>
+      <Suspense>
+        <Fidelite />
+      </Suspense>
+      <Suspense>
+        <Avis />
+      </Suspense>
+      <Suspense>
+        <Acces />
+      </Suspense>
     </Page>
   );
 }

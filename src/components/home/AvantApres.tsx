@@ -5,14 +5,12 @@
  * Glisser (souris / doigt), ou clavier : flèches, Page préc./suiv., Début/Fin.
  */
 import Image from "next/image";
-import { motion, useInView, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { realisations } from "@/data/realisations";
 import { getBarbier } from "@/data/barbiers";
-import { ProfilTete } from "@/components/illustrations/ProfilTete";
+import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 
 function Lame() {
@@ -39,8 +37,23 @@ export function AvantApres() {
   const [pos, setPos] = useState(100);
   const stage = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
-  const inView = useInView(stage, { once: true, margin: "0px 0px -25% 0px" });
-  const reduce = useReducedMotion();
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = stage.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -25% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const r = realisations[index];
   const barbier = getBarbier(r.barbier);
 
@@ -49,7 +62,7 @@ export function AvantApres() {
     if (!inView) return;
     let raf = 0;
     const t0 = performance.now();
-    const duree = reduce ? 1 : 1200;
+    const duree = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 1200;
     const step = (t: number) => {
       const k = Math.min(1, (t - t0) / duree);
       const e = 1 - Math.pow(1 - k, 4);
@@ -58,7 +71,7 @@ export function AvantApres() {
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [inView, reduce]);
+  }, [inView]);
 
   const fromPointer = useCallback((clientX: number) => {
     const el = stage.current;
@@ -82,7 +95,7 @@ export function AvantApres() {
   };
 
   return (
-    <section aria-labelledby="aa-titre" className="bg-charbon py-(--spacing-section) text-creme">
+    <section aria-labelledby="aa-titre" className="cv-auto bg-charbon py-(--spacing-section) text-creme">
       <div className="container-page grid-page gap-y-12">
         <div className="col-span-12 lg:col-span-4">
           <Etiquette n="04" className="text-acier">
@@ -116,14 +129,11 @@ export function AvantApres() {
         </div>
 
         <div className="col-span-12 lg:col-span-7 lg:col-start-6">
-          <motion.div
+          <div
             ref={stage}
+            data-reveal="clip-bas"
             className="relative aspect-[5/6] w-full touch-pan-y select-none overflow-hidden bg-creme text-charbon sm:aspect-[4/3]"
             style={{ ["--paper" as string]: "var(--color-creme)" }}
-            initial={{ clipPath: "inset(100% 0 0 0)", opacity: 0 }}
-            whileInView={{ clipPath: "inset(0% 0 0 0)", opacity: 1 }}
-            viewport={{ once: true, margin: "0px 0px -20% 0px" }}
-            transition={transition(reduce, { duration: 1.1, ease: ease.blade, opacity: { duration: 0.3 } })}
             onPointerDown={(e) => {
               dragging.current = true;
               (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
@@ -134,19 +144,19 @@ export function AvantApres() {
             onPointerCancel={() => (dragging.current = false)}
           >
             {/* Après (dessous) */}
-            <div className="absolute inset-0 flex items-end justify-center">
+            <div key={`apres-${r.id}`} className="absolute inset-0 flex animate-[fadein_400ms_ease-out] items-end justify-center">
               {r.photos ? (
                 <Image src={r.photos.apres} alt={`${r.photos.alt} — après`} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover grayscale" />
               ) : (
-                <ProfilTete {...r.apres} title={`Après : ${r.titre}, réalisé par ${barbier?.prenom} chez Dégradé à Sète`} className="h-[92%] w-auto" />
+                <ProfilStatique id={`ap-${r.id}`} {...r.apres} title={`Après : ${r.titre}, réalisé par ${barbier?.prenom} chez Dégradé à Sète`} className="h-[92%] w-auto" />
               )}
             </div>
             {/* Avant (dessus, rogné par la lame) */}
-            <div className="absolute inset-0 flex items-end justify-center bg-creme-2" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+            <div key={`avant-${r.id}`} className="absolute inset-0 flex animate-[fadein_400ms_ease-out] items-end justify-center bg-creme-2" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
               {r.photos ? (
                 <Image src={r.photos.avant} alt={`${r.photos.alt} — avant`} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover grayscale" />
               ) : (
-                <ProfilTete {...r.avant} title={`Avant : ${r.titre}`} className="h-[92%] w-auto" />
+                <ProfilStatique id={`av-${r.id}`} {...r.avant} title={`Avant : ${r.titre}`} className="h-[92%] w-auto" />
               )}
             </div>
 
@@ -171,7 +181,7 @@ export function AvantApres() {
                 <Lame />
               </span>
             </div>
-          </motion.div>
+          </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>

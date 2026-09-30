@@ -27,7 +27,7 @@ export function EnTete({ ariane, titre, intro, repere, children, className }: Pr
       ) : null}
       <div className="container-page relative">
         <FilAriane items={ariane} />
-        <Lignes as="h1" className="mt-10 max-w-[14ch] text-d2 md:mt-16" lines={titre} stagger={0.1} />
+        <Lignes as="h1" className="mt-10 max-w-[14ch] text-d2 md:mt-16" lines={titre} auto />
         {intro ? <div className="mt-8 max-w-xl text-lg text-creme/80">{intro}</div> : null}
         {children}
       </div>

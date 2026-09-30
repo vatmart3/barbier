@@ -6,7 +6,7 @@ import { GererCookies } from "./CookieBanner";
 export function Footer() {
   const groupes = horairesGroupes();
   return (
-    <footer className="relative overflow-hidden border-t border-creme/10 bg-charbon pb-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom))] text-creme lg:pb-0">
+    <footer className="cv-auto relative overflow-hidden border-t border-creme/10 bg-charbon pb-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom))] text-creme lg:pb-0">
       <div className="container-page grid-page gap-y-12 pt-20 pb-10">
         <div className="col-span-12 lg:col-span-5">
           <p className="font-display text-d1">On coupe. On taille. On rase.</p>
@@ -65,9 +65,12 @@ export function Footer() {
         </nav>
       </div>
 
-      <p aria-hidden className="pointer-events-none select-none px-(--spacing-gutter) font-display text-mega leading-[0.72] text-creme/[0.06]">
-        Dégradé
-      </p>
+      {/* Mot décoratif en SVG : pas de faux positif de contraste, jamais lu */}
+      <svg aria-hidden viewBox="0 0 1000 250" className="pointer-events-none block w-full select-none px-(--spacing-gutter)">
+        <text x="0" y="238" textLength="1000" lengthAdjust="spacingAndGlyphs" fontSize="330" fill="rgb(242 237 228 / 0.06)" style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontVariationSettings: '"opsz" 72' }}>
+          DÉGRADÉ
+        </text>
+      </svg>
 
       <div className="container-page flex flex-col gap-4 border-t border-creme/10 py-6 text-xs text-acier md:flex-row md:items-center md:justify-between">
         <ul className="flex flex-wrap gap-x-6 gap-y-1">

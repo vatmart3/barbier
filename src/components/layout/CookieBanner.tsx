@@ -7,9 +7,7 @@
  * d'en conditionner un (mesure d'audience) si le client en ajoute.
  */
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { ease } from "@/design/motion";
 
 const KEY = "dg-consent";
 const EVENT = "dg-consent-open";
@@ -79,16 +77,12 @@ export function CookieBanner() {
   };
 
   return (
-    <AnimatePresence>
+    <>
       {open ? (
-        <motion.section
+        <section
           role="region"
           aria-label="Gestion des cookies"
-          className="fixed inset-x-3 bottom-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+0.75rem)] z-[70] max-w-md border border-charbon/15 bg-creme p-5 text-charbon shadow-card sm:left-auto sm:right-6 lg:bottom-6"
-          initial={{ y: 24, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 24, opacity: 0 }}
-          transition={{ duration: 0.45, ease: ease.outCut }}
+          className="fixed inset-x-3 bottom-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+0.75rem)] z-[70] max-w-md border border-charbon/15 bg-creme p-5 text-charbon shadow-card animate-[monte-doux_450ms_var(--ease-out-cut)_both] sm:left-auto sm:right-6 lg:bottom-6"
         >
           <h2 className="font-display text-2xl leading-none">Cookies</h2>
           <p className="mt-3 text-sm text-charbon/80">
@@ -113,9 +107,9 @@ export function CookieBanner() {
               Accepter
             </button>
           </div>
-        </motion.section>
+        </section>
       ) : null}
-    </AnimatePresence>
+    </>
   );
 }
 

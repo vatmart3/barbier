@@ -26,8 +26,7 @@ const CLIP_A = `polygon(0 0, 100% 0, 100% ${CUT.right}%, 0 ${CUT.left}%)`;
 const CLIP_B = `polygon(100% calc(${CUT.right}% - 2px), 100% 100%, 0 100%, 0 calc(${CUT.left}% - 2px))`;
 const SABOTS = ["0", "0,5", "1", "1,5", "2", "3", "4"];
 
-function HeroFace({ decor = false }: { decor?: boolean }) {
-  const H = decor ? "p" : "h1";
+function HeroFace() {
   return (
     <div className="relative flex h-full flex-col bg-charbon text-creme">
       {/* Traces de tondeuse en fond */}
@@ -62,12 +61,11 @@ function HeroFace({ decor = false }: { decor?: boolean }) {
               La coupe, un peu plus.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-              <Bouton href="/reserver" size="lg" iconEnd={<IconFleche size={22} />} tabIndex={decor ? -1 : undefined}>
+              <Bouton href="/reserver" size="lg" iconEnd={<IconFleche size={22} />}>
                 Prendre place
               </Bouton>
               <Link
                 href="/coupes#configurateur"
-                tabIndex={decor ? -1 : undefined}
                 className="group inline-flex min-h-11 items-center gap-2 text-sm text-creme/80 underline decoration-creme/30 underline-offset-[6px] transition-colors hover:text-creme hover:decoration-rouge"
               >
                 Composer sa coupe
@@ -76,11 +74,11 @@ function HeroFace({ decor = false }: { decor?: boolean }) {
           </div>
         </div>
 
-        <H className="relative mt-6 md:mt-8">
+        <h1 className="relative mt-6 md:mt-8">
           <span className="eyebrow mb-7 block text-acier md:mb-4" data-hero-in>
             Barbier à Sète — fade, taper, barbe au coupe-chou
           </span>
-          <span aria-hidden={decor || undefined} className="relative -mb-[0.1em] -mt-[0.12em] block select-none font-display text-[min(30vw,40svh)] leading-[0.74] tracking-[-0.02em]">
+          <span className="relative -mb-[0.1em] -mt-[0.12em] block select-none font-display text-[min(30vw,40svh)] leading-[0.74] tracking-[-0.02em]">
             {/* Le mot « DÉGRADÉ » est lui-même un dégradé : plein à gauche, traces à droite.
                 Le padding haut garde les accents dans la zone peinte (background-clip / mask). */}
             <span data-hero-word className="block bg-[repeating-linear-gradient(180deg,var(--color-creme)_0_2px,transparent_2px_6px)] bg-clip-text pt-[0.3em] text-transparent">
@@ -94,7 +92,7 @@ function HeroFace({ decor = false }: { decor?: boolean }) {
               Dégradé
             </span>
           </span>
-        </H>
+        </h1>
       </div>
     </div>
   );
@@ -165,11 +163,29 @@ export function Hero({ children }: { children: ReactNode }) {
       const mm = gsap.matchMedia();
       const delay = loaderDelay();
 
+      // Clone de la face A dans la moitié B (décor : aucun titre, aucun élément focalisable)
+      const faceA = root.current?.querySelector("[data-half-a] [data-face]");
+      const halfB = root.current?.querySelector("[data-half-b]");
+      if (faceA && halfB && !halfB.firstChild) {
+        const clone = faceA.cloneNode(true) as HTMLElement;
+        clone.querySelectorAll("h1").forEach((h) => {
+          const p = document.createElement("p");
+          p.className = h.className;
+          p.append(...Array.from(h.childNodes));
+          h.replaceWith(p);
+        });
+        clone.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+        halfB.appendChild(clone);
+      }
+      const halfA = root.current?.querySelector<HTMLElement>("[data-half-a]");
+      if (halfA && halfB?.firstChild) halfA.style.clipPath = CLIP_A;
+
       // Entrée
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.from("[data-hero-in]", { y: 24, opacity: 0, duration: 0.9, ease: "expo.out", stagger: 0.06, delay: delay + 0.1 });
-        gsap.from("[data-hero-word]", { yPercent: 40, opacity: 0, duration: 1.2, ease: "expo.out", delay: delay });
-        gsap.from("[data-rasoir]", { opacity: 0, scale: 0.9, rotate: -8, duration: 1.4, ease: "expo.out", delay: delay + 0.2 });
+        // Pas d'opacité sur le mot : il est peint dès le premier rendu (LCP), seul le transform est animé
+        gsap.from("[data-hero-word]", { yPercent: 18, duration: 1.2, ease: "expo.out", delay: delay });
+        gsap.from("[data-rasoir]", { scale: 0.92, rotate: -6, yPercent: 4, duration: 1.4, ease: "expo.out", delay: delay + 0.2 });
 
         // Séquence de découpe pilotée au scroll
         const tl = gsap.timeline({
@@ -211,16 +227,14 @@ export function Hero({ children }: { children: ReactNode }) {
         </div>
 
         {/* Deux moitiés du hero : la première porte le contenu réel, la seconde est un décor */}
-        <div data-half-a className="absolute inset-0 z-10 will-change-transform motion-reduce:relative motion-reduce:h-svh" style={{ clipPath: CLIP_A }}>
+        {/* Moitié A : entière au chargement, découpée dès que la moitié B est prête */}
+        <div data-half-a className="absolute inset-0 z-10 will-change-transform motion-reduce:relative motion-reduce:h-svh">
           <div data-face className="h-full">
             <HeroFace />
           </div>
         </div>
-        <div data-half-b aria-hidden inert className="absolute inset-0 z-10 will-change-transform motion-reduce:hidden" style={{ clipPath: CLIP_B }}>
-          <div data-face className="h-full">
-            <HeroFace decor />
-          </div>
-        </div>
+        {/* Moitié B : copie décorative de la face, clonée côté client (HTML initial plus léger) */}
+        <div data-half-b aria-hidden inert className="absolute inset-0 z-10 will-change-transform motion-reduce:hidden" style={{ clipPath: CLIP_B }} />
         {/* Motion-reduce : la moitié A doit être entière */}
         <style>{`@media (prefers-reduced-motion: reduce){[data-half-a]{clip-path:none!important}}`}</style>
 

@@ -1,22 +1,17 @@
-"use client";
-
 /**
  * « Entendu au fauteuil » — les avis en index typographique, pas en carrousel.
- * Chaque ligne entre par un masque horizontal, en alternance gauche / droite.
+ * Chaque ligne entre par un masque horizontal, en alternance gauche / droite (CSS).
  */
-import { motion, useReducedMotion } from "motion/react";
 import { avis, chiffres } from "@/data/avis";
 import { getBarbier } from "@/data/barbiers";
 import { Compteur } from "@/components/ui/Compteur";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 
 export function Avis() {
-  const reduce = useReducedMotion();
   return (
-    <section aria-labelledby="avis-titre" className="bg-creme py-(--spacing-section) text-charbon">
+    <section aria-labelledby="avis-titre" className="cv-auto bg-creme py-(--spacing-section) text-charbon">
       <div className="container-page">
         <div className="grid-page gap-y-10">
           <div className="col-span-12 lg:col-span-6">
@@ -44,13 +39,7 @@ export function Avis() {
             const droite = i % 2 === 1;
             return (
               <li key={a.auteur} className="overflow-hidden border-b border-charbon/15">
-                <motion.figure
-                  className="grid-page gap-y-4 py-10 md:py-14"
-                  initial={{ clipPath: droite ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)", x: droite ? 40 : -40, opacity: 0 }}
-                  whileInView={{ clipPath: "inset(0 0% 0 0%)", x: 0, opacity: 1 }}
-                  viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-                  transition={transition(reduce, { duration: 1, ease: ease.outCut, opacity: { duration: 0.3 } })}
-                >
+                <figure className="grid-page gap-y-4 py-10 md:py-14" data-reveal={droite ? "clip-droite" : "clip-gauche"}>
                   <figcaption className={cn("col-span-12 text-sm md:col-span-3", droite && "md:order-2 md:col-start-10 md:text-right")}>
                     <span className="block font-semibold">{a.auteur}</span>
                     <span className="block text-acier-fonce">{a.ville}</span>
@@ -64,7 +53,7 @@ export function Avis() {
                     <p className="mt-4 max-w-xl text-charbon/75">{a.texte}</p>
                     <p className="eyebrow mt-3 text-acier-fonce">{a.date}</p>
                   </blockquote>
-                </motion.figure>
+                </figure>
               </li>
             );
           })}

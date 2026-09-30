@@ -56,7 +56,7 @@ export function DispoSemaine({ barbier, prenom, tone = "dark" }: { barbier: Barb
                   {contenu}
                 </Link>
               ) : (
-                <span className="block py-2 opacity-60" aria-label={`${d.jour} ${d.num} : ${j.travaille ? "complet" : "ne travaille pas"}`}>
+                <span className="block py-2" aria-label={`${d.jour} ${d.num} : ${j.travaille ? "complet" : "ne travaille pas"}`}>
                   {contenu}
                 </span>
               )}

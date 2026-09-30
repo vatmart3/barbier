@@ -1,14 +1,14 @@
 "use client";
 
 /**
- * Lenis (défilement doux) synchronisé avec le ticker GSAP / ScrollTrigger.
+ * Lenis (défilement doux). Il fait défiler la fenêtre native : ScrollTrigger
+ * (chargé seulement par les pages qui en ont besoin) suit les événements
+ * « scroll » natifs, sans dépendance à GSAP dans le layout partagé.
  * Désactivé si prefers-reduced-motion : défilement natif.
  */
 import Lenis from "lenis";
-import { MotionConfig } from "motion/react";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const LenisContext = createContext<Lenis | null>(null);
 export const useLenis = () => useContext(LenisContext);
@@ -20,18 +20,12 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
     let instance: Lenis | null = null;
-    let tick: ((t: number) => void) | null = null;
 
     const start = () => {
-      instance = new Lenis({ lerp: 0.11, wheelMultiplier: 1, touchMultiplier: 1.2, autoRaf: false });
-      instance.on("scroll", ScrollTrigger.update);
-      tick = (t: number) => instance?.raf(t * 1000);
-      gsap.ticker.add(tick);
-      gsap.ticker.lagSmoothing(0);
+      instance = new Lenis({ lerp: 0.11, wheelMultiplier: 1, touchMultiplier: 1.2, autoRaf: true });
       setLenis(instance);
     };
     const stop = () => {
-      if (tick) gsap.ticker.remove(tick);
       instance?.destroy();
       instance = null;
       setLenis(null);
@@ -48,13 +42,13 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   // Nouvelle page : haut de page immédiat, puis recalcul des déclencheurs
   useEffect(() => {
     lenis?.scrollTo(0, { immediate: true, force: true });
-    const id = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+    const id = window.setTimeout(() => window.dispatchEvent(new Event("resize")), 120);
     return () => window.clearTimeout(id);
   }, [pathname, lenis]);
 
   return (
     <LenisContext.Provider value={lenis}>
-      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+      {children}
     </LenisContext.Provider>
   );
 }

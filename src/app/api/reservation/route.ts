@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod/mini";
 import { NextResponse } from "next/server";
 import { reservationSchema } from "@/lib/schemas";
 import { estLibre } from "@/lib/slots";

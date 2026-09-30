@@ -65,7 +65,7 @@ export function Fidelite() {
   const complet = total >= fidelite.cases;
 
   return (
-    <section ref={ref} aria-labelledby="fid-titre" className="cv-auto overflow-hidden bg-charbon py-(--spacing-section) text-creme">
+    <section ref={ref} aria-labelledby="fid-titre" className="overflow-hidden bg-charbon py-(--spacing-section) text-creme">
       <div className="container-page grid-page items-center gap-y-14">
         <div className="col-span-12 lg:col-span-5">
           <Etiquette n="06" className="text-acier">
@@ -75,7 +75,7 @@ export function Fidelite() {
           <ul className="mt-8 space-y-2 text-sm text-creme/80">
             {fidelite.regles.map((r) => (
               <li key={r} className="flex gap-3">
-                <span aria-hidden className="mt-2.5 h-px w-4 shrink-0 bg-rouge" />
+                <span aria-hidden className="mt-2 size-2 shrink-0 rounded-full bg-rouge" />
                 {r}
               </li>
             ))}

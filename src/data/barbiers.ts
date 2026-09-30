@@ -20,6 +20,10 @@ export interface Barbier {
   outil: string;
   /** Réplique qui donne le ton (humour sec) */
   replique: string;
+  /** Ce qui passe dans le salon quand il coupe */
+  ambiance: string;
+  /** Teinte douce du fond de portrait */
+  teinte: string;
   jours: DayKey[];
   /** Surcharge horaire par jour (sinon horaires du salon) */
   horairesPerso?: Partial<Record<DayKey, { open: string; close: string }>>;
@@ -43,6 +47,8 @@ export const barbiers: Barbier[] = [
     signature: "Skin fade haut, ligne de barbe au rasoir",
     outil: "Coupe-chou lame 6/8, manche corne",
     replique: "« Une patte plus haute que l'autre, c'est une coupe à refaire. Chez moi, ça n'arrive pas. »",
+    ambiance: "Brassens, forcément : on est à Sète.",
+    teinte: "#efe7dd",
     jours: ["mardi", "mercredi", "jeudi", "vendredi", "samedi"],
     portrait: { fade: "haut", skin: true, dessus: "court", barbe: "pleine" },
     alt: "Portrait gravé de Karim, barbier fondateur de Dégradé à Sète, skin fade et barbe taillée",
@@ -61,6 +67,8 @@ export const barbiers: Barbier[] = [
     signature: "Taper nuque arrondie, dessus texturisé",
     outil: "Ciseaux 6 pouces + effileur",
     replique: "« Vous voulez court ? Montrez-moi avec les doigts. Non, pas comme ça. »",
+    ambiance: "Le rugby à la radio le samedi, le son baissé pendant les contours.",
+    teinte: "#e4e9ee",
     jours: ["mardi", "jeudi", "vendredi", "samedi"],
     horairesPerso: { mardi: { open: "12:00", close: "19:00" } },
     portrait: { fade: "taper", skin: false, dessus: "long", barbe: "aucune", moustache: true },
@@ -80,6 +88,8 @@ export const barbiers: Barbier[] = [
     signature: "Fade moyen, trace au rasoir",
     outil: "Tondeuse de finition lame T",
     replique: "« Une trace, c'est comme un tatouage qui repousse. On peut se tromper une fois. »",
+    ambiance: "Du rap marseillais, pas trop fort, promis.",
+    teinte: "#e6ebe2",
     jours: ["mercredi", "jeudi", "vendredi", "samedi"],
     horairesPerso: { jeudi: { open: "10:00", close: "19:00" } },
     portrait: { fade: "moyen", skin: false, dessus: "ras", barbe: "aucune" },

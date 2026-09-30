@@ -17,7 +17,7 @@ export interface OpeningSlot {
 
 export const site = {
   name: "Dégradé",
-  fullName: "Dégradé — Barbier",
+  fullName: "Dégradé Barbier",
   legalName: "DÉGRADÉ SARL (à compléter)",
   baseline: "Barbier à Sète. Dégradés, taper, barbe au coupe-chou.",
   description:

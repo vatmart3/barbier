@@ -1,65 +1,51 @@
 import Link from "next/link";
 import { barbiers } from "@/data/barbiers";
-import { Grave } from "@/components/ui/Grave";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
+import { Bouton } from "@/components/ui/Bouton";
 import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
-import { IconFleche } from "@/components/ui/Icons";
 import { cn } from "@/lib/cn";
 
-const OFFSETS = ["md:col-start-1", "md:col-start-5", "md:col-start-2"];
-
-/** Les barbiers — noms gravés au burin, portraits en hachures. */
+/** Les barbiers — trois cartes arrondies, portrait gravé sur fond teinté, réplique écrite à la main. */
 export function Barbiers() {
   const annee = new Date().getFullYear();
   return (
-    <section aria-labelledby="barbiers-titre" className="salon cv-auto bg-creme py-(--spacing-section) text-charbon" style={{ ["--paper" as string]: "var(--color-creme)" }}>
+    <section aria-labelledby="barbiers-titre" className="bg-charbon py-(--spacing-section)">
       <div className="container-page">
-        <div className="grid-page gap-y-6">
-          <Etiquette n="03" className="col-span-12 text-acier-fonce">
-            Les barbiers
-          </Etiquette>
-          <Lignes
-            id="barbiers-titre"
-            className="col-span-12 text-d2 md:col-span-9"
-            lines={["Trois paires de mains.", <span key="b" className="text-acier-fonce">Trois manies.</span>]}
-          />
-        </div>
+        <Etiquette>Les barbiers</Etiquette>
+        <Lignes
+          id="barbiers-titre"
+          className="mt-4 text-d2"
+          lines={["Trois paires de mains.", <span key="b" className="text-acier">Trois manies.</span>]}
+        />
 
-        <ul className="mt-20 space-y-24 md:mt-28 md:space-y-32">
+        <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {barbiers.map((b, i) => (
-            <li key={b.id} className="grid-page items-end gap-y-6">
-              <div className={cn("col-span-12 md:col-span-8", OFFSETS[i])}>
-                <p className="eyebrow mb-4 flex gap-4 text-acier-fonce">
-                  <span>{b.role}</span>
-                  <span aria-hidden>·</span>
-                  <span className="tabular">{annee - b.depuis} ans de tondeuse</span>
-                </p>
-                <div className="flex items-end gap-6">
-                  <Grave text={b.prenom} className="text-[clamp(5rem,3rem+10vw,13rem)] leading-none" delay={i * 120} />
-                  <div className={cn("hidden w-40 shrink-0 sm:block lg:w-52", i === 1 && "-scale-x-100")}>
-                    <ProfilStatique id={`b-${b.id}`} {...b.portrait} title={b.alt} className="w-full" />
+            <li key={b.id} data-reveal="monte" style={{ ["--d" as string]: `${i * 90}ms` }}>
+              <article aria-labelledby={`barbier-${b.id}`} className="flex h-full flex-col rounded-[1.75rem] bg-charbon-2 p-3">
+                <div className="rounded-[1.25rem] px-8 pt-8" style={{ background: b.teinte, ["--paper" as string]: b.teinte }}>
+                  <div className={cn("mx-auto w-[70%] max-w-60", i === 1 && "-scale-x-100")}>
+                    <ProfilStatique id={`b-${b.id}`} {...b.portrait} title={b.alt} className="w-full text-creme" />
                   </div>
                 </div>
-                <div className="mt-6 grid gap-6 border-t border-charbon/15 pt-6 sm:grid-cols-2">
-                  <div>
-                    <p className="font-display text-2xl leading-tight">{b.specialite}</p>
-                    <p className="mt-2 text-sm text-acier-fonce">{b.style}</p>
-                  </div>
-                  <div className="flex flex-col justify-between gap-4">
-                    <blockquote className="text-sm italic text-charbon/80">{b.replique}</blockquote>
-                    <div className="flex flex-wrap gap-x-6">
-                      <Link href={`/reserver?barbier=${b.id}`} className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold">
-                        <span className="text-rouge-fonce group-hover:underline">Réserver avec {b.prenom}</span>
-                        <IconFleche size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-                      </Link>
-                      <Link href={`/equipe#${b.id}`} className="inline-flex min-h-11 items-center text-sm text-acier-fonce underline underline-offset-4 hover:text-charbon">
-                        Ses dispos
-                      </Link>
-                    </div>
+                <div className="flex flex-1 flex-col px-3 pb-3 pt-5">
+                  <p className="text-sm text-acier">
+                    {b.role} · <span className="tabular">{annee - b.depuis} ans de métier</span>
+                  </p>
+                  <h3 id={`barbier-${b.id}`} className="mt-1 text-[2rem] leading-tight">
+                    {b.prenom}
+                  </h3>
+                  <p className="mt-2 font-semibold">{b.specialite}</p>
+                  <p className="mt-1 text-acier">{b.style}</p>
+                  <blockquote className="font-script mt-5 text-[1.45rem] text-rouge-fonce">{b.replique.replace(/[«»]/g, "").trim()}</blockquote>
+                  <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-6">
+                    <Bouton href={`/reserver?barbier=${b.id}`}>Réserver avec {b.prenom}</Bouton>
+                    <Link href={`/equipe#${b.id}`} className="inline-flex min-h-11 items-center text-[0.9375rem] font-medium text-rouge-fonce hover:underline">
+                      Ses dispos <span aria-hidden className="ml-1">›</span>
+                    </Link>
                   </div>
                 </div>
-              </div>
+              </article>
             </li>
           ))}
         </ul>

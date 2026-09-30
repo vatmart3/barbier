@@ -20,7 +20,7 @@ export function Acces({ n = "08", as = "h2" }: { n?: string; as?: "h2" | "h1" })
   const semaine = horairesSemaine();
 
   return (
-    <section aria-labelledby="acces-titre" className="cv-auto bg-charbon py-(--spacing-section) text-creme">
+    <section aria-labelledby="acces-titre" className="bg-charbon py-(--spacing-section) text-creme">
       <div className="container-page grid-page gap-y-14">
         <div className="col-span-12 lg:col-span-5">
           <Etiquette n={n} className="text-acier">

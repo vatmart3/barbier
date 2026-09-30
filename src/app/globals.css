@@ -2,8 +2,8 @@
 @import "../design/tokens.css";
 
 /* ==========================================================================
-   Base — style « Apple » : police système, titres gras à approche serrée,
-   beaucoup d'air, formes arrondies.
+   Base — clair, arrondi, beaucoup d'air. Titres en Fraunces « SOFT »
+   (empattements ronds), texte en Figtree, notes à la main en Caveat.
    ========================================================================== */
 
 @layer base {
@@ -25,15 +25,34 @@
     overflow-x: clip;
   }
 
-  /* Titres : même famille que le texte, gras, casse normale, approche négative */
+  /* Titres : Fraunces arrondie, demi-gras, approche légèrement resserrée */
   .font-display,
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.022em;
+    font-weight: 600;
+    font-optical-sizing: auto;
+    letter-spacing: -0.012em;
     text-wrap: balance;
+  }
+
+  /* Petits titres de cartes : on garde la chaleur mais plus de tenue */
+  h3 {
+    letter-spacing: -0.005em;
+  }
+
+  /* Notes écrites à la main */
+  .font-script {
+    font-family: var(--font-script);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
   }
 
   /* Toute boîte encadrée est arrondie (les utilitaires rounded-* restent prioritaires) */
@@ -198,11 +217,6 @@
   }
 }
 
-/* Sections sous la ligne de flottaison : rendu différé par le navigateur */
-@utility cv-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 1000px;
-}
 
 /* Matériau translucide (barres, pastilles) */
 @utility verre {
@@ -396,5 +410,22 @@ html.js [data-reveal="carte"]:not([data-vu]) [data-epingle] {
     background: var(--color-charbon);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+}
+
+/* Entrée du hero : CSS pur, démarre au premier affichage (sans attendre le JS).
+   fill-mode « backwards » : une fois jouée, l'animation ne fige rien et laisse
+   le scroll (GSAP) piloter opacité et position. */
+[data-hero-in] {
+  animation: monte-doux 900ms var(--ease-out-cut) backwards;
+  animation-delay: calc(60ms + var(--i, 0) * 80ms);
+}
+.entree-objet {
+  animation: objet-entree 1200ms var(--ease-out-cut) 250ms backwards;
+}
+@keyframes objet-entree {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
   }
 }

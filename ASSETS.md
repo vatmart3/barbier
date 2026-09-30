@@ -1,7 +1,7 @@
 # ASSETS — visuels, sources et crédits
 
 La direction artistique repose d'abord sur des visuels **procéduraux, SVG et typographiques**, dessinés pour ce site : ils ne se retrouvent nulle part ailleurs.
-Le téléchargement de photos libres (Unsplash, Pexels) était bloqué dans l'environnement de production du site : les deux emplacements photo sont des **placeholders art-dirigés** générés par `scripts/placeholders.mjs`, à remplacer par de vraies photos (prompts ci-dessous).
+Le téléchargement de photos libres (Unsplash, Pexels, Wikimedia) est bloqué dans l'environnement de production du site : le salon et la devanture sont donc **dessinés** (SVG en aplats arrondis). Pour un vrai client, de vraies photos restent préférables (prompts ci-dessous).
 
 ## 1. Visuels originaux (code, aucun crédit tiers)
 
@@ -9,6 +9,8 @@ Le téléchargement de photos libres (Unsplash, Pexels) était bloqué dans l'en
 |---|---|---|
 | Rasoir coupe-chou 3D (hero) | `src/components/three/RasoirScene.tsx` | Géométries extrudées procédurales, acier `MeshPhysicalMaterial`, corne en texture canvas, reflets Lightformer — aucun modèle ni HDR téléchargé |
 | Enseigne de barbier 3D (progression) | `src/components/three/EnseigneScene.tsx` | Cylindre + shader GLSL maison (spirale pilotée par le scroll) |
+| Intérieur du salon (fauteuils, miroirs en arche, Sabot le chat) | `src/components/illustrations/IllustrationSalon.tsx` | SVG dessiné, aplats arrondis |
+| Devanture Grand'Rue (store festonné, vitrine, vélo) | `src/components/illustrations/IllustrationDevanture.tsx` | SVG dessiné, aplats arrondis |
 | Rasoir SVG (repli sans WebGL) | `src/components/illustrations/RasoirSVG.tsx` | SVG dessiné à la main |
 | Profils gravés (coupes, configurateur, avant/après, portraits) | `src/components/illustrations/profil-*.ts(x)` | SVG paramétrique : hachures « traces de tondeuse », masque de fondu, morphing |
 | Carte de Sète | `src/components/illustrations/CarteSete.tsx` | SVG stylisé (étang de Thau, canal royal, Mont Saint-Clair en courbes de niveau) — pas de carte tierce |
@@ -19,23 +21,30 @@ Le téléchargement de photos libres (Unsplash, Pexels) était bloqué dans l'en
 
 ## 2. Polices
 
-Le site utilise la **police système** de l'appareil (SF Pro sur Apple, Segoe UI sur Windows, Roboto sur Android) : aucune police web n'est téléchargée.
-Seules les images Open Graph embarquent une police (`src/assets/fonts/`, SIL Open Font License 1.1) : Schibsted Grotesk (Medium et Bold).
+Toutes sous **SIL Open Font License 1.1** (fichiers et licence dans `src/assets/fonts/`, sinon servies par `next/font/google`, auto-hébergées au build) :
 
-## 3. Photos à remplacer
+| Police | Rôle | Chargement |
+|---|---|---|
+| **Fraunces** (Undercase Type), axe « SOFT » à 100 | Titres, prix : empattements arrondis, chaleureux | Instance locale demi-grasse, tailles optiques 24–96 (`Fraunces-Soft-600.woff2`, 32 Ko, préchargée). Générée avec `fonttools varLib.instancer` depuis Google Fonts |
+| **Figtree** (Erik Kennedy) | Texte courant, interface | `next/font/google`, préchargée (20 Ko) |
+| **Caveat** (Impallari Type) | Notes à la main : répliques des barbiers, signature de Karim | `next/font/google`, non préchargée (jamais critique) |
+
+Les images Open Graph utilisent `Fraunces-Soft-600.ttf` et `Figtree-Medium.ttf`.
+
+## 3. Photos à prévoir pour un vrai client
 
 Style commun : **noir et blanc, fort contraste, grain argentique léger**, lumière latérale dure, aucun visage reconnaissable sans autorisation écrite (droit à l'image), aucune marque visible.
-Remplacer le fichier en gardant **le même nom et le même ratio** ; `next/image` produit automatiquement AVIF/WebP.
+Déposer la photo dans `public/images/` et remplacer l'illustration par un `next/image` du même ratio ; AVIF/WebP sont produits automatiquement.
 
-### `public/images/salon-fauteuils.jpg` — 1600 × 1100 px (ratio 16:11)
-Utilisée : page L'équipe, section « La maison ».
-Alt actuel : « Les trois fauteuils de barbier de Dégradé face aux miroirs, salon Grand'Rue à Sète ».
+### Salon — 1600 × 1100 px (ratio 16:11)
+À la place de : `IllustrationSalon` (page L'équipe, section « La maison » ; accueil, « Le mot de la maison »).
+Alt proposé : « Les trois fauteuils de barbier de Dégradé face aux miroirs, salon Grand'Rue à Sète ».
 
 > Prompt : *Black and white high-contrast photograph of a small barbershop interior in a southern French town, three vintage 1960s hydraulic barber chairs in dark leather and chrome facing three rectangular mirrors, checkerboard tiled floor, hard side light from a large shop window on the right, deep blacks, film grain, shot at eye level with a 35mm lens, editorial magazine style, no people, no text, no logos — 1600×1100.*
 
-### `public/images/devanture-grand-rue.jpg` — 1600 × 1000 px (ratio 8:5)
-Utilisée : page Infos & accès, sous le plan.
-Alt actuel : « Devanture noire du barbier Dégradé avec son enseigne et son poteau de barbier, Grand'Rue Mario Roustan à Sète ».
+### Devanture — 1600 × 1000 px (ratio 8:5)
+À la place de : `IllustrationDevanture` (page Infos & accès, sous le plan).
+Alt proposé : « Devanture noire du barbier Dégradé avec son enseigne et son poteau de barbier, Grand'Rue Mario Roustan à Sète ».
 
 > Prompt : *Black and white street photograph of a narrow barbershop storefront in Sète, France, matte black painted facade with large shop window, cream uppercase condensed sign lettering reading "DÉGRADÉ", classic barber pole mounted on the left, pale limestone wall, late afternoon Mediterranean light with strong shadows, film grain, frontal composition, no people — 1600×1000.*
 
@@ -49,4 +58,4 @@ Les portraits sont aujourd'hui des profils gravés (`portrait` dans `src/data/ba
 
 ## 4. Textes
 
-Tous les textes sont originaux. Les **avis** (`src/data/avis.ts`) et les **chiffres** de preuve sociale sont des **exemples de démonstration** à remplacer par des données réelles. Profils des barbiers fictifs.
+Tous les textes sont originaux. Les **avis** (`src/data/avis.ts`), le **mot du patron** (`src/components/home/MotDuPatron.tsx`) et les profils des barbiers (`src/data/barbiers.ts`) sont **fictifs** : à réécrire avec le vrai salon, idéalement avec ses propres mots.

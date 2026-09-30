@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import { Caveat, Figtree } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/config/site";
 import { hairSalonJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -10,6 +12,31 @@ import { loaderScript } from "@/components/layout/Loader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Revelateur } from "@/components/layout/Revelateur";
 import "./globals.css";
+
+// Titres : Fraunces « SOFT » (empattements arrondis), instance demi-grasse
+// avec tailles optiques 24–96 : 32 Ko au lieu de 120 Ko (voir ASSETS.md)
+const titres = localFont({
+  src: "../assets/fonts/Fraunces-Soft-600.woff2",
+  weight: "600",
+  display: "swap",
+  variable: "--font-fraunces",
+  fallback: ["Georgia", "serif"],
+});
+
+// Texte : Figtree, géométrique et ronde, très lisible en petit
+const texte = Figtree({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-figtree",
+});
+
+// Notes à la main (répliques, signature) : jamais critique au premier affichage
+const main = Caveat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-caveat",
+  preload: false,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -33,7 +60,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr-FR" suppressHydrationWarning>
+    <html lang="fr-FR" className={`${titres.variable} ${texte.variable} ${main.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: loaderScript }} />
       </head>

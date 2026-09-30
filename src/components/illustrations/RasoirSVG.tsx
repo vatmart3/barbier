@@ -42,10 +42,8 @@ export function RasoirSVG({ className }: { className?: string }) {
       {/* Axes */}
       <circle cx="318" cy="110" r="5" fill="#d9dde0" stroke="#111" />
       <circle cx="592" cy="118" r="4" fill="#d9dde0" stroke="#111" />
-      {/* Gravure */}
-      <text x="140" y="126" fontSize="11" letterSpacing="3" fill="#111" opacity="0.55" fontFamily="var(--font-sans)">
-        DÉGRADÉ · SÈTE
-      </text>
+      {/* Gravure (traits, pas de texte : rien à attendre au premier affichage) */}
+      <path d="M150 121h118M160 126h98" stroke="#111" strokeOpacity="0.28" strokeWidth="1" strokeLinecap="round" strokeDasharray="1 4" />
     </svg>
   );
 }

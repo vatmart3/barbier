@@ -12,7 +12,7 @@ export function FilAriane({ items }: { items: { name: string; path: string }[] }
         </li>
         {items.map((it, i) => (
           <li key={it.path} className="flex items-center gap-2">
-            <span aria-hidden className="h-px w-4 bg-rouge" />
+            <span aria-hidden className="text-acier">›</span>
             {i === items.length - 1 ? (
               <span aria-current="page" className="text-creme">
                 {it.name}

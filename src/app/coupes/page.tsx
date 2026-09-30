@@ -49,7 +49,7 @@ export default function CoupesPage() {
         </div>
       </section>
 
-      <section aria-label="Détail des coupes" className="bg-charbon text-creme">
+      <section aria-label="Détail des coupes" className="bg-charbon py-(--spacing-section) text-creme">
         <CoupesListe />
       </section>
 
@@ -58,7 +58,7 @@ export default function CoupesPage() {
       <section id="entretien" aria-labelledby="ent-titre" className="salon scroll-mt-16 border-t border-charbon/10 bg-creme py-(--spacing-section) text-charbon">
         <div className="container-page">
           <Etiquette n="03" className="text-acier-fonce">
-            Entretien — offert, sans inscription
+            Entretien : offert, sans inscription
           </Etiquette>
           <Lignes id="ent-titre" className="mb-14 mt-6 text-d2" lines={["Quand", <span key="b" className="text-acier-fonce">revenir ?</span>]} />
           <Entretien />

@@ -95,7 +95,7 @@ export function AvantApres() {
   };
 
   return (
-    <section aria-labelledby="aa-titre" className="cv-auto bg-charbon py-(--spacing-section) text-creme">
+    <section aria-labelledby="aa-titre" className="bg-charbon py-(--spacing-section) text-creme">
       <div className="container-page grid-page gap-y-12">
         <div className="col-span-12 lg:col-span-4">
           <Etiquette n="04" className="text-acier">

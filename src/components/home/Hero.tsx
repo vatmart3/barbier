@@ -65,8 +65,6 @@ export function Hero() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.from("[data-hero-in]", { y: 16, opacity: 0, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.05 });
-        gsap.from("[data-rasoir]", { y: 40, opacity: 0, duration: 1.2, ease: "power3.out", delay: 0.25 });
 
         const tl = gsap.timeline({
           defaults: { ease: "none" },
@@ -100,18 +98,18 @@ export function Hero() {
 
         <div data-texte className="container-page relative z-10 flex flex-col items-center pt-[calc(var(--header-h)+7svh)] text-center">
           <h1 className="flex flex-col items-center">
-            <span data-hero-in className="text-lg font-semibold text-ambre md:text-xl">
+            <span className="text-lg font-semibold text-ambre md:text-xl">
               Barbier à Sète
             </span>
-            <span data-hero-in className="metal mt-1 block text-[clamp(3.6rem,2rem+8vw,8.5rem)] leading-[1.02] tracking-[-0.035em]">
+            <span className="metal mt-1 block text-[clamp(3.6rem,2rem+8vw,8.5rem)] leading-[1.02] tracking-[-0.035em]">
               Dégradé.
             </span>
           </h1>
-          <p data-hero-in className="mt-4 max-w-xl text-[clamp(1.2rem,1rem+0.8vw,1.6rem)] leading-snug text-creme-2">
+          <p data-hero-in style={{ ["--i" as string]: 2 }} className="mt-4 max-w-xl text-[clamp(1.2rem,1rem+0.8vw,1.6rem)] leading-snug text-creme-2">
             Fade, taper, barbe au coupe-chou.
             <br className="hidden sm:block" /> Trois fauteuils, Grand&apos;Rue.
           </p>
-          <div data-hero-in className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          <div data-hero-in style={{ ["--i" as string]: 3 }} className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             <Bouton href="/reserver" size="lg">
               Réserver
             </Bouton>
@@ -122,7 +120,7 @@ export function Hero() {
         </div>
 
         {/* L'objet : SVG immédiat, 3D en surcouche quand prête */}
-        <div data-rasoir className="pointer-events-none absolute inset-x-0 bottom-0 top-[42%] motion-reduce:top-auto motion-reduce:h-[40svh]">
+        <div data-rasoir className="entree-objet pointer-events-none absolute inset-x-0 bottom-0 top-[42%] motion-reduce:top-auto motion-reduce:h-[40svh]">
           <div
             data-rasoir-svg
             className={cn(
@@ -139,7 +137,7 @@ export function Hero() {
           </div>
         ) : null}
 
-        <p aria-hidden data-scroll-hint className="absolute inset-x-0 bottom-5 z-10 text-center text-xs text-acier motion-reduce:hidden" data-hero-in>
+        <p aria-hidden data-scroll-hint className="absolute inset-x-0 bottom-5 z-10 text-center text-xs text-acier motion-reduce:hidden" data-hero-in style={{ ["--i" as string]: 4 }}>
           Faites défiler, la lame s&apos;ouvre
         </p>
       </div>

@@ -5,6 +5,7 @@ import { Hero } from "@/components/home/Hero";
 import { ProchainCreneau } from "@/components/home/ProchainCreneau";
 import { CoupesHorizontal } from "@/components/home/CoupesHorizontal";
 import { Barbiers } from "@/components/home/Barbiers";
+import { MotDuPatron } from "@/components/home/MotDuPatron";
 import { AvantApres } from "@/components/home/AvantApres";
 import { Tarifs } from "@/components/home/Tarifs";
 import { Fidelite } from "@/components/home/Fidelite";
@@ -31,6 +32,7 @@ export default function Accueil() {
       <Suspense>
         <Barbiers />
       </Suspense>
+      <MotDuPatron />
       <Suspense>
         <AvantApres />
       </Suspense>

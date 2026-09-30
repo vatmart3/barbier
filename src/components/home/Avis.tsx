@@ -1,64 +1,67 @@
 /**
- * « Entendu au fauteuil » — les avis en index typographique, pas en carrousel.
- * Chaque ligne entre par un masque horizontal, en alternance gauche / droite (CSS).
+ * « Entendu au fauteuil » — les avis en cartes arrondies, en colonnes de
+ * hauteurs libres (comme des mots posés sur le comptoir, pas un carrousel).
  */
-import { avis, chiffres } from "@/data/avis";
+import { avis } from "@/data/avis";
 import { getBarbier } from "@/data/barbiers";
-import { Compteur } from "@/components/ui/Compteur";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { cn } from "@/lib/cn";
+
+function Etoiles() {
+  return (
+    <span role="img" className="flex gap-0.5 text-rouge" aria-label="5 sur 5">
+      {Array.from({ length: 5 }, (_, i) => (
+        <svg key={i} width="16" height="16" viewBox="0 0 24 24" aria-hidden fill="currentColor">
+          <path d="M12 3.2c.3 0 .6.2.7.5l2.1 4.6 5 .6c.7.1.9.9.4 1.3l-3.7 3.4 1 4.9c.1.7-.6 1.2-1.2.9L12 17l-4.4 2.4c-.6.3-1.3-.2-1.2-.9l1-4.9-3.7-3.4c-.5-.4-.3-1.2.4-1.3l5-.6 2.1-4.6c.2-.3.5-.5.8-.5Z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
 
 export function Avis() {
   return (
-    <section aria-labelledby="avis-titre" className="salon cv-auto bg-creme py-(--spacing-section) text-charbon">
+    <section aria-labelledby="avis-titre" className="bg-charbon-2 py-(--spacing-section)">
       <div className="container-page">
-        <div className="grid-page gap-y-10">
-          <div className="col-span-12 lg:col-span-6">
-            <Etiquette n="07" className="text-acier-fonce">
-              Entendu au fauteuil
-            </Etiquette>
-            <Lignes id="avis-titre" className="mt-6 text-d2" lines={["Ce qu'ils disent", <span key="b" className="text-acier-fonce">en se levant.</span>]} />
+        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+          <div>
+            <Etiquette>Entendu au fauteuil</Etiquette>
+            <Lignes id="avis-titre" className="mt-4 text-d2" lines={["Ce qu'ils disent", <span key="b" className="text-acier">en se levant.</span>]} />
           </div>
-          <dl className="col-span-12 grid grid-cols-3 gap-4 self-end border-t border-charbon/15 pt-6 lg:col-span-6">
-            {chiffres.map((c) => (
-              <div key={c.legende}>
-                <dd className="font-display text-[clamp(2.25rem,1.5rem+3vw,4.5rem)] leading-none">
-                  <Compteur value={c.valeur.toLocaleString("fr-FR")} duration={1300} />
-                  {c.suffixe}
-                </dd>
-                <dt className="mt-2 text-xs text-acier-fonce">{c.legende}</dt>
-              </div>
-            ))}
-          </dl>
+          <p aria-hidden className="font-script -rotate-2 text-2xl text-rouge-fonce">recopiés du cahier près de la caisse</p>
         </div>
 
-        <ul className="mt-20 border-t border-charbon/15 md:mt-28">
+        <ul className="mt-12 gap-4 sm:columns-2 lg:columns-3">
           {avis.map((a, i) => {
             const b = getBarbier(a.barbier);
-            const droite = i % 2 === 1;
             return (
-              <li key={a.auteur} className="overflow-hidden border-b border-charbon/15">
-                <figure className="grid-page gap-y-4 py-10 md:py-14" data-reveal={droite ? "clip-droite" : "clip-gauche"}>
-                  <figcaption className={cn("col-span-12 text-sm md:col-span-3", droite && "md:order-2 md:col-start-10 md:text-right")}>
-                    <span className="block font-semibold">{a.auteur}</span>
-                    <span className="block text-acier-fonce">{a.ville}</span>
-                    <span className="eyebrow mt-3 block text-acier-fonce">
-                      {a.coupe} · avec {b?.prenom}
+              <li key={a.auteur} className="mb-4 break-inside-avoid" data-reveal="monte" style={{ ["--d" as string]: `${(i % 3) * 80}ms` }}>
+                <figure className="rounded-[1.75rem] bg-charbon p-6 shadow-[0_1px_2px_rgb(0_0_0/0.04)]">
+                  <Etoiles />
+                  <blockquote className="mt-4 text-[1.0625rem] leading-relaxed">« {a.texte} »</blockquote>
+                  <figcaption className="mt-6 flex items-center gap-3">
+                    <span
+                      aria-hidden
+                      className="font-display grid size-11 shrink-0 place-items-center rounded-full text-lg"
+                      style={{ background: b?.teinte ?? "var(--color-charbon-2)" }}
+                    >
+                      {a.auteur[0]}
                     </span>
-                    {a.clientDepuis ? <span className="mt-1 block text-xs text-acier-fonce">Client depuis {a.clientDepuis}</span> : null}
+                    <span className="min-w-0 text-sm leading-snug">
+                      <span className="block font-semibold">
+                        {a.auteur} <span className="font-normal text-acier">· {a.ville}</span>
+                      </span>
+                      <span className="block text-acier">
+                        {a.coupe} avec {b?.prenom} · {a.date}
+                      </span>
+                    </span>
                   </figcaption>
-                  <blockquote className={cn("col-span-12 md:col-span-8", droite ? "md:col-start-1" : "md:col-start-5")}>
-                    <p className="font-display text-[clamp(2rem,1.2rem+3.2vw,4.75rem)] leading-[1.05]">« {a.extrait} »</p>
-                    <p className="mt-4 max-w-xl text-charbon/75">{a.texte}</p>
-                    <p className="eyebrow mt-3 text-acier-fonce">{a.date}</p>
-                  </blockquote>
                 </figure>
               </li>
             );
           })}
         </ul>
-        <p className="mt-6 text-xs text-acier-fonce">Site concept : avis d&apos;illustration, à remplacer par les avis réels du salon.</p>
+        <p className="mt-4 text-xs text-acier">Site concept : avis d&apos;illustration, à remplacer par les avis réels du salon.</p>
       </div>
     </section>
   );

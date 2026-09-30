@@ -36,9 +36,9 @@ export function ProchainCreneau() {
   const barbier = p ? getBarbier(p.barbier) : null;
 
   return (
-    <section aria-labelledby="creneau-titre" className="salon relative bg-creme py-(--spacing-section) text-charbon">
+    <section aria-labelledby="creneau-titre" className="salon relative bg-creme-2 pb-(--spacing-section) pt-16 text-charbon md:pt-24">
       <div className="container-page">
-        <div className="grid-page gap-y-10 rounded-[2rem] bg-creme-2 p-6 shadow-card sm:p-10 lg:p-14">
+        <div className="grid-page gap-y-10 rounded-[2rem] bg-creme p-6 sm:p-10 lg:p-14">
           <div className="col-span-12 lg:col-span-7">
             <Etiquette n="01" className="text-acier-fonce">
               Prochain créneau libre
@@ -55,7 +55,7 @@ export function ProchainCreneau() {
               ) : null}
             </p>
             <p className="mt-2 font-display text-d3 leading-[0.8]" aria-hidden={!p}>
-              <Compteur value={heure} duration={1100} />
+              {p ? <Compteur value={heure} /> : <span className="inline-block h-[0.8em] w-[3.4em] animate-pulse rounded-3xl bg-charbon/8 align-top" />}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Bouton href={p ? lien(p) : "/reserver"} size="lg" iconEnd={<IconFleche size={22} />}>
@@ -94,7 +94,7 @@ export function ProchainCreneau() {
                             <strong className="font-semibold">{formatHeure(s.start)}</strong>
                           </>
                         ) : (
-                          <span className="h-3 w-24 animate-pulse bg-charbon/10" aria-hidden />
+                          <span className="h-3 w-24 animate-pulse rounded-full bg-charbon/10" aria-hidden />
                         )}
                         <IconFleche size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                       </span>

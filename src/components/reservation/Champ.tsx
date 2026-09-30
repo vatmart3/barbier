@@ -35,7 +35,7 @@ export function Champ({
       ) : null}
       {erreur ? (
         <p id={`${id}-erreur`} role="alert" className={cn("mt-1.5 flex items-center gap-2 text-sm", tone === "dark" ? "text-erreur" : "text-rouge-fonce")}>
-          <span aria-hidden className="inline-block h-px w-3 bg-current" />
+          <span aria-hidden className="inline-block size-1.5 shrink-0 rounded-full bg-current" />
           {erreur}
         </p>
       ) : null}

@@ -1,125 +1,97 @@
 /**
- * « Les coupes » — le fauteuil pivote : section épinglée, le scroll vertical
- * devient un déplacement horizontal (composant serveur + <Epingle> client).
- * Un panneau par coupe : numéro de sabot géant, profil gravé, prix et durée en compteur mécanique, entretien.
+ * « Les coupes » — une carte arrondie par coupe, dans un carrousel natif
+ * (glisser au doigt, flèches rondes au clavier / à la souris).
+ * Profil gravé, prix et durée, rythme d'entretien. Dernière carte : le configurateur.
  */
 import Link from "next/link";
 import { coupes } from "@/data/prestations";
 import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
-import { Epingle } from "@/components/ui/Epingle";
-import { Compteur } from "@/components/ui/Compteur";
+import { Carrousel } from "@/components/ui/Carrousel";
 import { Etiquette } from "@/components/ui/Etiquette";
+import { Lignes } from "@/components/ui/Lignes";
 
 export function CoupesHorizontal() {
   return (
-    <Epingle
-      aria-labelledby="coupes-titre"
-      className="bg-charbon text-creme"
-      trackClassName="flex h-svh w-max items-stretch motion-reduce:w-full motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:overflow-x-auto"
-      railClassName="bottom-7 rounded-full"
-    >
-        {/* Panneau d'ouverture */}
-        <div className="flex w-[86vw] shrink-0 flex-col justify-between px-(--spacing-gutter) pb-24 pt-[calc(var(--header-h)+2.5rem)] sm:w-[56vw] lg:w-[38vw] motion-reduce:snap-start">
-          <Etiquette n="02" className="text-acier">
-            Les coupes
-          </Etiquette>
-          <div>
-            <h2 id="coupes-titre" className="text-d2">
-              Six coupes.
-              <br />
-              <span className="text-acier">Aucune au hasard.</span>
-            </h2>
-            <p className="mt-6 max-w-sm text-creme/80">
-              Du sabot 0 au peigne seul. Chaque coupe a son geste, sa durée, son rythme d&apos;entretien. Faites pivoter le fauteuil.
-            </p>
-          </div>
-          <p aria-hidden className="eyebrow flex items-center gap-3 text-acier">
-            Faites défiler <span aria-hidden>→</span>
+    <section id="coupes" aria-labelledby="coupes-titre" className="scroll-mt-12 bg-charbon-2 py-(--spacing-section)">
+      <div className="container-page">
+        <Etiquette>Les coupes</Etiquette>
+        <div className="mt-4 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+          <Lignes id="coupes-titre" className="text-d2" lines={["Six coupes.", <span key="b" className="text-acier">Aucune au hasard.</span>]} />
+          <p className="max-w-sm text-acier">
+            Du sabot 0 au peigne seul. Chaque coupe a son geste, sa durée et son rythme d&apos;entretien.
           </p>
         </div>
+        <p aria-hidden className="font-script mt-5 inline-block -rotate-2 text-2xl text-rouge-fonce">
+          la plus demandée ? le fade moyen, de loin.
+        </p>
+      </div>
 
-        {coupes.map((c, i) => (
-          <article
-            key={c.id}
-            data-panel
-            aria-labelledby={`coupe-${c.id}`}
-            className="relative mx-2 mb-16 mt-[calc(var(--header-h)+1rem)] flex w-[86vw] shrink-0 flex-col overflow-hidden rounded-[2rem] bg-charbon-2 p-7 sm:w-[64vw] sm:p-10 lg:w-[46vw] xl:w-[40vw] motion-reduce:snap-start"
-            style={{ ["--paper" as string]: "var(--color-charbon-2)" }}
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p aria-hidden className="font-display text-d3 leading-none text-creme-3">
-                  {c.repere}
+      <Carrousel label="Les six coupes" className="mt-10">
+        {coupes.map((c) => (
+          <li key={c.id} className="w-[84%] max-w-[23rem] shrink-0 snap-start sm:w-[22rem]">
+            <article aria-labelledby={`coupe-${c.id}`} className="flex h-full flex-col rounded-[1.75rem] bg-charbon p-3 shadow-[0_1px_2px_rgb(0_0_0/0.04),0_8px_24px_-12px_rgb(0_0_0/0.12)]">
+              <div className="relative overflow-hidden rounded-[1.25rem] bg-charbon-2 px-6 pt-10" style={{ ["--paper" as string]: "var(--color-charbon-2)" }}>
+                <p className="absolute left-4 top-4 rounded-full bg-charbon px-3 py-1 text-xs font-semibold">
+                  <span className="text-acier">Sabot </span>
+                  <span className="tabular">{c.repere}</span>
                 </p>
-                <p className="eyebrow mt-2 text-acier">{c.repereLegende}</p>
+                <ProfilStatique
+                  id={`h-${c.id}`}
+                  {...c.profil}
+                  dessus={c.dessusPossibles.includes("court") ? "court" : c.dessusPossibles[0]}
+                  barbe="aucune"
+                  className="mx-auto w-[78%] text-creme"
+                />
               </div>
-              <p className="eyebrow tabular relative z-10 text-acier">
-                {String(i + 1).padStart(2, "0")} / {String(coupes.length).padStart(2, "0")}
-              </p>
-            </div>
-
-            <div className="pointer-events-none absolute right-[4%] top-[8%] w-[50%] max-w-[360px] sm:w-[42%]" data-profil>
-              <ProfilStatique
-                id={`h-${c.id}`}
-                {...c.profil}
-                dessus={c.dessusPossibles.includes("court") ? "court" : c.dessusPossibles[0]}
-                barbe="aucune"
-                className="w-full text-creme"
-              />
-            </div>
-
-            <div className="relative mt-auto max-w-[26rem]">
-              <h3 id={`coupe-${c.id}`} className="text-[clamp(1.9rem,1.4rem+1.6vw,3rem)] leading-[1]">
-                {c.nom}
-              </h3>
-              <p className="mt-3 text-lg text-creme/85">{c.accroche}</p>
-              <dl className="mt-6 grid grid-cols-2 gap-4">
-                <div>
-                  <dt className="eyebrow text-acier">Prix</dt>
-                  <dd className="font-display text-4xl leading-none">
-                    <Compteur value={c.prix} /> €
-                  </dd>
+              <div className="flex flex-1 flex-col px-3 pb-3 pt-5">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 id={`coupe-${c.id}`} className="text-[1.75rem] leading-tight">
+                    {c.nom}
+                  </h3>
+                  <p className="font-display tabular shrink-0 text-2xl">{c.prix} €</p>
                 </div>
-                <div>
-                  <dt className="eyebrow text-acier">Durée</dt>
-                  <dd className="font-display text-4xl leading-none">
-                    <Compteur value={c.duree} delay={120} /> min
-                  </dd>
-                </div>
-              </dl>
-              <p className="mt-4 text-sm text-acier">{c.entretien}</p>
-              <Link
-                href={`/reserver?coupe=${c.id}`}
-                className="mt-5 inline-flex min-h-11 items-center gap-1 text-[1.0625rem] text-rouge-fonce hover:underline"
-              >
-                Réserver un {c.nom.toLowerCase()} <span aria-hidden>›</span>
-              </Link>
-            </div>
-          </article>
+                <p className="mt-1 text-acier">
+                  {c.accroche} <span className="tabular whitespace-nowrap">· {c.duree} min</span>
+                </p>
+                <p className="mt-4 text-sm text-acier">{c.entretien}</p>
+                <Link
+                  href={`/reserver?coupe=${c.id}`}
+                  className="mt-auto inline-flex min-h-11 items-center gap-1 pt-4 font-semibold text-rouge-fonce hover:underline"
+                >
+                  Réserver un {c.nom.toLowerCase()} <span aria-hidden>›</span>
+                </Link>
+              </div>
+            </article>
+          </li>
         ))}
 
-        {/* Dernier panneau : entrée du configurateur (micro-engagement) */}
-        <div className="mx-2 mb-16 mr-(--spacing-gutter) mt-[calc(var(--header-h)+1rem)] flex w-[86vw] shrink-0 flex-col justify-center gap-6 rounded-[2rem] bg-creme p-8 text-charbon sm:w-[56vw] sm:p-10 lg:w-[36vw] motion-reduce:snap-start">
-          <p className="eyebrow text-charbon/70">Étape 1 sur 3</p>
-          <p className="font-display text-d1">Pas sûr ? Composez la vôtre.</p>
-          <p className="max-w-sm text-charbon/80">Hauteur du dégradé, longueur du dessus, barbe. Le prix et la durée se calculent au fur et à mesure.</p>
-          <ul className="grid grid-cols-3 gap-2" aria-label="Choisir la hauteur du dégradé">
-            {(["fade-bas", "fade-moyen", "fade-haut"] as const).map((id) => {
-              const c = coupes.find((x) => x.id === id)!;
-              return (
-                <li key={id}>
-                  <Link
-                    href={`/coupes?coupe=${id}#configurateur`}
-                    className="flex min-h-24 flex-col justify-between rounded-2xl bg-charbon/10 p-4 transition-colors hover:bg-charbon/20"
-                  >
-                    <span className="font-display text-3xl leading-none">{c.repere}</span>
-                    <span className="text-xs">{c.nom.replace("Skin fade haut", "Fade haut")}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-    </Epingle>
+        {/* Dernière carte : entrée du configurateur */}
+        <li className="w-[84%] max-w-[23rem] shrink-0 snap-start sm:w-[22rem]">
+          <div className="nuit flex h-full flex-col justify-between gap-8 rounded-[1.75rem] bg-charbon-2 p-7 text-creme">
+            <div>
+              <p className="text-sm font-semibold text-ambre">Pas sûr ?</p>
+              <p className="font-display mt-2 text-[2rem] leading-tight">Composez la vôtre.</p>
+              <p className="mt-3 text-creme-2">Hauteur du dégradé, longueur du dessus, barbe. Le prix et la durée se calculent au fur et à mesure.</p>
+            </div>
+            <ul className="grid grid-cols-3 gap-2" aria-label="Choisir la hauteur du dégradé">
+              {(["fade-bas", "fade-moyen", "fade-haut"] as const).map((id) => {
+                const c = coupes.find((x) => x.id === id)!;
+                return (
+                  <li key={id}>
+                    <Link
+                      href={`/coupes?coupe=${id}#configurateur`}
+                      className="flex min-h-24 flex-col justify-between rounded-2xl bg-white/10 p-4 transition-colors hover:bg-white/18"
+                    >
+                      <span className="font-display tabular text-3xl leading-none">{c.repere}</span>
+                      <span className="text-xs text-creme-2">{c.nom.replace("Skin fade haut", "Fade haut")}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </li>
+      </Carrousel>
+    </section>
   );
 }

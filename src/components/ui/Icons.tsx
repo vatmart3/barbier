@@ -1,6 +1,6 @@
 /**
- * Pictos dessinés pour Dégradé : trait 1,5 px, extrémités droites, pas d'arrondi
- * décoratif — le même trait que les traces de tondeuse.
+ * Pictos dessinés pour Dégradé : trait 1,5 px, extrémités et angles arrondis
+ * pour aller avec le reste du site.
  */
 import type { SVGProps } from "react";
 
@@ -13,8 +13,8 @@ const base = (size = 20): SVGProps<SVGSVGElement> => ({
   fill: "none",
   stroke: "currentColor",
   strokeWidth: 1.5,
-  strokeLinecap: "square",
-  strokeLinejoin: "miter",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
   "aria-hidden": true,
   focusable: false,
 });

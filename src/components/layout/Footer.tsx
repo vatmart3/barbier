@@ -7,7 +7,7 @@ import { IconFacebook, IconInstagram, IconTiktok } from "@/components/ui/Icons";
 export function Footer() {
   const groupes = horairesGroupes();
   return (
-    <footer className="cv-auto relative overflow-hidden bg-charbon-2 pb-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+1.5rem)] text-sm text-creme lg:pb-0">
+    <footer className="relative overflow-hidden bg-charbon-2 pb-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+1.5rem)] text-sm text-creme lg:pb-0">
       <div className="container-page grid-page gap-y-12 pt-20 pb-10">
         <div className="col-span-12 lg:col-span-5">
           <p className="text-2xl font-semibold tracking-tight">On coupe. On taille. On rase.</p>
@@ -30,7 +30,7 @@ export function Footer() {
         </div>
 
         <address className="col-span-12 not-italic sm:col-span-6 md:col-span-4 lg:col-span-3">
-          <h2 className="mb-3 text-xs font-semibold text-creme">Le salon</h2>
+          <h2 className="mb-3 font-sans text-xs font-semibold tracking-normal text-creme">Le salon</h2>
           <p className="text-sm leading-relaxed">
             {site.fullName}
             <br />
@@ -53,7 +53,7 @@ export function Footer() {
         </address>
 
         <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-2">
-          <h2 className="mb-3 text-xs font-semibold text-creme">Horaires</h2>
+          <h2 className="mb-3 font-sans text-xs font-semibold tracking-normal text-creme">Horaires</h2>
           <dl className="space-y-2 text-sm">
             {groupes.map((g) => (
               <div key={g.jours}>
@@ -65,7 +65,7 @@ export function Footer() {
         </div>
 
         <nav aria-label="Pied de page" className="col-span-12 md:col-span-4 lg:col-span-2">
-          <h2 className="mb-3 text-xs font-semibold text-creme">Pages</h2>
+          <h2 className="mb-3 font-sans text-xs font-semibold tracking-normal text-creme">Pages</h2>
           <ul className="text-sm">
             {[...nav, { href: "/reserver", label: "Réserver", sabot: "" }].map((n) => (
               <li key={n.href}>

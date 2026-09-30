@@ -3,9 +3,9 @@
 Site vitrine de démonstration — portfolio **MJAGENCY** (site 02/10).
 Marque fictive traitée comme un vrai client : réservation fonctionnelle, configurateur de coupe, rasoir 3D, SEO local complet.
 
-> Direction visuelle : **sobre et arrondie, façon page produit Apple** — police système, fond blanc / gris clair, hero noir, boutons en pilule, cartes très arrondies, barres translucides, animations en fondu.
+> Direction visuelle : **sobre, arrondie et chaleureuse**, dans l'esprit d'une page produit Apple : fond blanc / gris clair, hero noir, boutons en pilule, cartes très arrondies, barres translucides, animations en fondu. Titres en **Fraunces « SOFT »** (empattements ronds), texte en **Figtree**, répliques et signature écrites à la main en **Caveat**. Le salon et la devanture sont **dessinés** (aplats arrondis, avec Sabot, le chat de la maison).
 >
-> Concept : **« la chaise »**. Le site se regarde depuis le fauteuil : les sections clés pivotent (défilement horizontal épinglé), le rasoir tranche l'écran au premier scroll, l'enseigne de barbier tourne au rythme de la page.
+> Concept : **« la chaise »**. Le site se regarde depuis le fauteuil : le rasoir s'ouvre au premier scroll, les coupes défilent en carrousel, les barbiers parlent avec leurs mots, le patron signe à la main, et l'enseigne de barbier tourne au rythme de la page.
 
 ---
 
@@ -26,7 +26,7 @@ Autres commandes :
 | `npm start` | Sert le build |
 | `npm run lint` | ESLint (config Next, règles React Compiler) |
 | `npm run typecheck` | TypeScript sans émission |
-| `npm run assets` | Régénère favicons et placeholders photo |
+| `npm run assets` | Régénère les favicons et icônes PWA |
 | `npm run test:e2e` | Parcours Playwright (réservation, interactions, console) sur un serveur lancé en :3000 |
 
 Les tests e2e utilisent Playwright ; en local, installez d'abord son navigateur : `npx playwright install chromium`.
@@ -54,13 +54,13 @@ Les tests e2e utilisent Playwright ; en local, installez d'abord son navigateur 
 | `src/data/realisations.ts` | Avant / après (illustrations, ou vraies photos via le champ `photos`) |
 | `src/data/fidelite.ts` | Carte de fidélité |
 
-Couleurs et typographie : `src/design/tokens.css` (rôles des couleurs, police système, arrondis) et `src/app/globals.css` (portées `.salon` gris clair, `.nuit` hero noir, `.papier` cartes blanches).
+Couleurs et typographie : `src/design/tokens.css` (rôles des couleurs, polices, arrondis) et `src/app/globals.css` (portées `.salon` gris clair, `.nuit` hero noir, `.papier` cartes blanches).
 
 Les prix modifiés se répercutent partout : pages, configurateur, réservation, e-mails, JSON-LD `Service`/`Offer`.
 
 ### Images
 
-- Placeholders : `public/images/*.jpg` — remplacez-les par de vraies photos **en gardant le même nom** (ou changez le `src` dans `src/app/equipe/page.tsx` et `src/app/infos/page.tsx`). Prompts et formats dans `ASSETS.md`.
+- Photos : le salon (`/equipe`, accueil) et la devanture (`/infos`) sont des illustrations SVG (`src/components/illustrations/Illustration*.tsx`). Pour un vrai client, remplacez-les par des photos avec `next/image` : prompts et formats dans `ASSETS.md`.
 - Avant / après avec photos : dans `src/data/realisations.ts`, ajoutez `photos: { avant: "/images/xxx-avant.jpg", apres: "/images/xxx-apres.jpg", alt: "…" }`.
 - Favicons : modifiez `src/app/icon.svg` puis `npm run assets`.
 
@@ -78,21 +78,21 @@ src/
   design/              tokens.css (design system) + motion.ts (easings/durées JS)
   lib/                 heure de Paris, moteur de créneaux, tarifs, .ics, schémas zod, SEO, OG
   components/
-    layout/            header, pastille « prochain créneau », enseigne, menu, CTA mobile, footer, loader, cookies, Lenis, révélateur
+    layout/            header, pastille « prochain créneau », enseigne, menu, CTA mobile, footer, cookies, Lenis, révélateur
     three/             rasoir coupe-chou (R3F, procédural) + enseigne (shader GLSL)
     illustrations/     profil gravé paramétrique (statique serveur / animé), rasoir SVG, carte de Sète
     home/ coupes/ equipe/ reservation/ infos/ ui/
 scripts/               génération d'assets + contrôles Playwright
 ```
 
-**Stack** : Next.js 16 (App Router, statique), React 19, TypeScript strict, Tailwind CSS 4 (tokens en variables CSS), police système (aucune police web à charger), GSAP + ScrollTrigger (séquences épinglées), Motion (configurateur, tunnel), Lenis, React Three Fiber + drei, react-hook-form + zod (`zod/mini`), Resend.
+**Stack** : Next.js 16 (App Router, statique), React 19, TypeScript strict, Tailwind CSS 4 (tokens en variables CSS), next/font (Fraunces en instance locale de 32 Ko, Figtree, Caveat non préchargée), GSAP + ScrollTrigger (hero), Motion (configurateur, tunnel), Lenis, React Three Fiber + drei, react-hook-form + zod (`zod/mini`), Resend.
 
 **Choix de performance** : Motion n'est chargé que là où il sert (configurateur, réservation) ; les révélations au scroll sont en CSS via un seul `IntersectionObserver` ; les profils gravés fixes sont rendus côté serveur ; la 3D est chargée en différé et remplacée par un SVG si WebGL manque, si l'appareil est modeste ou si `prefers-reduced-motion` est actif (forcer : `?3d=on` / `?3d=off`).
 
 ## Checklist qualité (mesurée sur le build de production)
 
 - `npm run build` : 0 erreur, 0 warning — `npm run lint` et `tsc` propres.
-- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** ; Performance **93 à 96** ; LCP ≈ 2,2 s, CLS ≤ 0,01.
+- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** ; Performance **93 à 96** (accueil 93–94, pages 94–96, mentions 99) ; LCP 2,4 à 2,9 s, CLS ≤ 0,01.
 - Captures contrôlées à 320, 375, 768, 1024, 1280, 1440 et 1920 px ; `prefers-reduced-motion` testé (aucune erreur d'hydratation).
 
 ## Mentions

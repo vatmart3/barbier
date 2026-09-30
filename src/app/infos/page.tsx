@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Page } from "@/components/layout/Page";
 import { EnTete } from "@/components/ui/EnTete";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { Lignes } from "@/components/ui/Lignes";
+import { IllustrationDevanture } from "@/components/illustrations/IllustrationDevanture";
 import { Acces } from "@/components/home/Acces";
 import { Faq } from "@/components/infos/Faq";
 import { Question } from "@/components/infos/Question";
@@ -41,16 +41,12 @@ export default function InfosPage() {
       <figure className="bg-charbon pb-(--spacing-section) text-creme">
         <div className="container-page">
           <div data-reveal="clip-bas">
-            <Image
-              src="/images/devanture-grand-rue.jpg"
-              alt="Devanture noire du barbier Dégradé avec son enseigne et son poteau de barbier, Grand'Rue Mario Roustan à Sète"
-              width={1600}
-              height={1000}
-              sizes="(min-width: 1920px) 1840px, 100vw"
+            <IllustrationDevanture
+              title="Devanture noire du barbier Dégradé avec son store cuivre et son poteau de barbier, Grand'Rue Mario Roustan à Sète"
               className="h-auto w-full rounded-[2rem]"
             />
           </div>
-          <figcaption className="eyebrow mt-3 text-acier">La devanture noire, Grand&apos;Rue. L&apos;enseigne tourne aux heures d&apos;ouverture.</figcaption>
+          <figcaption className="eyebrow mt-3 text-acier">La devanture noire, Grand&apos;Rue. Le vélo se gare en face, aux arceaux de la pharmacie.</figcaption>
         </div>
       </figure>
 

@@ -82,7 +82,7 @@ export function CookieBanner() {
         <section
           role="region"
           aria-label="Gestion des cookies"
-          className="fixed inset-x-3 bottom-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+0.75rem)] z-[70] max-w-md border border-charbon/15 bg-creme p-5 text-charbon shadow-card animate-[monte-doux_450ms_var(--ease-out-cut)_both] sm:left-auto sm:right-6 lg:bottom-6"
+          className="fixed inset-x-3 bottom-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+0.75rem)] z-[70] max-w-md rounded-[1.5rem] bg-creme p-5 text-charbon shadow-card animate-[monte-doux_450ms_var(--ease-out-cut)_both] sm:left-auto sm:right-6 lg:bottom-6"
         >
           <h2 className="font-display text-2xl leading-none">Cookies</h2>
           <p className="mt-3 text-sm text-charbon/80">
@@ -95,14 +95,14 @@ export function CookieBanner() {
             <button
               type="button"
               onClick={() => choose(false)}
-              className="min-h-11 border border-charbon px-4 text-sm font-semibold uppercase tracking-wide transition-colors hover:bg-charbon hover:text-creme"
+              className="min-h-11 rounded-full border border-charbon/40 px-4 text-sm font-semibold transition-colors hover:bg-charbon hover:text-creme"
             >
               Refuser
             </button>
             <button
               type="button"
               onClick={() => choose(true)}
-              className="min-h-11 border border-charbon px-4 text-sm font-semibold uppercase tracking-wide transition-colors hover:bg-charbon hover:text-creme"
+              className="min-h-11 rounded-full border border-charbon/40 px-4 text-sm font-semibold transition-colors hover:bg-charbon hover:text-creme"
             >
               Accepter
             </button>

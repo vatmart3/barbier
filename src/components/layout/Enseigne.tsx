@@ -35,7 +35,7 @@ export function Enseigne({ className }: { className?: string }) {
 
   return (
     <div
-      className={cn("relative h-14 w-6 shrink-0", className)}
+      className={cn("relative h-9 w-4 shrink-0", className)}
       role="progressbar"
       aria-label="Progression dans la page"
       aria-valuemin={0}
@@ -47,19 +47,17 @@ export function Enseigne({ className }: { className?: string }) {
         aria-hidden
         className={cn("absolute inset-0 flex flex-col items-center transition-opacity duration-500", load3d && "opacity-0")}
       >
-        <span className="h-1.5 w-4 rounded-t-full bg-acier-clair" />
-        <span className="h-0.5 w-5 bg-acier-clair" />
+        <span className="h-1 w-2.5 rounded-t-full bg-acier-clair" />
         <span
-          className="relative w-3.5 flex-1 overflow-hidden border-x border-acier-clair/60"
+          className="relative w-3 flex-1 overflow-hidden rounded-full ring-1 ring-acier-clair/40"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(-58deg, var(--color-rouge) 0 5px, var(--color-creme) 5px 7px, var(--color-acier) 7px 12px, var(--color-creme) 12px 14px)",
+              "repeating-linear-gradient(-58deg, var(--color-rouge) 0 4px, #ffffff 4px 6px, #9aa0a6 6px 10px, #ffffff 10px 12px)",
             backgroundSize: "100% 200%",
             backgroundPositionY: "calc(var(--p, 0) * 400px)",
           }}
         />
-        <span className="h-0.5 w-5 bg-acier-clair" />
-        <span className="h-1.5 w-4 rounded-b-full bg-acier-clair" />
+        <span className="h-1 w-2.5 rounded-b-full bg-acier-clair" />
       </div>
       {load3d ? (
         <div className="absolute -inset-x-3 -inset-y-1 animate-[fadein_0.6s_ease-out]" aria-hidden>

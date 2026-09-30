@@ -31,16 +31,16 @@ export function BarreMobile() {
     <nav
       aria-label="Actions rapides"
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-creme/10 bg-charbon/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md transition-transform duration-500 ease-(--ease-out-cut) lg:hidden",
-        visible ? "translate-y-0" : "translate-y-full",
+        "fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 transition-[transform,opacity] duration-500 ease-(--ease-out-cut) lg:hidden",
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[140%] opacity-0",
       )}
     >
-      <div className="grid h-(--mobile-bar-h) grid-cols-[1fr_auto_auto]">
-        <Link href="/reserver" className="flex items-center justify-center gap-2.5 bg-rouge px-4 text-sm font-semibold uppercase tracking-wide text-creme active:bg-rouge-fonce">
+      <div className="verre flex h-(--mobile-bar-h) items-center gap-1.5 rounded-full border border-creme/10 p-1.5 shadow-card">
+        <Link href="/reserver" className="flex h-full flex-1 items-center justify-center gap-2 rounded-full bg-rouge px-4 text-[0.9375rem] font-semibold text-white active:scale-[0.98]">
           <IconCalendrier size={18} />
           Réserver
         </Link>
-        <a href={telHref} className="flex min-w-20 flex-col items-center justify-center gap-1 border-l border-creme/10 px-4 text-[0.6875rem] uppercase tracking-wider active:bg-creme/10">
+        <a href={telHref} aria-label="Appeler le salon" className="flex h-full min-w-14 flex-col items-center justify-center gap-0.5 rounded-full px-3 text-[0.6875rem] text-creme active:bg-creme/10">
           <IconTel size={18} />
           Appeler
         </a>
@@ -48,7 +48,8 @@ export function BarreMobile() {
           href={directionsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex min-w-20 flex-col items-center justify-center gap-1 border-l border-creme/10 px-4 text-[0.6875rem] uppercase tracking-wider active:bg-creme/10"
+          aria-label="Itinéraire vers le salon"
+          className="flex h-full min-w-14 flex-col items-center justify-center gap-0.5 rounded-full px-3 text-[0.6875rem] text-creme active:bg-creme/10"
         >
           <IconRoute size={18} />
           Itinéraire

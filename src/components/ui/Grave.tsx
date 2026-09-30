@@ -76,13 +76,13 @@ export function Grave({ text, className, as: Tag = "h3", delay = 0 }: Props) {
             fill: "currentColor",
             fillOpacity: go ? 1 : 0,
             stroke: "currentColor",
-            strokeWidth: 1.2,
+            strokeWidth: 0.8,
             strokeDasharray: 900,
             strokeDashoffset: go ? 0 : 900,
             transition: `stroke-dashoffset 1.6s cubic-bezier(0.45,0.05,0.25,1) ${delay}ms, fill-opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${delay + 1100}ms`,
           }}
         >
-          {text.toUpperCase()}
+          {text}
         </text>
       </svg>
     </Tag>

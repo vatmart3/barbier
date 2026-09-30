@@ -117,7 +117,7 @@ export function Configurateur() {
     <div className="grid-page gap-y-10">
       {/* Profil en direct */}
       <div className="col-span-12 lg:col-span-6">
-        <div className="sticky top-(--header-h) z-10 bg-creme-2 text-charbon shadow-[0_12px_24px_-16px_rgba(17,17,17,0.4)] lg:top-24 lg:shadow-none" style={{ ["--paper" as string]: "var(--color-creme-2)" }}>
+        <div className="sticky top-(--header-h) z-10 overflow-hidden rounded-[2rem] bg-creme-2 text-charbon shadow-[0_12px_24px_-16px_rgba(17,17,17,0.4)] lg:top-24 lg:shadow-none" style={{ ["--paper" as string]: "var(--color-creme-2)" }}>
           <div className="absolute left-4 top-4 z-10">
             <p className="eyebrow text-acier-fonce">Votre coupe</p>
             <AnimatePresence mode="wait">
@@ -133,7 +133,7 @@ export function Configurateur() {
               </motion.p>
             </AnimatePresence>
           </div>
-          <p aria-hidden className="absolute right-4 top-2 font-display text-[clamp(4rem,2rem+6vw,8rem)] leading-none text-transparent [-webkit-text-stroke:1px_var(--color-charbon)]">
+          <p aria-hidden className="absolute right-4 top-2 font-display text-[clamp(4rem,2rem+6vw,8rem)] leading-none text-creme-3">
             {c.repere}
           </p>
           <ProfilTete
@@ -269,21 +269,21 @@ export function Configurateur() {
             <button
               type="button"
               onClick={() => valider(etape)}
-              className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold uppercase tracking-wide"
+              className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold"
             >
-              <span className="border-b border-rouge pb-0.5">Valider · {ETAPES[etape + 1].toLowerCase()}</span>
+              <span className="text-rouge-fonce group-hover:underline">Valider · {ETAPES[etape + 1].toLowerCase()}</span>
               <IconFleche size={18} className="transition-transform group-hover:translate-x-1" />
             </button>
           ) : (
-            <button type="button" onClick={() => valider(2)} className="inline-flex min-h-11 items-center text-sm font-semibold uppercase tracking-wide">
-              <span className="border-b border-rouge pb-0.5">Valider la barbe</span>
+            <button type="button" onClick={() => valider(2)} className="inline-flex min-h-11 items-center text-sm font-semibold">
+              <span className="text-rouge-fonce group-hover:underline">Valider la barbe</span>
             </button>
           )}
         </div>
 
         {/* Récapitulatif */}
         {d ? (
-          <div className="mt-8 bg-charbon p-6 text-creme">
+          <div className="mt-8 rounded-[2rem] bg-charbon p-7 text-creme">
             <div className="flex items-end justify-between gap-6">
               <div>
                 <p className="eyebrow text-acier">Total</p>
@@ -309,7 +309,7 @@ export function Configurateur() {
             <AnimatePresence>
               {d.economie > 0 ? (
                 <motion.p
-                  className="mt-3 inline-block bg-rouge px-2 py-1 text-xs font-semibold uppercase tracking-wider"
+                  className="mt-3 inline-block bg-rouge px-2 py-1 text-xs font-semibold"
                   initial={{ scale: 0.6, opacity: 0, rotate: -6 }}
                   animate={{ scale: 1, opacity: 1, rotate: -2 }}
                   exit={{ opacity: 0 }}

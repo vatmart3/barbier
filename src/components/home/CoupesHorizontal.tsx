@@ -9,7 +9,6 @@ import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
 import { Epingle } from "@/components/ui/Epingle";
 import { Compteur } from "@/components/ui/Compteur";
 import { Etiquette } from "@/components/ui/Etiquette";
-import { IconFleche } from "@/components/ui/Icons";
 
 export function CoupesHorizontal() {
   return (
@@ -17,10 +16,10 @@ export function CoupesHorizontal() {
       aria-labelledby="coupes-titre"
       className="bg-charbon text-creme"
       trackClassName="flex h-svh w-max items-stretch motion-reduce:w-full motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:overflow-x-auto"
-      railClassName="bottom-8"
+      railClassName="bottom-7 rounded-full"
     >
         {/* Panneau d'ouverture */}
-        <div className="flex w-[88vw] shrink-0 flex-col justify-between px-(--spacing-gutter) pb-24 pt-[calc(var(--header-h)+2.5rem)] sm:w-[60vw] lg:w-[42vw] motion-reduce:snap-start">
+        <div className="flex w-[86vw] shrink-0 flex-col justify-between px-(--spacing-gutter) pb-24 pt-[calc(var(--header-h)+2.5rem)] sm:w-[56vw] lg:w-[38vw] motion-reduce:snap-start">
           <Etiquette n="02" className="text-acier">
             Les coupes
           </Etiquette>
@@ -35,8 +34,7 @@ export function CoupesHorizontal() {
             </p>
           </div>
           <p aria-hidden className="eyebrow flex items-center gap-3 text-acier">
-            <span className="inline-block h-px w-12 bg-rouge" />
-            Pivot <span data-deg className="tabular text-creme">0°</span>
+            Faites défiler <span aria-hidden>→</span>
           </p>
         </div>
 
@@ -45,12 +43,12 @@ export function CoupesHorizontal() {
             key={c.id}
             data-panel
             aria-labelledby={`coupe-${c.id}`}
-            className="relative flex w-[88vw] shrink-0 flex-col border-l border-creme/10 px-(--spacing-gutter) pb-24 pt-[calc(var(--header-h)+1.5rem)] sm:w-[70vw] lg:w-[56vw] xl:w-[48vw] motion-reduce:snap-start"
-            style={{ ["--paper" as string]: "var(--color-charbon)" }}
+            className="relative mx-2 mb-16 mt-[calc(var(--header-h)+1rem)] flex w-[86vw] shrink-0 flex-col overflow-hidden rounded-[2rem] bg-charbon-2 p-7 sm:w-[64vw] sm:p-10 lg:w-[46vw] xl:w-[40vw] motion-reduce:snap-start"
+            style={{ ["--paper" as string]: "var(--color-charbon-2)" }}
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p aria-hidden className="font-display text-d3 leading-[0.8] text-transparent [-webkit-text-stroke:1.5px_var(--color-creme)]">
+                <p aria-hidden className="font-display text-d3 leading-none text-creme-3">
                   {c.repere}
                 </p>
                 <p className="eyebrow mt-2 text-acier">{c.repereLegende}</p>
@@ -60,7 +58,7 @@ export function CoupesHorizontal() {
               </p>
             </div>
 
-            <div className="pointer-events-none absolute right-[2%] top-[calc(var(--header-h)+1rem)] w-[52%] max-w-[400px] opacity-90 sm:w-[42%] lg:top-[16%]" data-profil>
+            <div className="pointer-events-none absolute right-[4%] top-[8%] w-[50%] max-w-[360px] sm:w-[42%]" data-profil>
               <ProfilStatique
                 id={`h-${c.id}`}
                 {...c.profil}
@@ -75,16 +73,16 @@ export function CoupesHorizontal() {
                 {c.nom}
               </h3>
               <p className="mt-3 text-lg text-creme/85">{c.accroche}</p>
-              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-creme/15 pt-4">
+              <dl className="mt-6 grid grid-cols-2 gap-4">
                 <div>
                   <dt className="eyebrow text-acier">Prix</dt>
-                  <dd className="font-display text-5xl leading-none">
+                  <dd className="font-display text-4xl leading-none">
                     <Compteur value={c.prix} /> €
                   </dd>
                 </div>
                 <div>
                   <dt className="eyebrow text-acier">Durée</dt>
-                  <dd className="font-display text-5xl leading-none">
+                  <dd className="font-display text-4xl leading-none">
                     <Compteur value={c.duree} delay={120} /> min
                   </dd>
                 </div>
@@ -92,19 +90,18 @@ export function CoupesHorizontal() {
               <p className="mt-4 text-sm text-acier">{c.entretien}</p>
               <Link
                 href={`/reserver?coupe=${c.id}`}
-                className="group mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-semibold uppercase tracking-wide"
+                className="mt-5 inline-flex min-h-11 items-center gap-1 text-[1.0625rem] text-rouge-fonce hover:underline"
               >
-                <span className="border-b border-rouge pb-1">Réserver un {c.nom.toLowerCase()}</span>
-                <IconFleche size={20} className="transition-transform duration-300 group-hover:translate-x-1" />
+                Réserver un {c.nom.toLowerCase()} <span aria-hidden>›</span>
               </Link>
             </div>
           </article>
         ))}
 
         {/* Dernier panneau : entrée du configurateur (micro-engagement) */}
-        <div className="flex w-[88vw] shrink-0 flex-col justify-center gap-8 salon border-l border-creme/10 bg-creme px-(--spacing-gutter) pb-24 pt-[calc(var(--header-h)+1.5rem)] text-charbon sm:w-[60vw] lg:w-[40vw] motion-reduce:snap-start">
-          <p className="eyebrow text-acier-fonce">Étape 1 sur 3</p>
-          <p className="font-display text-d1 uppercase">Pas sûr ? Composez la vôtre.</p>
+        <div className="mx-2 mb-16 mr-(--spacing-gutter) mt-[calc(var(--header-h)+1rem)] flex w-[86vw] shrink-0 flex-col justify-center gap-6 rounded-[2rem] bg-creme p-8 text-charbon sm:w-[56vw] sm:p-10 lg:w-[36vw] motion-reduce:snap-start">
+          <p className="eyebrow text-charbon/70">Étape 1 sur 3</p>
+          <p className="font-display text-d1">Pas sûr ? Composez la vôtre.</p>
           <p className="max-w-sm text-charbon/80">Hauteur du dégradé, longueur du dessus, barbe. Le prix et la durée se calculent au fur et à mesure.</p>
           <ul className="grid grid-cols-3 gap-2" aria-label="Choisir la hauteur du dégradé">
             {(["fade-bas", "fade-moyen", "fade-haut"] as const).map((id) => {
@@ -113,7 +110,7 @@ export function CoupesHorizontal() {
                 <li key={id}>
                   <Link
                     href={`/coupes?coupe=${id}#configurateur`}
-                    className="flex min-h-24 flex-col justify-between border border-charbon/25 p-3 transition-colors hover:border-charbon hover:bg-charbon hover:text-creme"
+                    className="flex min-h-24 flex-col justify-between rounded-2xl bg-charbon/10 p-4 transition-colors hover:bg-charbon/20"
                   >
                     <span className="font-display text-3xl leading-none">{c.repere}</span>
                     <span className="text-xs">{c.nom.replace("Skin fade haut", "Fade haut")}</span>

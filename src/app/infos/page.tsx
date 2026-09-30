@@ -47,7 +47,7 @@ export default function InfosPage() {
               width={1600}
               height={1000}
               sizes="(min-width: 1920px) 1840px, 100vw"
-              className="h-auto w-full"
+              className="h-auto w-full rounded-[2rem]"
             />
           </div>
           <figcaption className="eyebrow mt-3 text-acier">La devanture noire, Grand&apos;Rue. L&apos;enseigne tourne aux heures d&apos;ouverture.</figcaption>
@@ -60,7 +60,7 @@ export default function InfosPage() {
             <Etiquette n="02" className="text-acier-fonce">
               FAQ
             </Etiquette>
-            <Lignes id="faq-titre" className="mt-6 text-d1 xl:text-[3.6rem]" lines={["Ce qu'on", "nous demande", <span key="c" className="text-acier-fonce">au comptoir.</span>]} />
+            <Lignes id="faq-titre" className="mt-6 text-d1" lines={["Ce qu'on", "nous demande", <span key="c" className="text-acier-fonce">au comptoir.</span>]} />
           </div>
           <div className="col-span-12 lg:col-span-7 lg:col-start-6">
             <Faq items={faq} />

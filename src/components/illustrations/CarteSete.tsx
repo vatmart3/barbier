@@ -68,8 +68,8 @@ export function CarteSete({ title }: { title: string }) {
         <circle cx="330" cy="252" r="22" fill="var(--color-rouge)" opacity="0.18" />
         <circle cx="330" cy="252" r="7" fill="var(--color-rouge)" />
         <line x1="330" y1="252" x2="330" y2="196" stroke="var(--color-rouge)" strokeWidth="1.5" />
-        <rect x="330" y="176" width="92" height="22" fill="var(--color-rouge)" />
-        <text x="338" y="191" fill="var(--color-creme)" fontSize="11" fontWeight="700" letterSpacing="2">
+        <rect x="330" y="176" width="92" height="22" rx="11" fill="var(--color-rouge)" />
+        <text x="338" y="191" fill="#ffffff" fontSize="11" fontWeight="700" letterSpacing="2">
           DÉGRADÉ
         </text>
       </g>

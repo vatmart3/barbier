@@ -2,23 +2,22 @@
 @import "../design/tokens.css";
 
 /* ==========================================================================
-   Base
+   Base — style « Apple » : police système, titres gras à approche serrée,
+   beaucoup d'air, formes arrondies.
    ========================================================================== */
 
 @layer base {
   html {
-    color-scheme: dark;
     background: var(--color-charbon);
     color: var(--color-creme);
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scrollbar-color: var(--color-charbon-3) var(--color-charbon);
     -webkit-tap-highlight-color: transparent;
   }
 
   body {
+    background: var(--color-charbon);
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
@@ -26,26 +25,30 @@
     overflow-x: clip;
   }
 
-  /* Archivo, largeur étendue : capitales larges et lourdes, façon enseigne */
+  /* Titres : même famille que le texte, gras, casse normale, approche négative */
   .font-display,
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    font-variation-settings: "wdth" 112;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  /* Toute boîte encadrée est arrondie (les utilitaires rounded-* restent prioritaires) */
+  .border,
+  .border-2 {
+    border-radius: var(--radius-sm);
   }
 
   ::selection {
-    background: var(--color-rouge);
-    color: var(--color-creme);
+    background: color-mix(in oklab, var(--color-rouge) 30%, transparent);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-rouge);
-    outline-offset: 3px;
+    outline: 3px solid color-mix(in oklab, var(--color-rouge) 70%, transparent);
+    outline-offset: 2px;
     border-radius: var(--radius-xs);
   }
 
@@ -83,34 +86,87 @@
 }
 
 /* ==========================================================================
+   Portées de couleur
+   ========================================================================== */
+
+/* Sections gris clair (alternance blanc / gris, comme les pages produit) */
+.salon {
+  --color-creme: #f5f5f7;       /* surface de la section                   */
+  --color-creme-2: #ffffff;     /* cartes posées sur la section            */
+  --color-creme-3: #86868b;
+  --color-charbon: #1d1d1f;     /* encre (et cartes sombres éventuelles)   */
+  --color-acier-fonce: #6e6e73;
+  --color-acier: #a1a1a6;       /* texte secondaire sur les cartes sombres */
+  --color-rouge-fonce: #a84d19;
+}
+
+/* Hero noir, façon page produit */
+.nuit {
+  --color-charbon: #000000;
+  --color-charbon-2: #1d1d1f;
+  --color-charbon-3: #333336;
+  --color-creme: #f5f5f7;
+  --color-creme-2: #d2d2d7;
+  --color-acier: #a1a1a6;
+  --color-acier-clair: #a1a1a6;
+  --color-rouge-fonce: #f5a25d;
+  --color-ambre: #f5a25d;
+  color-scheme: dark;
+}
+
+/* Cartes blanches (carte de fidélité, ticket, récapitulatifs) */
+.papier {
+  --color-creme: #ffffff;
+  --color-creme-2: #f5f5f7;
+  --color-charbon: #1d1d1f;
+  --color-acier-fonce: #6e6e73;
+  --color-rouge-fonce: #a84d19;
+}
+
+/* Titres en deux tons : la seconde ligne en gris (et non en couleur d'accent) */
+:is(h1, h2) :is(.text-acier, .text-acier-fonce) {
+  color: var(--color-acier-fonce);
+}
+.nuit :is(h1, h2) :is(.text-acier, .text-acier-fonce) {
+  color: var(--color-acier);
+}
+
+/* Titre du hero : léger dégradé titane */
+.metal {
+  background: linear-gradient(180deg, #ffffff 0%, #e8e8ed 55%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-top: 0.1em;
+  margin-top: -0.1em;
+}
+
+/* ==========================================================================
    Utilitaires maison
    ========================================================================== */
 
 @utility container-page {
   width: 100%;
-  max-width: 120rem;
+  max-width: 80rem;
   margin-inline: auto;
   padding-inline: var(--spacing-gutter);
 }
 
-/* Grille éditoriale 12 colonnes */
 @utility grid-page {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--spacing-gutter);
 }
 
-/* Traces de tondeuse en fond */
 @utility traces {
-  background-image: var(--traces);
+  background-image: none;
 }
 
+/* Petits libellés : gras, discrets, casse normale */
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: var(--text-micro);
   line-height: var(--text-micro--line-height);
-  letter-spacing: var(--text-micro--letter-spacing);
-  text-transform: uppercase;
   font-weight: 600;
 }
 
@@ -142,6 +198,19 @@
   }
 }
 
+/* Sections sous la ligne de flottaison : rendu différé par le navigateur */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+}
+
+/* Matériau translucide (barres, pastilles) */
+@utility verre {
+  background: color-mix(in oklab, var(--color-charbon) 72%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
 /* ==========================================================================
    Lenis
    ========================================================================== */
@@ -158,120 +227,147 @@ html.lenis body {
 }
 
 /* ==========================================================================
-   Loader d'entrée — CSS pur, ne dépend pas de l'hydratation
-   ========================================================================== */
-
-.loader {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  display: grid;
-  place-items: center;
-  background: var(--color-charbon);
-  animation: loader-out 420ms var(--ease-blade) 880ms forwards;
-  pointer-events: none;
-}
-.loader__stack {
-  height: 1em;
-  overflow: hidden;
-  font-size: clamp(7rem, 30vw, 16rem);
-  line-height: 1;
-}
-.loader__reel {
-  display: flex;
-  flex-direction: column;
-  animation: loader-reel 780ms var(--ease-comb) forwards;
-}
-.loader__reel > span {
-  height: 1em;
-  display: block;
-  text-align: center;
-}
-.loader__pass {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 1px;
-  background: var(--color-rouge);
-  transform-origin: left;
-  animation: loader-pass 820ms var(--ease-blade) forwards;
-}
-.loader__label {
-  position: absolute;
-  bottom: calc(var(--spacing-gutter) + 0.25rem);
-  left: var(--spacing-gutter);
-  right: var(--spacing-gutter);
-  display: flex;
-  justify-content: space-between;
-  color: var(--color-acier);
-}
-@keyframes loader-reel {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-3em); }
-}
-@keyframes loader-pass {
-  0% { transform: translateY(0) scaleX(0); }
-  30% { transform: translateY(0) scaleX(1); }
-  100% { transform: translateY(100dvh) scaleX(1); }
-}
-@keyframes loader-out {
-  to {
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    visibility: hidden;
-  }
-}
-.loader {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-html[data-seen] .loader {
-  display: none;
-}
-
-/* ==========================================================================
-   Grain photo animé
-   ========================================================================== */
-
-.grain {
-  position: fixed;
-  inset: -10%;
-  z-index: 80;
-  pointer-events: none;
-  opacity: 0.07;
-  mix-blend-mode: overlay;
-  background-image: url("/textures/grain.png");
-  background-size: 180px 180px;
-  animation: var(--animate-grain);
-}
-
-/* ==========================================================================
-   Transitions de page (View Transitions API) — coup de lame diagonal
+   Transitions de page : simple fondu
    ========================================================================== */
 
 ::view-transition-old(.page-cut) {
-  animation: page-cut-out 520ms var(--ease-blade) both;
+  animation: page-sortie 200ms ease-out both;
 }
 ::view-transition-new(.page-cut) {
-  animation: page-cut-in 620ms var(--ease-out-cut) 120ms both;
+  animation: page-entree 360ms var(--ease-out-cut) both;
 }
-@keyframes page-cut-out {
-  from {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    transform: translateY(0);
-  }
+@keyframes page-sortie {
   to {
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 30%);
-    transform: translateY(-6vh);
+    opacity: 0;
   }
 }
-@keyframes page-cut-in {
+@keyframes page-entree {
   from {
-    clip-path: polygon(0 70%, 100% 100%, 100% 100%, 0 100%);
-    transform: translateY(8vh);
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ==========================================================================
+   Révélations au scroll — fondu montant, CSS pur. Un seul IntersectionObserver
+   (components/layout/Revelateur) pose [data-vu]. Sans JS, rien n'est masqué.
+   ========================================================================== */
+
+.ligne {
+  display: block;
+}
+.ligne-in {
+  display: block;
+  transition:
+    transform 800ms var(--ease-out-cut),
+    opacity 600ms ease-out;
+  transition-delay: calc(var(--d, 0ms) + var(--i, 0) * 70ms);
+}
+html.js [data-reveal="lignes"]:not([data-vu]) .ligne-in {
+  transform: translateY(24px);
+  opacity: 0;
+}
+@keyframes ligne-entree {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+[data-reveal="lignes-auto"] .ligne-in {
+  animation: ligne-entree 800ms var(--ease-out-cut) both;
+  animation-delay: calc(var(--d, 0ms) + 80ms + var(--i, 0) * 70ms);
+}
+
+[data-reveal^="clip"],
+[data-reveal="monte"] {
+  transition:
+    transform 900ms var(--ease-out-cut),
+    opacity 700ms ease-out;
+  transition-delay: var(--d, 0ms);
+}
+html.js :is([data-reveal^="clip"], [data-reveal="monte"]):not([data-vu]) {
+  transform: translateY(32px);
+  opacity: 0;
+}
+
+/* Tracés qui se dessinent (carte) : pathLength="1" sur chaque tracé */
+[data-trace] {
+  stroke-dasharray: 1;
+  transition:
+    stroke-dashoffset 1400ms var(--ease-out-cut),
+    fill-opacity 900ms linear;
+  transition-delay: calc(100ms + var(--i, 0) * 70ms);
+}
+html.js [data-reveal="carte"]:not([data-vu]) [data-trace] {
+  stroke-dashoffset: 1;
+  fill-opacity: 0;
+}
+[data-epingle] {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition:
+    transform 500ms var(--ease-out-cut) 1200ms,
+    opacity 300ms linear 1200ms;
+}
+html.js [data-reveal="carte"]:not([data-vu]) [data-epingle] {
+  transform: scale(0.6);
+  opacity: 0;
+}
+
+/* Tampon de fidélité */
+@keyframes tamponner {
+  from {
+    transform: scale(1.5) rotate(var(--r, 0deg));
+    opacity: 0;
   }
   to {
-    clip-path: polygon(0 -40%, 100% 0, 100% 100%, 0 100%);
-    transform: translateY(0);
+    transform: scale(1) rotate(var(--r, 0deg));
+    opacity: 0.92;
+  }
+}
+.tampon {
+  transform: rotate(var(--r, 0deg));
+  opacity: 0.92;
+  animation: tamponner 320ms var(--ease-out-cut) both;
+}
+
+/* Menu plein écran : apparaît en fondu, légère descente */
+.menu {
+  opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
+  transition:
+    opacity 260ms ease-out,
+    transform 360ms var(--ease-out-cut),
+    visibility 0s linear 360ms;
+}
+.menu[data-ouvert] {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity 260ms ease-out,
+    transform 360ms var(--ease-out-cut),
+    visibility 0s;
+}
+.menu-item {
+  display: block;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 400ms ease-out,
+    transform 500ms var(--ease-out-cut);
+  transition-delay: calc(80ms + var(--i, 0) * 40ms);
+}
+.menu[data-ouvert] .menu-item {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes monte-doux {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
   }
 }
 
@@ -289,273 +385,16 @@ html[data-seen] .loader {
     transition-property: opacity, color, background-color, border-color !important;
     scroll-behavior: auto !important;
   }
-  .loader {
-    animation: loader-fade 300ms linear 200ms forwards !important;
-    animation-duration: 300ms !important;
-  }
-  .loader__reel,
-  .loader__pass {
-    animation: none !important;
-  }
-  .grain {
-    animation: none;
-  }
   ::view-transition-old(.page-cut),
   ::view-transition-new(.page-cut) {
     animation: none !important;
   }
 }
-@keyframes loader-fade {
-  to {
-    opacity: 0;
-    visibility: hidden;
+
+@media (prefers-reduced-transparency: reduce) {
+  .verre {
+    background: var(--color-charbon);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
-}
-
-/* Sections sous la ligne de flottaison : rendu différé par le navigateur */
-@utility cv-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 1000px;
-}
-
-/* ==========================================================================
-   Révélations au scroll — CSS pur. Un seul IntersectionObserver
-   (components/layout/Revelateur) pose [data-vu]. Sans JS, rien n'est masqué
-   (la classe .js est posée par le script inline du <head>).
-   ========================================================================== */
-
-/* Masques de lignes : chaque ligne remonte de sous sa propre arête */
-.ligne {
-  display: block;
-  overflow: hidden;
-  margin-top: -0.2em;
-  padding-top: 0.2em;
-  margin-bottom: -0.08em;
-  padding-bottom: 0.08em;
-}
-.ligne-in {
-  display: block;
-  transition:
-    transform 900ms var(--ease-out-cut),
-    opacity 450ms linear;
-  transition-delay: calc(var(--d, 0ms) + var(--i, 0) * 85ms);
-}
-html.js [data-reveal="lignes"]:not([data-vu]) .ligne-in {
-  transform: translateY(108%) rotate(1.5deg);
-  opacity: 0;
-}
-
-/* Révélations au clip-path */
-[data-reveal^="clip"],
-[data-reveal="monte"] {
-  transition:
-    clip-path 1000ms var(--ease-out-cut),
-    transform 1000ms var(--ease-out-cut),
-    opacity 350ms linear;
-  transition-delay: var(--d, 0ms);
-}
-[data-reveal="clip-bas"] {
-  transition-duration: 1100ms, 1100ms, 350ms;
-  transition-timing-function: var(--ease-blade), var(--ease-blade), linear;
-}
-html.js [data-reveal="clip-bas"]:not([data-vu]) {
-  clip-path: inset(100% 0 0 0);
-  opacity: 0;
-}
-html.js [data-reveal="clip-gauche"]:not([data-vu]) {
-  clip-path: inset(0 100% 0 0);
-  transform: translateX(-40px);
-  opacity: 0;
-}
-html.js [data-reveal="clip-droite"]:not([data-vu]) {
-  clip-path: inset(0 0 0 100%);
-  transform: translateX(40px);
-  opacity: 0;
-}
-html.js [data-reveal="monte"]:not([data-vu]) {
-  transform: translateY(60px) rotate(-6deg);
-  opacity: 0;
-}
-
-/* Tracés qui se dessinent (carte) : pathLength="1" sur chaque tracé */
-[data-trace] {
-  stroke-dasharray: 1;
-  transition:
-    stroke-dashoffset 1600ms var(--ease-comb),
-    fill-opacity 900ms linear;
-  transition-delay: calc(100ms + var(--i, 0) * 80ms);
-}
-html.js [data-reveal="carte"]:not([data-vu]) [data-trace] {
-  stroke-dashoffset: 1;
-  fill-opacity: 0;
-}
-[data-epingle] {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  transition:
-    transform 500ms var(--ease-thud) 1400ms,
-    opacity 300ms linear 1400ms;
-}
-html.js [data-reveal="carte"]:not([data-vu]) [data-epingle] {
-  transform: scale(0);
-  opacity: 0;
-}
-
-/* Tampon de fidélité */
-@keyframes tamponner {
-  from {
-    transform: scale(1.9) rotate(calc(var(--r, 0deg) - 20deg));
-    opacity: 0;
-  }
-  to {
-    transform: scale(1) rotate(var(--r, 0deg));
-    opacity: 0.92;
-  }
-}
-.tampon {
-  transform: rotate(var(--r, 0deg));
-  opacity: 0.92;
-  animation: tamponner 380ms var(--ease-thud) both;
-}
-@keyframes ligne-entree {
-  from {
-    transform: translateY(108%) rotate(1.5deg);
-  }
-}
-[data-reveal="lignes-auto"] .ligne-in {
-  animation: ligne-entree 1000ms var(--ease-out-cut) both;
-  animation-delay: calc(var(--d, 0ms) + 120ms + var(--i, 0) * 90ms);
-}
-/* Premier chargement : on attend la fin du loader */
-html:not([data-seen]) [data-reveal="lignes-auto"] .ligne-in {
-  animation-delay: calc(1150ms + var(--i, 0) * 90ms);
-}
-
-/* Menu plein écran : coupe diagonale depuis le coin haut droit */
-.menu {
-  clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
-  visibility: hidden;
-  transition:
-    clip-path 600ms var(--ease-blade),
-    visibility 0s linear 600ms;
-}
-.menu[data-ouvert] {
-  clip-path: polygon(-60% 0, 100% 0, 100% 160%, -60% 160%);
-  visibility: visible;
-  transition:
-    clip-path 600ms var(--ease-blade),
-    visibility 0s;
-}
-.menu-item {
-  display: block;
-  transform: translateY(110%);
-  transition: transform 700ms var(--ease-out-cut);
-  transition-delay: calc(180ms + var(--i, 0) * 50ms);
-}
-.menu[data-ouvert] .menu-item {
-  transform: none;
-}
-
-@keyframes monte-doux {
-  from {
-    transform: translateY(24px);
-    opacity: 0;
-  }
-}
-
-/* ==========================================================================
-   Style « salon » : sections sombres chaudes, titres métal, script cuivre
-   ========================================================================== */
-
-/* Les anciennes sections papier passent en sombre : on remappe les tokens.
-   Les composants gardent leurs classes (bg-creme, text-charbon…). */
-.salon {
-  --color-creme: #16120f;
-  --color-creme-2: #1e1814;
-  --color-creme-3: #3a3029;
-  --color-charbon: #f2ede4;
-  --color-acier-fonce: #b3aaa0;
-  --color-rouge-fonce: #e8a04a;
-  /* dans une section salon, les encadrés « charbon » deviennent clairs :
-     le texte secondaire y reste lisible */
-  --color-acier: #5c5650;
-  color-scheme: dark;
-}
-/* Mais le papier (carte, ticket) reste du papier, même dans un salon */
-.salon .papier {
-  --color-creme: #f2ede4;
-  --color-creme-2: #e7e0d3;
-  --color-charbon: #0f0d0c;
-  --color-acier-fonce: #5c5650;
-  --color-rouge-fonce: #8a4810;
-}
-
-/* Titres en dégradé métal (acier poli) */
-.metal,
-:is(h1, h2) .ligne-in {
-  background: linear-gradient(180deg, #ffffff 0%, #e9e6e1 38%, #8b8783 52%, #d8d4ce 70%, #fbfaf8 100%);
-  /* marge haute : les accents restent dans la zone peinte */
-  padding-top: 0.16em;
-  margin-top: -0.16em;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-/* Deuxième ligne d'un titre : script cuivre, comme une signature d'enseigne */
-:is(h1, h2) :is(.text-acier, .text-acier-fonce),
-.script {
-  font-family: var(--font-script);
-  font-weight: 400;
-  font-variation-settings: normal;
-  text-transform: none;
-  letter-spacing: 0;
-  -webkit-text-fill-color: var(--color-ambre);
-  color: var(--color-ambre);
-  background: none;
-}
-
-:is(h1, h2) .ligne-in :is(.text-acier, .text-acier-fonce) {
-  font-size: 0.86em;
-}
-
-/* Boutons et pastilles cuivre : léger dégradé de lumière */
-.bg-rouge {
-  background-image: linear-gradient(180deg, var(--color-ambre-2) 0%, var(--color-rouge) 58%, #7c400e 100%);
-}
-
-/* Fond d'ambiance du salon (hero) : plafonniers flous, briques, comptoir */
-.ambiance {
-  background:
-    radial-gradient(ellipse 9% 5% at 22% 4%, rgb(255 250 240 / 0.95), transparent 70%),
-    radial-gradient(ellipse 9% 5% at 54% 3%, rgb(255 250 240 / 0.9), transparent 70%),
-    radial-gradient(ellipse 9% 5% at 84% 5%, rgb(255 250 240 / 0.95), transparent 70%),
-    radial-gradient(ellipse 22% 16% at 22% 6%, rgb(255 214 150 / 0.22), transparent 70%),
-    radial-gradient(ellipse 22% 16% at 54% 5%, rgb(255 214 150 / 0.18), transparent 70%),
-    radial-gradient(ellipse 22% 16% at 84% 7%, rgb(255 214 150 / 0.22), transparent 70%),
-    radial-gradient(circle at 8% 88%, rgb(232 160 74 / 0.35), transparent 22%),
-    radial-gradient(circle at 96% 70%, rgb(232 160 74 / 0.22), transparent 18%),
-    radial-gradient(circle at 70% 96%, rgb(255 200 120 / 0.14), transparent 20%),
-    linear-gradient(180deg, #2a221c 0%, #17120f 45%, #0f0d0c 100%);
-}
-.ambiance::before {
-  /* murs de briques, flous comme à l'arrière-plan d'une photo */
-  content: "";
-  position: absolute;
-  inset: 12% 0 34% 0;
-  background:
-    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.35) 0 2px, transparent 2px 26px),
-    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.25) 0 2px, transparent 2px 64px),
-    linear-gradient(90deg, #3a2c22, #2a211b 40%, #3b2d23);
-  filter: blur(5px);
-  opacity: 0.55;
-  mask-image: linear-gradient(180deg, transparent, #000 25%, #000 70%, transparent);
-}
-.ambiance::after {
-  /* poussière dans la lumière + vignettage */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 45%, transparent 40%, rgb(0 0 0 / 0.7) 100%);
-  pointer-events: none;
 }

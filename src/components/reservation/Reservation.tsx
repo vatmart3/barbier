@@ -392,7 +392,7 @@ function Recap({
   children?: React.ReactNode;
 }) {
   return (
-    <aside className="self-start border border-creme/15 p-5 lg:sticky lg:top-28" aria-live="polite">
+    <aside className="self-start rounded-[1.5rem] bg-charbon-2 p-6 lg:sticky lg:top-24" aria-live="polite">
       <p className="eyebrow text-acier">Récapitulatif</p>
       {d ? (
         <>
@@ -402,7 +402,7 @@ function Recap({
             <span className="font-display text-5xl leading-none">{euros(d.prix)}</span>
             <span className="tabular text-sm text-acier">{d.duree} min</span>
           </div>
-          {d.economie > 0 ? <p className="mt-2 inline-block bg-rouge px-2 py-0.5 text-xs font-semibold uppercase">−{euros(d.economie)} en formule</p> : null}
+          {d.economie > 0 ? <p className="mt-2 inline-block bg-rouge px-2 py-0.5 text-xs font-semibold">−{euros(d.economie)} en formule</p> : null}
         </>
       ) : (
         <p className="mt-3 text-sm text-acier">Choisissez une coupe ou une prestation.</p>
@@ -412,7 +412,7 @@ function Recap({
         type="button"
         onClick={onSuivant}
         disabled={disabled}
-        className="group mt-6 flex min-h-14 w-full items-center justify-between bg-rouge px-5 text-sm font-semibold uppercase tracking-wide text-creme transition-colors hover:bg-rouge-fonce disabled:cursor-not-allowed disabled:bg-creme/10 disabled:text-acier"
+        className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-full bg-rouge px-6 text-sm font-semibold text-white transition-colors hover:bg-rouge-fonce disabled:cursor-not-allowed disabled:bg-creme/10 disabled:text-acier"
       >
         {label}
         <IconFleche size={20} className="transition-transform group-enabled:group-hover:translate-x-1" />
@@ -502,7 +502,7 @@ function EtapeCreneau({
                     )}
                     aria-label={`${formatDateLongue(j.date)} : ${!j.ouvert ? "fermé" : j.libres ? `${j.libres} créneaux libres` : "complet"}`}
                   >
-                    <span className="text-[0.6875rem] uppercase">{diffDays(now.date, j.date) === 0 ? "auj." : d.jour}</span>
+                    <span className="text-[0.6875rem]">{diffDays(now.date, j.date) === 0 ? "auj." : d.jour}</span>
                     <span className="font-display text-3xl leading-none">{d.num}</span>
                     <span className="text-[0.6875rem]">{!j.ouvert ? "fermé" : j.libres ? `${j.libres} libres` : "complet"}</span>
                   </button>
@@ -520,7 +520,7 @@ function EtapeCreneau({
         </div>
 
         {alerte ? (
-          <p role="alert" className="mt-4 border-l-2 border-rouge bg-rouge/10 px-4 py-3 text-sm">
+          <p role="alert" className="mt-4 rounded-xl bg-rouge/10 px-4 py-3 text-sm">
             {alerte}
           </p>
         ) : null}
@@ -551,7 +551,7 @@ function EtapeCreneau({
                       aria-label={c.libre ? `${formatHeure(c.start)}${choix === "premier" && b ? ` avec ${b.prenom}` : ""}` : `${formatHeure(c.start)} : déjà pris`}
                       className={cn(
                         "relative flex min-h-14 flex-col items-center justify-center border text-sm transition-[background-color,border-color,transform] duration-200 active:scale-[0.96]",
-                        actif ? "border-rouge bg-rouge text-creme" : c.libre ? "border-creme/20 hover:border-creme" : "cursor-not-allowed border-transparent text-acier/60",
+                        actif ? "border-rouge bg-rouge text-white" : c.libre ? "border-creme/20 hover:border-creme" : "cursor-not-allowed border-transparent text-acier/60",
                       )}
                     >
                       <span className={cn("tabular font-semibold", !c.libre && "line-through decoration-rouge/70 decoration-2")}>{formatHeure(c.start)}</span>
@@ -572,7 +572,7 @@ function EtapeCreneau({
         </button>
       </div>
 
-      <aside className="self-start border border-creme/15 p-5 lg:sticky lg:top-28" aria-live="polite">
+      <aside className="self-start rounded-[1.5rem] bg-charbon-2 p-6 lg:sticky lg:top-24" aria-live="polite">
         <p className="eyebrow text-acier">Votre créneau</p>
         {selection && dateEffective ? (
           <>
@@ -595,7 +595,7 @@ function EtapeCreneau({
               onSuivant();
             }
           }}
-          className="group mt-6 flex min-h-14 w-full items-center justify-between bg-rouge px-5 text-sm font-semibold uppercase tracking-wide text-creme transition-colors hover:bg-rouge-fonce disabled:cursor-not-allowed disabled:bg-creme/10 disabled:text-acier"
+          className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-full bg-rouge px-6 text-sm font-semibold text-white transition-colors hover:bg-rouge-fonce disabled:cursor-not-allowed disabled:bg-creme/10 disabled:text-acier"
         >
           Mes coordonnées
           <IconFleche size={20} className="transition-transform group-enabled:group-hover:translate-x-1" />

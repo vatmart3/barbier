@@ -11,13 +11,13 @@ function Ligne({ nom, detail, duree, prix, href }: { nom: string; detail?: strin
     <li className="border-b border-charbon/15">
       <Link href={href} className="group grid min-h-16 grid-cols-[1fr_auto] items-baseline gap-x-4 py-3 sm:grid-cols-[1fr_auto_auto]">
         <span>
-          <span className="font-display text-2xl leading-none transition-colors group-hover:text-rouge-fonce sm:text-3xl">{nom}</span>
+          <span className="text-lg font-semibold transition-colors group-hover:text-rouge-fonce sm:text-xl">{nom}</span>
           {detail ? <span className="mt-1 block text-xs text-acier-fonce">{detail}</span> : null}
         </span>
         <span className="tabular hidden text-sm text-acier-fonce sm:block">
           <Compteur value={duree} duration={700} /> min
         </span>
-        <span className="font-display text-3xl leading-none sm:w-20 sm:text-right">
+        <span className="text-xl font-semibold sm:w-20 sm:text-right">
           <Compteur value={prix} /> €
         </span>
       </Link>
@@ -46,10 +46,10 @@ export function Tarifs({ n = "05", titre = true }: { n?: string; titre?: boolean
 
         {/* Formule vedette */}
         <div className="col-span-12 lg:col-span-5">
-          <div className="relative bg-charbon p-6 text-creme shadow-card sm:p-8 lg:sticky lg:top-28">
+          <div className="relative rounded-[2rem] bg-charbon p-7 text-creme shadow-card sm:p-10 lg:sticky lg:top-24">
             <p className="eyebrow flex items-center justify-between text-acier">
               <span>La plus demandée</span>
-              <span className="bg-rouge px-2 py-1 text-creme">−{economie} €</span>
+              <span className="rounded-full bg-rouge px-2.5 py-1 text-white">−{economie} €</span>
             </p>
             <p className="mt-6 font-display text-d1">{formuleVedette.nom}</p>
             <p className="mt-2 text-sm text-creme/75">{formuleVedette.detail}</p>

@@ -5,13 +5,13 @@
  * - Lame : ExtrudeGeometry biseautée, acier poli (MeshPhysicalMaterial métal).
  * - Manche : deux plaquettes de corne sombre (texture de veinage générée en canvas).
  * - Reflets : environnement fait de Lightformers (pas de HDR distante).
- * Le scroll (heroState.p) ouvre la lame puis la fait trancher l'écran en diagonale.
+ * Le scroll (heroState.p) ouvre la lame et fait pivoter l'objet, comme une page produit.
  */
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { CUT, heroState } from "@/components/home/heroState";
+import { heroState } from "@/components/home/heroState";
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
@@ -170,40 +170,24 @@ function Rasoir({ onReady }: { onReady?: () => void }) {
     const w = viewport.width;
     const h = viewport.height;
     const portrait = w < h;
-    const scale = portrait ? w * 0.125 : Math.min(w * 0.075, h * 0.115);
-    g.scale.setScalar(scale);
+    // Présentation « produit » : centré sous le titre, puis au centre de l'écran
+    const lever = easeInOut(range(p, 0, 0.6));
+    const base = portrait ? w * 0.13 : Math.min(w * 0.068, h * 0.1);
+    g.scale.setScalar(base * THREE.MathUtils.lerp(1, 1.3, lever));
 
-    // 1. Ouverture de la lame (0 → 0.3)
-    const open = easeInOut(range(p, 0, 0.3));
+    // 1. Ouverture de la lame (0 → 0.55)
+    const open = easeInOut(range(p, 0, 0.55));
     b.rotation.z = THREE.MathUtils.lerp(2.55, Math.PI * 1.03, open);
 
-    // 2. Coup diagonal (0.3 → 0.56) : le rasoir suit la ligne de coupe
-    const cut = easeInOut(range(p, 0.3, 0.56));
-    const R = new THREE.Vector3(w / 2, h * (0.5 - CUT.right / 100), 0);
-    const L = new THREE.Vector3(-w / 2, h * (0.5 - CUT.left / 100), 0);
-    const dir = new THREE.Vector3().subVectors(L, R);
-    const aim = Math.atan2(dir.y, dir.x) - Math.PI; // la lame (côté -x local) mène le geste
-    const start = R.clone().addScaledVector(dir, -0.12);
-    const end = R.clone().addScaledVector(dir, 1.45);
-    const rest = new THREE.Vector3(portrait ? 0.02 * w : -0.28 * w, portrait ? 0.24 * h : -0.02 * h, 0);
-    const restZ = portrait ? 0.35 : 0.95;
-
-    if (p < 0.3) {
-      g.position.copy(rest);
-      g.position.y += Math.sin(t * 1.1) * 0.05 * scale;
-      g.rotation.set(0.15 + sm.rx + Math.sin(t * 0.7) * 0.05, -0.35 + sm.ry, restZ + Math.sin(t * 0.5) * 0.03);
-    } else {
-      // Élan vers le coin haut droit, puis traversée de l'écran
-      const windup = easeInOut(range(p, 0.3, 0.37));
-      if (cut > 0) g.position.lerpVectors(start, end, cut);
-      else g.position.lerpVectors(rest, start, windup);
-      g.rotation.set(
-        THREE.MathUtils.lerp(0.15 + sm.rx, 0, windup),
-        THREE.MathUtils.lerp(-0.35 + sm.ry, 0, windup),
-        THREE.MathUtils.lerp(restZ, aim, windup),
-      );
-    }
-    g.visible = p < 0.62;
+    // 2. L'objet monte au centre, se redresse à l'horizontale et pivote lentement
+    const yRepos = portrait ? -0.14 * h : -0.17 * h;
+    g.position.set(0, THREE.MathUtils.lerp(yRepos, 0, lever) + Math.sin(t * 1.1) * 0.03 * base, 0);
+    const tour = easeInOut(range(p, 0.3, 1));
+    g.rotation.set(
+      THREE.MathUtils.lerp(0.4, 0.12, lever) + sm.rx * 0.6 + Math.sin(t * 0.7) * 0.03,
+      THREE.MathUtils.lerp(-0.5, 0.35, tour) + sm.ry * 0.6,
+      THREE.MathUtils.lerp(0.3, 0.02, open) + Math.sin(t * 0.5) * 0.02,
+    );
 
     if (!readySent.current) {
       readySent.current = true;
@@ -240,7 +224,7 @@ export default function RasoirScene({ active, onReady }: { active: boolean; onRe
     >
       <ambientLight intensity={0.25} />
       <directionalLight position={[3, 4, 5]} intensity={1.6} />
-      <directionalLight position={[-4, -2, 3]} intensity={0.7} color="#e8a04a" />
+      <directionalLight position={[-4, -2, 3]} intensity={0.5} color="#ffffff" />
       <Environment resolution={256} frames={1}>
         {/* Fond d'atelier gris : l'acier ne tombe jamais dans le noir */}
         <color attach="background" args={["#3a3a3a"]} />
@@ -252,7 +236,7 @@ export default function RasoirScene({ active, onReady }: { active: boolean; onRe
         <Lightformer form="rect" intensity={2} position={[-5, 0, 2]} rotation-y={Math.PI / 2} scale={[8, 1.4, 1]} />
         <Lightformer form="rect" intensity={1.4} position={[5, -1, 1]} rotation-y={-Math.PI / 2} scale={[8, 0.6, 1]} />
         <Lightformer form="ring" color="#f2ede4" intensity={2.5} position={[0, 0, -6]} scale={3} />
-        <Lightformer form="rect" color="#e8a04a" intensity={1.6} position={[0, -4, 1]} rotation-x={Math.PI / 2} scale={[6, 0.4, 1]} />
+        <Lightformer form="rect" color="#ffffff" intensity={0.8} position={[0, -4, 1]} rotation-x={Math.PI / 2} scale={[6, 0.4, 1]} />
       </Environment>
       <Rasoir onReady={onReady} />
     </Canvas>

@@ -132,7 +132,7 @@ export function AvantApres() {
           <div
             ref={stage}
             data-reveal="clip-bas"
-            className="salon relative aspect-[5/6] w-full touch-pan-y select-none overflow-hidden bg-creme text-charbon sm:aspect-[4/3]"
+            className="salon relative aspect-[5/6] w-full rounded-[2rem] touch-pan-y select-none overflow-hidden bg-creme text-charbon sm:aspect-[4/3]"
             style={{ ["--paper" as string]: "var(--color-creme)" }}
             onPointerDown={(e) => {
               dragging.current = true;
@@ -160,8 +160,8 @@ export function AvantApres() {
               )}
             </div>
 
-            <span className="eyebrow absolute left-4 top-4 bg-charbon px-2 py-1 text-creme">Avant</span>
-            <span className="eyebrow absolute right-4 top-4 bg-rouge px-2 py-1 text-creme">Après</span>
+            <span className="eyebrow absolute left-4 top-4 rounded-full bg-charbon px-3 py-1 text-creme">Avant</span>
+            <span className="eyebrow absolute right-4 top-4 rounded-full bg-rouge px-3 py-1 text-white">Après</span>
 
             {/* La lame */}
             <div

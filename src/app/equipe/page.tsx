@@ -67,7 +67,7 @@ export default function EquipePage() {
               width={1600}
               height={1100}
               sizes="(min-width: 1920px) 1840px, 100vw"
-              className="h-auto w-full"
+              className="h-auto w-full rounded-[2rem]"
             />
             <figcaption className="eyebrow mt-3 text-acier-fonce">Trois fauteuils de 1968, Grand&apos;Rue, Sète.</figcaption>
           </figure>

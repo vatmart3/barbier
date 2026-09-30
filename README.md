@@ -3,7 +3,7 @@
 Site vitrine de démonstration — portfolio **MJAGENCY** (site 02/10).
 Marque fictive traitée comme un vrai client : réservation fonctionnelle, configurateur de coupe, rasoir 3D, SEO local complet.
 
-> Direction visuelle : **salon sombre et chaud** (lumières de plafond floues, briques), titres larges en dégradé métal, signatures en script cuivre, accents cuivre.
+> Direction visuelle : **sobre et arrondie, façon page produit Apple** — police système, fond blanc / gris clair, hero noir, boutons en pilule, cartes très arrondies, barres translucides, animations en fondu.
 >
 > Concept : **« la chaise »**. Le site se regarde depuis le fauteuil : les sections clés pivotent (défilement horizontal épinglé), le rasoir tranche l'écran au premier scroll, l'enseigne de barbier tourne au rythme de la page.
 
@@ -54,7 +54,7 @@ Les tests e2e utilisent Playwright ; en local, installez d'abord son navigateur 
 | `src/data/realisations.ts` | Avant / après (illustrations, ou vraies photos via le champ `photos`) |
 | `src/data/fidelite.ts` | Carte de fidélité |
 
-Couleurs et polices : `src/design/tokens.css` (palette cuivre, `--font-display`, `--font-script`) et `src/app/globals.css` (section « Style salon » : `.salon`, `.metal`, `.script`, `.ambiance`).
+Couleurs et typographie : `src/design/tokens.css` (rôles des couleurs, police système, arrondis) et `src/app/globals.css` (portées `.salon` gris clair, `.nuit` hero noir, `.papier` cartes blanches).
 
 Les prix modifiés se répercutent partout : pages, configurateur, réservation, e-mails, JSON-LD `Service`/`Offer`.
 
@@ -85,14 +85,14 @@ src/
 scripts/               génération d'assets + contrôles Playwright
 ```
 
-**Stack** : Next.js 16 (App Router, statique), React 19, TypeScript strict, Tailwind CSS 4 (tokens en variables CSS), GSAP + ScrollTrigger (séquences épinglées), Motion (configurateur, tunnel), Lenis, React Three Fiber + drei, react-hook-form + zod (`zod/mini`), Resend.
+**Stack** : Next.js 16 (App Router, statique), React 19, TypeScript strict, Tailwind CSS 4 (tokens en variables CSS), police système (aucune police web à charger), GSAP + ScrollTrigger (séquences épinglées), Motion (configurateur, tunnel), Lenis, React Three Fiber + drei, react-hook-form + zod (`zod/mini`), Resend.
 
 **Choix de performance** : Motion n'est chargé que là où il sert (configurateur, réservation) ; les révélations au scroll sont en CSS via un seul `IntersectionObserver` ; les profils gravés fixes sont rendus côté serveur ; la 3D est chargée en différé et remplacée par un SVG si WebGL manque, si l'appareil est modeste ou si `prefers-reduced-motion` est actif (forcer : `?3d=on` / `?3d=off`).
 
 ## Checklist qualité (mesurée sur le build de production)
 
 - `npm run build` : 0 erreur, 0 warning — `npm run lint` et `tsc` propres.
-- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** sur toutes les pages ; Performance 90–91 sur les pages intérieures, ~85 sur l'accueil (fond d'ambiance + police variable). CLS ≤ 0,03.
+- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** ; Performance **93 à 96** ; LCP ≈ 2,2 s, CLS ≤ 0,01.
 - Captures contrôlées à 320, 375, 768, 1024, 1280, 1440 et 1920 px ; `prefers-reduced-motion` testé (aucune erreur d'hydratation).
 
 ## Mentions

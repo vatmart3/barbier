@@ -69,7 +69,7 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
       data-lenis-prevent
     >
       <div className="container-page flex h-(--header-h) items-center justify-between">
-        <span className="metal font-display text-[1.45rem] leading-none [font-variation-settings:'wdth'_125]">Dégradé</span>
+        <span className="text-[1.1875rem] font-semibold tracking-tight">Dégradé</span>
         <button type="button" onClick={onClose} className="-mr-2 inline-flex size-11 items-center justify-center" aria-label="Fermer le menu">
           <IconFermer size={24} />
         </button>
@@ -82,11 +82,10 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
               <li key={item.href} className="border-b border-creme/10">
                 <Link href={item.href} aria-current={active ? "page" : undefined} className="group flex items-baseline justify-between gap-4 py-4">
                   <span className="-mt-[0.2em] block overflow-hidden pt-[0.2em]">
-                    <span className={`menu-item font-display text-d1 ${item.href === "/reserver" ? "text-rouge" : ""}`} style={{ "--i": i } as CSSProperties}>
+                    <span className={`menu-item font-display text-d1 ${item.href === "/reserver" ? "text-rouge-fonce" : ""}`} style={{ "--i": i } as CSSProperties}>
                       {item.label}
                     </span>
                   </span>
-                  <span className="eyebrow tabular text-acier">sabot {item.sabot}</span>
                 </Link>
               </li>
             );

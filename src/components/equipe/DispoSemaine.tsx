@@ -37,7 +37,7 @@ export function DispoSemaine({ barbier, prenom, tone = "dark" }: { barbier: Barb
           const ratio = j.libres / j.total;
           const contenu = (
             <>
-              <span className={cn("block text-[0.6875rem] uppercase", muted)}>{d.jour.replace(".", "")}</span>
+              <span className={cn("block text-[0.6875rem]", muted)}>{d.jour.replace(".", "")}</span>
               <span className="block font-display text-2xl leading-none">{d.num}</span>
               <span aria-hidden className={cn("mx-auto mt-2 block h-10 w-1.5", tone === "dark" ? "bg-creme/10" : "bg-charbon/10")}>
                 <span className="block w-full bg-rouge transition-[height] duration-700" style={{ height: `${Math.round(ratio * 100)}%`, marginTop: `${Math.round((1 - ratio) * 40)}px` }} />

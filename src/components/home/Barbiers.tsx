@@ -49,8 +49,8 @@ export function Barbiers() {
                   <div className="flex flex-col justify-between gap-4">
                     <blockquote className="text-sm italic text-charbon/80">{b.replique}</blockquote>
                     <div className="flex flex-wrap gap-x-6">
-                      <Link href={`/reserver?barbier=${b.id}`} className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold uppercase tracking-wide">
-                        <span className="border-b border-rouge pb-0.5">Réserver avec {b.prenom}</span>
+                      <Link href={`/reserver?barbier=${b.id}`} className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold">
+                        <span className="text-rouge-fonce group-hover:underline">Réserver avec {b.prenom}</span>
                         <IconFleche size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                       </Link>
                       <Link href={`/equipe#${b.id}`} className="inline-flex min-h-11 items-center text-sm text-acier-fonce underline underline-offset-4 hover:text-charbon">

@@ -20,13 +20,8 @@ Le téléchargement de photos libres (Unsplash, Pexels) était bloqué dans l'en
 
 ## 2. Polices
 
-| Police | Usage | Licence |
-|---|---|---|
-| Archivo (axe de largeur, étendu) — Omnibus-Type | Titres métal | SIL Open Font License 1.1 |
-| Kaushan Script — Impallari Type | Signatures en script cuivre | SIL Open Font License 1.1 |
-| Schibsted Grotesk — Schibsted | Texte | SIL Open Font License 1.1 |
-
-Chargées via `next/font/google` (auto-hébergées au build). Copies TTF dans `src/assets/fonts/` (Big Shoulders, Schibsted) utilisées uniquement pour les images Open Graph.
+Le site utilise la **police système** de l'appareil (SF Pro sur Apple, Segoe UI sur Windows, Roboto sur Android) : aucune police web n'est téléchargée.
+Seules les images Open Graph embarquent deux polices (`src/assets/fonts/`, SIL Open Font License 1.1) : Big Shoulders et Schibsted Grotesk.
 
 ## 3. Photos à remplacer
 

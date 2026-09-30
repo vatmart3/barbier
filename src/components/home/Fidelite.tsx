@@ -84,7 +84,7 @@ export function Fidelite() {
 
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
           <div data-reveal="monte">
-          <div className="relative mx-auto max-w-xl papier rotate-[-2deg] bg-creme p-5 text-charbon shadow-paper sm:p-8">
+          <div className="relative mx-auto max-w-xl papier rotate-[-2deg] rounded-[1.75rem] bg-creme p-5 text-charbon shadow-paper sm:p-8">
             <div className="flex items-baseline justify-between border-b border-charbon/20 pb-3">
               <p className="font-display text-3xl leading-none">Dégradé</p>
               <p className="eyebrow text-acier-fonce">Carte n° 0427</p>
@@ -129,7 +129,7 @@ export function Fidelite() {
               <button
                 type="button"
                 onClick={() => (complet ? (setExtra(0), setAuto(0)) : setExtra((e) => e + 1))}
-                className="min-h-11 border border-charbon px-4 text-sm font-semibold uppercase tracking-wide transition-colors hover:bg-charbon hover:text-creme active:scale-[0.97]"
+                className="min-h-11 border border-charbon px-4 text-sm font-semibold transition-colors hover:bg-charbon hover:text-creme active:scale-[0.97]"
               >
                 {complet ? "Nouvelle carte" : "Tamponner"}
               </button>

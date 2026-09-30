@@ -55,7 +55,7 @@ export function Succes({ confirmation: c }: { confirmation: Confirmation }) {
           <button
             type="button"
             onClick={() => telechargerIcs(`rdv-degrade-${c.date}.ics`, creerIcs({ uid: c.reference, ...evt, rappelMinutes: 120 }))}
-            className="inline-flex min-h-12 items-center gap-2.5 bg-creme px-5 text-sm font-semibold uppercase tracking-wide text-charbon transition-colors hover:bg-creme-2"
+            className="inline-flex min-h-12 items-center gap-2.5 bg-creme px-5 text-sm font-semibold text-charbon transition-colors hover:bg-creme-2"
           >
             <IconTelecharger size={18} />
             Ajouter au calendrier (.ics)
@@ -64,7 +64,7 @@ export function Succes({ confirmation: c }: { confirmation: Confirmation }) {
             href={lienGoogleAgenda(evt)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center gap-2.5 border border-creme/30 px-5 text-sm font-semibold uppercase tracking-wide transition-colors hover:border-creme"
+            className="inline-flex min-h-12 items-center gap-2.5 border border-creme/30 px-5 text-sm font-semibold transition-colors hover:border-creme"
           >
             <IconCalendrier size={18} />
             Google Agenda
@@ -73,7 +73,7 @@ export function Succes({ confirmation: c }: { confirmation: Confirmation }) {
             href={directionsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center gap-2.5 border border-creme/30 px-5 text-sm font-semibold uppercase tracking-wide transition-colors hover:border-creme"
+            className="inline-flex min-h-12 items-center gap-2.5 border border-creme/30 px-5 text-sm font-semibold transition-colors hover:border-creme"
           >
             <IconRoute size={18} />
             Itinéraire
@@ -90,7 +90,7 @@ export function Succes({ confirmation: c }: { confirmation: Confirmation }) {
 
       {/* Le ticket */}
       <motion.div
-        className="relative self-start bg-creme text-charbon shadow-paper"
+        className="papier relative self-start rounded-[1.5rem] bg-creme text-charbon shadow-paper"
         initial={reduce ? { opacity: 0 } : { y: -40, rotate: 4, opacity: 0, clipPath: "inset(0 0 100% 0)" }}
         animate={reduce ? { opacity: 1 } : { y: 0, rotate: -1.5, opacity: 1, clipPath: "inset(0 0 0% 0)" }}
         transition={{ duration: 0.9, ease: ease.outCut, delay: 0.15 }}

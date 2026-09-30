@@ -18,7 +18,7 @@ export function CoupesListe() {
                 className={cn("relative col-span-12 md:col-span-5", inverse && "md:order-2 md:col-start-8")}
                 style={{ ["--paper" as string]: "var(--color-charbon)" }}
               >
-                <p aria-hidden className="absolute -top-4 left-0 font-display text-[clamp(7rem,4rem+10vw,14rem)] leading-none text-transparent [-webkit-text-stroke:1px_rgb(242_237_228/0.35)]">
+                <p aria-hidden className="absolute -top-4 left-0 font-display text-[clamp(7rem,4rem+10vw,14rem)] leading-none text-creme-3">
                   {c.repere}
                 </p>
                 <ProfilStatique
@@ -68,8 +68,8 @@ export function CoupesListe() {
                 </dl>
                 <p className="mt-4 text-sm text-acier">{c.entretien}</p>
                 <div className="mt-6 flex flex-wrap gap-x-8">
-                  <Link href={`/reserver?coupe=${c.id}`} className="group inline-flex min-h-11 items-center gap-3 text-sm font-semibold uppercase tracking-wide">
-                    <span className="border-b border-rouge pb-0.5">Réserver</span>
+                  <Link href={`/reserver?coupe=${c.id}`} className="group inline-flex min-h-11 items-center gap-3 text-sm font-semibold">
+                    <span className="text-rouge-fonce group-hover:underline">Réserver</span>
                     <IconFleche size={18} className="transition-transform group-hover:translate-x-1" />
                   </Link>
                   <Link href={`/coupes?coupe=${c.id}#configurateur`} scroll={false} className="inline-flex min-h-11 items-center text-sm text-acier underline underline-offset-4 hover:text-creme">

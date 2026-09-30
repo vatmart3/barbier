@@ -59,7 +59,7 @@ export function Entretien() {
               id="ent-coupe"
               value={coupeId}
               onChange={(e) => setCoupeId(e.target.value as CoupeId)}
-              className="mt-2 block min-h-12 w-full border border-charbon/30 bg-transparent px-3 font-display text-2xl uppercase focus:border-charbon focus:outline-none"
+              className="mt-2 block min-h-12 w-full border border-charbon/30 bg-transparent px-3 font-display text-2xl focus:border-charbon focus:outline-none"
             >
               {coupes.map((x) => (
                 <option key={x.id} value={x.id}>
@@ -96,9 +96,9 @@ export function Entretien() {
                     : `Ça fait ${-res.dans} jour${-res.dans > 1 ? "s" : ""} de trop. On ne juge pas, on rattrape.`}
               </p>
               <div className="mt-6 flex flex-wrap gap-x-8 gap-y-2">
-                <button type="button" onClick={rappel} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold uppercase tracking-wide">
+                <button type="button" onClick={rappel} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold">
                   <IconCalendrier size={18} />
-                  <span className="border-b border-rouge pb-0.5">Ajouter un rappel</span>
+                  <span className="text-rouge-fonce group-hover:underline">Ajouter un rappel</span>
                 </button>
                 <Link href={`/reserver?coupe=${coupeId}`} className="group inline-flex min-h-11 items-center gap-2 text-sm text-acier-fonce hover:text-charbon">
                   Réserver maintenant

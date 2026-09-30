@@ -6,6 +6,3 @@ export const heroState = {
   px: 0,
   py: 0,
 };
-
-/** Découpe diagonale : du bord droit (18 %) au bord gauche (82 %) */
-export const CUT = { right: 18, left: 82 } as const;

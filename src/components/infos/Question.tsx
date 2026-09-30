@@ -109,14 +109,14 @@ export function Question() {
             ) : null}
           </div>
           {erreur ? (
-            <p role="alert" className="border-l-2 border-rouge-fonce bg-rouge/10 px-3 py-2 text-sm text-rouge-fonce">
+            <p role="alert" className="rounded-xl bg-rouge/10 px-3 py-2 text-sm text-rouge-fonce">
               {erreur}
             </p>
           ) : null}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="group inline-flex min-h-14 items-center gap-4 bg-charbon px-6 text-sm font-semibold uppercase tracking-wide text-creme transition-colors hover:bg-rouge-fonce disabled:cursor-wait disabled:opacity-80"
+            className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-charbon px-6 text-[1.0625rem] font-medium text-creme transition-colors hover:bg-rouge-fonce disabled:cursor-wait disabled:opacity-80"
           >
             {isSubmitting ? "Envoi…" : "Envoyer la question"}
             <IconFleche size={20} className="transition-transform group-hover:translate-x-1" />

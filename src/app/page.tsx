@@ -22,9 +22,8 @@ export const metadata: Metadata = pageMetadata({
 export default function Accueil() {
   return (
     <Page>
-      <Hero>
-        <ProchainCreneau />
-      </Hero>
+      <Hero />
+      <ProchainCreneau />
       {/* Une frontière Suspense par section : hydratation sélective, en tâches courtes */}
       <Suspense>
         <CoupesHorizontal />

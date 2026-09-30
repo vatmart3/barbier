@@ -32,18 +32,17 @@ export function EquipeHorizontal() {
             id={b.id}
             aria-labelledby={`nom-${b.id}`}
             className={cn(
-              "relative grid scroll-mt-16 grid-cols-12 gap-x-(--spacing-gutter) gap-y-10 border-b border-creme/10 px-(--spacing-gutter) py-20 lg:h-svh lg:w-screen lg:border-b-0 lg:border-r lg:pb-16 lg:pt-[calc(var(--header-h)+2rem)] motion-reduce:lg:h-auto",
+              "relative mx-3 my-3 grid scroll-mt-20 grid-cols-12 gap-x-(--spacing-gutter) gap-y-10 overflow-hidden rounded-[2rem] bg-charbon-2 p-7 sm:p-10 lg:mx-2 lg:mb-6 lg:mt-[calc(var(--header-h)+1rem)] lg:h-[calc(100svh-var(--header-h)-2.5rem)] lg:w-[calc(100vw-3rem)] lg:p-12 motion-reduce:lg:h-auto",
             )}
-            style={{ ["--paper" as string]: i % 2 ? "var(--color-charbon-2)" : "var(--color-charbon)" }}
+            style={{ ["--paper" as string]: "var(--color-charbon-2)" }}
           >
-            <div className={cn("absolute inset-0 -z-10", i % 2 ? "bg-charbon-2" : "bg-charbon")} />
             <div className="col-span-12 flex flex-col justify-between lg:col-span-6">
               <div>
                 <p className="eyebrow tabular text-acier">
                   Fauteuil {i + 1} · {b.role} · depuis {b.depuis}
                 </p>
                 <div id={`nom-${b.id}`}>
-                  <Grave as="h2" text={b.prenom} className="mt-4 text-[clamp(4rem,2rem+8vw,10.5rem)] leading-none" />
+                  <Grave as="h2" text={b.prenom} className="mt-3 text-[clamp(3.5rem,2rem+6vw,8rem)] leading-none" />
                 </div>
               </div>
               <div className={cn("mt-8 w-2/3 max-w-sm self-start lg:mt-0 lg:w-[48%]", i === 1 && "-scale-x-100")}>
@@ -53,7 +52,7 @@ export function EquipeHorizontal() {
 
             <div className="col-span-12 flex flex-col justify-end gap-8 lg:col-span-5 lg:col-start-8">
               <div>
-                <p className="font-display text-4xl leading-none">{b.specialite}</p>
+                <p className="font-display text-3xl leading-tight">{b.specialite}</p>
                 <p className="mt-3 text-creme/80">{b.style}</p>
               </div>
               <div className="space-y-3 text-sm text-creme/80">
@@ -79,7 +78,7 @@ export function EquipeHorizontal() {
                   <dd className="tabular mt-1">{annee - b.depuis} ans</dd>
                 </div>
               </dl>
-              <blockquote className="border-l-2 border-rouge pl-4 italic text-creme/85">{b.replique}</blockquote>
+              <blockquote className="text-lg text-creme/85">{b.replique}</blockquote>
               <DispoSemaine barbier={b.id} prenom={b.prenom} />
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Bouton href={`/reserver?barbier=${b.id}`} iconEnd={<IconFleche size={20} />}>

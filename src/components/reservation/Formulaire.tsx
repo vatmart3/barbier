@@ -91,7 +91,7 @@ export function Formulaire({ prestation, devis: d, date, heure, barbier, debut, 
         <p className="mt-2 text-sm text-acier">Pour vous rappeler si besoin. Rien d&apos;autre : pas de newsletter, pas de revente.</p>
 
         {submitCount > 0 && nbErreurs > 0 ? (
-          <p id="resume-erreurs" role="alert" className="mt-6 border-l-2 border-erreur px-4 py-2 text-sm text-erreur">
+          <p id="resume-erreurs" role="alert" className="mt-6 rounded-xl bg-erreur/10 px-4 py-2 text-sm text-erreur">
             {nbErreurs === 1 ? "Un champ à corriger." : `${nbErreurs} champs à corriger.`}
           </p>
         ) : null}
@@ -181,7 +181,7 @@ export function Formulaire({ prestation, devis: d, date, heure, barbier, debut, 
         </button>
       </div>
 
-      <aside className="self-start bg-creme p-6 text-charbon lg:sticky lg:top-28">
+      <aside className="papier self-start rounded-[1.5rem] bg-creme p-6 text-charbon shadow-card lg:sticky lg:top-24">
         <p className="eyebrow text-acier-fonce">Récapitulatif</p>
         <p className="mt-3 font-display text-5xl leading-none">{formatHeure(heure)}</p>
         <p className="mt-1 text-sm first-letter:uppercase">
@@ -211,7 +211,7 @@ export function Formulaire({ prestation, devis: d, date, heure, barbier, debut, 
         </div>
 
         {erreurServeur ? (
-          <p role="alert" className="mt-4 border-l-2 border-rouge-fonce bg-rouge/10 px-3 py-2 text-sm text-rouge-fonce">
+          <p role="alert" className="mt-4 rounded-xl bg-rouge/10 px-3 py-2 text-sm text-rouge-fonce">
             {erreurServeur}
           </p>
         ) : null}
@@ -219,7 +219,7 @@ export function Formulaire({ prestation, devis: d, date, heure, barbier, debut, 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group mt-6 flex min-h-14 w-full items-center justify-between bg-rouge px-5 text-sm font-semibold uppercase tracking-wide text-creme transition-colors hover:bg-rouge-fonce disabled:cursor-wait disabled:opacity-80"
+          className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-full bg-rouge px-6 text-sm font-semibold text-white transition-colors hover:bg-rouge-fonce disabled:cursor-wait disabled:opacity-80"
         >
           {isSubmitting ? (
             <span className="flex items-center gap-3">

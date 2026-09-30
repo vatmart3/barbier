@@ -36,9 +36,9 @@ export function ProchainCreneau() {
   const barbier = p ? getBarbier(p.barbier) : null;
 
   return (
-    <section aria-labelledby="creneau-titre" className="salon relative flex h-full min-h-svh flex-col bg-creme text-charbon">
-      <div className="container-page flex flex-1 flex-col justify-center pb-10 pt-[calc(var(--header-h)+2rem)]">
-        <div className="grid-page gap-y-10">
+    <section aria-labelledby="creneau-titre" className="salon relative bg-creme py-(--spacing-section) text-charbon">
+      <div className="container-page">
+        <div className="grid-page gap-y-10 rounded-[2rem] bg-creme-2 p-6 shadow-card sm:p-10 lg:p-14">
           <div className="col-span-12 lg:col-span-7">
             <Etiquette n="01" className="text-acier-fonce">
               Prochain créneau libre
@@ -46,7 +46,7 @@ export function ProchainCreneau() {
             <h2 id="creneau-titre" className="sr-only">
               Prochain créneau libre chez Dégradé
             </h2>
-            <p className="mt-6 font-display text-[clamp(1.75rem,1.2rem+2vw,3rem)] leading-none first-letter:uppercase" aria-live="polite">
+            <p className="mt-4 font-display text-[clamp(1.6rem,1.2rem+1.6vw,2.6rem)] leading-tight first-letter:uppercase" aria-live="polite">
               {jour}
               {barbier ? (
                 <>
@@ -86,7 +86,7 @@ export function ProchainCreneau() {
                       href={s ? lien(s) : `/reserver?barbier=${b.id}`}
                       className="group flex min-h-14 items-center justify-between gap-4 py-3 transition-colors hover:text-rouge-fonce"
                     >
-                      <span className="font-display text-3xl leading-none">{b.prenom}</span>
+                      <span className="text-xl font-semibold">{b.prenom}</span>
                       <span className="tabular flex items-center gap-3 text-sm">
                         {s && now ? (
                           <>

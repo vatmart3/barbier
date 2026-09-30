@@ -51,7 +51,7 @@ export function Carrousel({ children, label, className, ton = "clair" }: Props) 
 
   const bouton = cn(
     "inline-flex size-11 items-center justify-center rounded-full transition-[background-color,opacity,transform] duration-200 active:scale-95 disabled:cursor-default disabled:opacity-35",
-    ton === "clair" ? "bg-[#dcdce1] text-creme hover:bg-[#d0d0d6]" : "bg-white/12 text-white hover:bg-white/20",
+    ton === "clair" ? "bg-charbon-3 text-creme hover:bg-[#383838]" : "bg-white/12 text-white hover:bg-white/20",
   );
 
   return (

@@ -39,6 +39,8 @@ export function Reservation() {
       barbier: (getBarbier(barbier)?.id ?? "premier") as ChoixBarbier,
       date: /^\d{4}-\d{2}-\d{2}$/.test(params.get("date") ?? "") ? params.get("date") : null,
       heure: Number.isFinite(heure) && params.get("heure") ? heure : null,
+      // Venu de la réservation express de l'accueil : tout est choisi, on ouvre les coordonnées
+      coordonnees: params.get("etape") === "3",
     };
   }, [params]);
 
@@ -85,6 +87,17 @@ export function Reservation() {
       return () => cancelAnimationFrame(id);
     }
   }, [now, date, heure, creneauValide, duree]);
+
+  // Arrivée depuis l'accueil avec un créneau encore libre : directement à l'étape 3
+  const sautFait = useRef(false);
+  useEffect(() => {
+    if (sautFait.current || !init.coordonnees || !now || !prestation || !creneauValide) return;
+    const id = requestAnimationFrame(() => {
+      sautFait.current = true;
+      setEtape(3);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [init.coordonnees, now, prestation, creneauValide]);
 
   if (confirmation) {
     return <Succes confirmation={confirmation} />;
@@ -223,7 +236,7 @@ function Carte({
     <label
       className={cn(
         "relative flex min-h-14 cursor-pointer items-center gap-3 border px-4 py-3 transition-colors duration-300",
-        checked ? "border-creme bg-creme text-charbon" : "border-creme/20 hover:border-creme/60",
+        checked ? "border-rouge bg-rouge/10 text-creme" : "border-creme/20 hover:border-creme/60",
         "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-rouge",
         className,
       )}
@@ -286,7 +299,7 @@ function EtapePrestation({
                       key={o.id}
                       className={cn(
                         "flex min-h-11 cursor-pointer items-center justify-center border text-sm transition-colors",
-                        coupe.dessus === o.id ? "border-creme bg-creme text-charbon" : "border-creme/20 hover:border-creme/60",
+                        coupe.dessus === o.id ? "border-rouge bg-rouge/10 text-creme" : "border-creme/20 hover:border-creme/60",
                         !ok && "pointer-events-none opacity-30",
                         "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-rouge",
                       )}
@@ -314,7 +327,7 @@ function EtapePrestation({
                     key={o.id}
                     className={cn(
                       "flex min-h-11 cursor-pointer items-center justify-center border px-1 text-center text-sm transition-colors",
-                      coupe.barbe === o.id ? "border-creme bg-creme text-charbon" : "border-creme/20 hover:border-creme/60",
+                      coupe.barbe === o.id ? "border-rouge bg-rouge/10 text-creme" : "border-creme/20 hover:border-creme/60",
                       "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-rouge",
                     )}
                   >
@@ -402,7 +415,7 @@ function Recap({
             <span className="font-display text-5xl leading-none">{euros(d.prix)}</span>
             <span className="tabular text-sm text-acier">{d.duree} min</span>
           </div>
-          {d.economie > 0 ? <p className="mt-2 inline-block bg-rouge px-2 py-0.5 text-xs font-semibold">−{euros(d.economie)} en formule</p> : null}
+          {d.economie > 0 ? <p className="mt-2 inline-block rounded-full bg-rouge px-3 py-0.5 text-xs font-semibold text-sur-accent">−{euros(d.economie)} en formule</p> : null}
         </>
       ) : (
         <p className="mt-3 text-sm text-acier">Choisissez une coupe ou une prestation.</p>
@@ -412,7 +425,7 @@ function Recap({
         type="button"
         onClick={onSuivant}
         disabled={disabled}
-        className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-full bg-rouge px-6 text-sm font-semibold text-white transition-colors hover:bg-rouge-fonce disabled:cursor-not-allowed disabled:bg-creme/10 disabled:text-acier"
+        className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-xl bg-rouge px-6 text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-sur-accent transition-colors hover:bg-rouge-fonce disabled:cursor-not-allowed disabled:bg-creme/10 disabled:text-acier"
       >
         {label}
         <IconFleche size={20} className="transition-transform group-enabled:group-hover:translate-x-1" />
@@ -497,7 +510,7 @@ function EtapeCreneau({
                     onClick={() => onDate(j.date)}
                     className={cn(
                       "flex h-24 w-[4.5rem] flex-col items-center justify-center gap-1 border transition-colors",
-                      actif ? "border-creme bg-creme text-charbon" : "border-creme/15 hover:border-creme/60",
+                      actif ? "border-rouge bg-rouge/10 text-creme" : "border-creme/15 hover:border-creme/60",
                       !dispo && "cursor-not-allowed border-dashed opacity-35 hover:border-creme/15",
                     )}
                     aria-label={`${formatDateLongue(j.date)} : ${!j.ouvert ? "fermé" : j.libres ? `${j.libres} créneaux libres` : "complet"}`}
@@ -551,7 +564,7 @@ function EtapeCreneau({
                       aria-label={c.libre ? `${formatHeure(c.start)}${choix === "premier" && b ? ` avec ${b.prenom}` : ""}` : `${formatHeure(c.start)} : déjà pris`}
                       className={cn(
                         "relative flex min-h-14 flex-col items-center justify-center border text-sm transition-[background-color,border-color,transform] duration-200 active:scale-[0.96]",
-                        actif ? "border-rouge bg-rouge text-white" : c.libre ? "border-creme/20 hover:border-creme" : "cursor-not-allowed border-transparent text-acier/60",
+                        actif ? "border-rouge bg-rouge text-sur-accent" : c.libre ? "border-creme/20 hover:border-creme" : "cursor-not-allowed border-transparent text-acier/60",
                       )}
                     >
                       <span className={cn("tabular font-semibold", !c.libre && "line-through decoration-rouge/70 decoration-2")}>{formatHeure(c.start)}</span>
@@ -595,7 +608,7 @@ function EtapeCreneau({
               onSuivant();
             }
           }}
-          className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-full bg-rouge px-6 text-sm font-semibold text-white transition-colors hover:bg-rouge-fonce disabled:cursor-not-allowed disabled:bg-creme/10 disabled:text-acier"
+          className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-xl bg-rouge px-6 text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-sur-accent transition-colors hover:bg-rouge-fonce disabled:cursor-not-allowed disabled:bg-creme/10 disabled:text-acier"
         >
           Mes coordonnées
           <IconFleche size={20} className="transition-transform group-enabled:group-hover:translate-x-1" />

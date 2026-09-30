@@ -1,15 +1,16 @@
 "use client";
 
 /**
- * HERO — page produit. Fond noir, titre centré, rasoir coupe-chou présenté
- * comme un objet : au scroll, la lame s'ouvre et l'objet pivote doucement
- * pendant que le texte s'efface. 3D chargée en différé, SVG en attendant.
+ * HERO — bannière de salon : texte à gauche (sur-titre or, grand titre serif
+ * en deux tons, bouton or), rasoir coupe-chou éclairé à droite. En sortant du
+ * hero, la lame s'ouvre et l'objet pivote. 3D chargée en différé, SVG en attendant.
  */
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { Bouton } from "@/components/ui/Bouton";
+import { IconCalendrier } from "@/components/ui/Icons";
 import { RasoirSVG } from "@/components/illustrations/RasoirSVG";
 import { useDeviceTier } from "@/hooks/useDeviceTier";
 import { cn } from "@/lib/cn";
@@ -65,22 +66,19 @@ export function Hero() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
             trigger: root.current,
             start: "top top",
-            end: "bottom bottom",
+            end: "bottom top",
             scrub: 0.5,
             onUpdate: (self) => {
-              heroState.p = self.progress;
+              heroState.p = Math.min(1, self.progress * 1.6);
             },
           },
         });
-        tl.to("[data-texte]", { opacity: 0, y: -60, duration: 0.35 }, 0)
-          .to("[data-scroll-hint]", { opacity: 0, duration: 0.1 }, 0)
-          .to("[data-rasoir-svg]", { rotate: 0, scale: 1.2, yPercent: -30, duration: 0.6, ease: "power2.inOut" }, 0);
+        tl.to("[data-rasoir-svg]", { rotate: 0, scale: 1.1, duration: 0.6, ease: "power2.inOut" }, 0);
         return () => {
           heroState.p = 0;
         };
@@ -91,56 +89,54 @@ export function Hero() {
   );
 
   return (
-    <div id="hero" ref={root} className="nuit relative h-[190svh] bg-charbon text-creme motion-reduce:h-auto">
-      <div className="sticky top-0 h-svh overflow-hidden motion-reduce:static">
-        {/* Halo de lumière sous l'objet */}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-[radial-gradient(ellipse_55%_45%_at_50%_70%,rgb(255_255_255/0.09),transparent_70%)]" />
-
-        <div data-texte className="container-page relative z-10 flex flex-col items-center pt-[calc(var(--header-h)+7svh)] text-center">
-          <h1 className="flex flex-col items-center">
-            <span className="text-lg font-semibold text-ambre md:text-xl">
-              Barbier à Sète
-            </span>
-            <span className="metal mt-1 block text-[clamp(3.6rem,2rem+8vw,8.5rem)] leading-[1.02] tracking-[-0.035em]">
-              Dégradé.
-            </span>
-          </h1>
-          <p data-hero-in style={{ ["--i" as string]: 2 }} className="mt-4 max-w-xl text-[clamp(1.2rem,1rem+0.8vw,1.6rem)] leading-snug text-creme-2">
-            Fade, taper, barbe au coupe-chou.
-            <br className="hidden sm:block" /> Trois fauteuils, Grand&apos;Rue.
+    <div id="hero" ref={root} className="nuit relative overflow-hidden bg-charbon text-creme">
+      {/* Lumière chaude côté rasoir, comme un projecteur de salon */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_45%_60%_at_72%_55%,rgb(214_180_125/0.16),transparent_70%),radial-gradient(ellipse_80%_70%_at_75%_50%,rgb(255_255_255/0.05),transparent_70%)]"
+      />
+      <div className="container-page relative grid min-h-[max(40rem,92svh)] items-center gap-6 pb-16 pt-[calc(var(--header-h)+3rem)] lg:grid-cols-2 lg:pb-24">
+        <div className="relative z-10 max-w-2xl">
+          <p data-hero-in style={{ ["--i" as string]: 0 }} className="text-[0.8125rem] font-semibold uppercase tracking-[0.2em] text-ambre">
+            Style <span aria-hidden>•</span> Précision <span aria-hidden>•</span> Caractère
           </p>
-          <div data-hero-in style={{ ["--i" as string]: 3 }} className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            <Bouton href="/reserver" size="lg">
-              Réserver
+          <h1 className="mt-6 text-[clamp(2.75rem,1.6rem+4.2vw,5.25rem)] leading-[1.04]">
+            <span className="block">Votre dégradé,</span>
+            <span className="metal block whitespace-nowrap">notre obsession.</span>
+          </h1>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-creme-2">
+            Réservez en une minute et prenez place dans l&apos;un des trois fauteuils de la Grand&apos;Rue, à Sète. Fade, taper, barbe au
+            coupe-chou.
+          </p>
+          <div data-hero-in style={{ ["--i" as string]: 2 }} className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3">
+            <Bouton href="#reserver-express" size="lg" iconEnd={<IconCalendrier size={18} />}>
+              Réserver maintenant
             </Bouton>
-            <Link href="/coupes" className="inline-flex min-h-11 items-center gap-1 text-[1.0625rem] text-ambre hover:underline">
+            <Link href="/coupes" className="inline-flex min-h-11 items-center gap-1 text-[0.9375rem] font-medium text-creme-2 hover:text-creme">
               Voir les coupes <span aria-hidden>›</span>
             </Link>
           </div>
         </div>
 
         {/* L'objet : SVG immédiat, 3D en surcouche quand prête */}
-        <div data-rasoir className="entree-objet pointer-events-none absolute inset-x-0 bottom-0 top-[42%] motion-reduce:top-auto motion-reduce:h-[40svh]">
+        <div data-rasoir className="entree-objet relative h-[34svh] min-h-60 lg:h-[64svh]">
           <div
             data-rasoir-svg
             className={cn(
-              "absolute left-1/2 top-[45%] w-[82vw] max-w-[720px] -translate-x-1/2 -translate-y-1/2 -rotate-[14deg] transition-opacity duration-700 md:w-[52vw]",
+              "absolute left-1/2 top-1/2 w-[92%] max-w-[640px] -translate-x-1/2 -translate-y-1/2 -rotate-[14deg] transition-opacity duration-700",
               ready3d && "opacity-0",
             )}
           >
             <RasoirSVG className="w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.7)]" />
           </div>
+          {load3d ? (
+            <div className={cn("pointer-events-none absolute -inset-x-10 -inset-y-16 transition-opacity duration-700", ready3d ? "opacity-100" : "opacity-0")}>
+              <RasoirScene active={active} centre onReady={() => setReady3d(true)} />
+            </div>
+          ) : null}
         </div>
-        {load3d ? (
-          <div className={cn("pointer-events-none absolute inset-0 transition-opacity duration-700", ready3d ? "opacity-100" : "opacity-0")}>
-            <RasoirScene active={active} onReady={() => setReady3d(true)} />
-          </div>
-        ) : null}
-
-        <p aria-hidden data-scroll-hint className="absolute inset-x-0 bottom-5 z-10 text-center text-xs text-acier motion-reduce:hidden" data-hero-in style={{ ["--i" as string]: 4 }}>
-          Faites défiler, la lame s&apos;ouvre
-        </p>
       </div>
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[#0f0f0f]" />
     </div>
   );
 }

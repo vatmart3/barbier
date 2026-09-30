@@ -36,7 +36,7 @@ export function BarreMobile() {
       )}
     >
       <div className="verre flex h-(--mobile-bar-h) items-center gap-1.5 rounded-full border border-creme/10 p-1.5 shadow-card">
-        <Link href="/reserver" className="flex h-full flex-1 items-center justify-center gap-2 rounded-full bg-rouge px-4 text-[0.9375rem] font-semibold text-white active:scale-[0.98]">
+        <Link href="/reserver" className="flex h-full flex-1 items-center justify-center gap-2 rounded-full bg-rouge px-4 text-[0.9375rem] font-semibold text-sur-accent active:scale-[0.98]">
           <IconCalendrier size={18} />
           Réserver
         </Link>

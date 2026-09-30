@@ -3,9 +3,9 @@
 Site vitrine de démonstration — portfolio **MJAGENCY** (site 02/10).
 Marque fictive traitée comme un vrai client : réservation fonctionnelle, configurateur de coupe, rasoir 3D, SEO local complet.
 
-> Direction visuelle : **sobre, arrondie et chaleureuse**, dans l'esprit d'une page produit Apple : fond blanc / gris clair, hero noir, boutons en pilule, cartes très arrondies, barres translucides, animations en fondu. Titres en **Fraunces « SOFT »** (empattements ronds), texte en **Figtree**, répliques et signature écrites à la main en **Caveat**. Le salon et la devanture sont **dessinés** (aplats arrondis, avec Sabot, le chat de la maison).
+> Direction visuelle : **salon de nuit, anthracite et or**. Grands titres serif fins en deux tons (blanc chaud puis or), sur-titres en capitales espacées, boutons or, panneaux et cartes arrondis. Titres en **Fraunces « SOFT »** (empattements ronds), texte en **Figtree**, répliques et signature écrites à la main en **Caveat**. Le salon et la devanture sont **dessinés** de nuit (aplats arrondis, avec Sabot, le chat de la maison).
 >
-> Concept : **« la chaise »**. Le site se regarde depuis le fauteuil : le rasoir s'ouvre au premier scroll, les coupes défilent en carrousel, les barbiers parlent avec leurs mots, le patron signe à la main, et l'enseigne de barbier tourne au rythme de la page.
+> Concept : **« la chaise »**. On réserve dès l'accueil (prestation, barbier, date et heure, récapitulatif côte à côte, pré-remplis avec le prochain créneau réel), le rasoir s'ouvre au scroll, les coupes défilent en carrousel, les barbiers parlent avec leurs mots, le patron signe à la main, et l'enseigne de barbier tourne au rythme de la page.
 
 ---
 
@@ -27,7 +27,7 @@ Autres commandes :
 | `npm run lint` | ESLint (config Next, règles React Compiler) |
 | `npm run typecheck` | TypeScript sans émission |
 | `npm run assets` | Régénère les favicons et icônes PWA |
-| `npm run test:e2e` | Parcours Playwright (réservation, interactions, console) sur un serveur lancé en :3000 |
+| `npm run test:e2e` | Parcours Playwright (réservation, réservation express, interactions, console) sur un serveur lancé en :3000 |
 
 Les tests e2e utilisent Playwright ; en local, installez d'abord son navigateur : `npx playwright install chromium`.
 
@@ -85,14 +85,14 @@ src/
 scripts/               génération d'assets + contrôles Playwright
 ```
 
-**Stack** : Next.js 16 (App Router, statique), React 19, TypeScript strict, Tailwind CSS 4 (tokens en variables CSS), next/font (Fraunces en instance locale de 32 Ko, Figtree, Caveat non préchargée), GSAP + ScrollTrigger (hero), Motion (configurateur, tunnel), Lenis, React Three Fiber + drei, react-hook-form + zod (`zod/mini`), Resend.
+**Stack** : Next.js 16 (App Router, statique), React 19, TypeScript strict, Tailwind CSS 4 (tokens en variables CSS), next/font (Fraunces en instance locale de 33 Ko, Figtree, Caveat non préchargée), GSAP + ScrollTrigger (hero), Motion (configurateur, tunnel), Lenis, React Three Fiber + drei, react-hook-form + zod (`zod/mini`), Resend.
 
 **Choix de performance** : Motion n'est chargé que là où il sert (configurateur, réservation) ; les révélations au scroll sont en CSS via un seul `IntersectionObserver` ; les profils gravés fixes sont rendus côté serveur ; la 3D est chargée en différé et remplacée par un SVG si WebGL manque, si l'appareil est modeste ou si `prefers-reduced-motion` est actif (forcer : `?3d=on` / `?3d=off`).
 
 ## Checklist qualité (mesurée sur le build de production)
 
 - `npm run build` : 0 erreur, 0 warning — `npm run lint` et `tsc` propres.
-- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** ; Performance **93 à 96** (accueil 93–94, pages 94–96, mentions 99) ; LCP 2,4 à 2,9 s, CLS ≤ 0,01.
+- Lighthouse mobile (simulation par défaut) : Accessibilité **100**, Bonnes pratiques **100**, SEO **100** ; Performance **90 à 97** (accueil 90–93, pages 93–96, mentions 97) ; LCP 2,4 à 3,0 s, CLS ≤ 0,01.
 - Captures contrôlées à 320, 375, 768, 1024, 1280, 1440 et 1920 px ; `prefers-reduced-motion` testé (aucune erreur d'hydratation).
 
 ## Mentions

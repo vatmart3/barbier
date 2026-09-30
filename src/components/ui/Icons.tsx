@@ -151,3 +151,34 @@ export const IconChevron = ({ size, dir = "droite", ...p }: P & { dir?: "gauche"
     <path d={dir === "droite" ? "M9 5l7 7-7 7" : "M15 5l-7 7 7 7"} />
   </svg>
 );
+
+/** Buste : le barbier */
+export const IconPersonne = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <circle cx="12" cy="8" r="3.5" />
+    <path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5" />
+  </svg>
+);
+
+/** Médaille : savoir-faire */
+export const IconMedaille = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <circle cx="12" cy="9" r="5.5" />
+    <path d="M9.6 9.2l1.6 1.6 3.2-3.2M8.5 13.8 7 21l5-2.5 5 2.5-1.5-7.2" />
+  </svg>
+);
+
+/** Fauteuil de barbier */
+export const IconFauteuil = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="M8 3h8v8H8zM6 11h12v4H6zM5 9v6M19 9v6M12 15v4M8 21h8" />
+  </svg>
+);
+
+/** Carte bancaire */
+export const IconCarte = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <rect x="3" y="5.5" width="18" height="13" rx="2.5" />
+    <path d="M3 10h18M7 15h4" />
+  </svg>
+);

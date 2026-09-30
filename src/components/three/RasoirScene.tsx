@@ -108,7 +108,7 @@ function makeEtchTexture() {
   return t;
 }
 
-function Rasoir({ onReady }: { onReady?: () => void }) {
+function Rasoir({ onReady, centre = false }: { onReady?: () => void; centre?: boolean }) {
   const group = useRef<THREE.Group>(null);
   const blade = useRef<THREE.Group>(null);
   const smooth = useRef({ p: 0, rx: 0, ry: 0 });
@@ -172,7 +172,7 @@ function Rasoir({ onReady }: { onReady?: () => void }) {
     const portrait = w < h;
     // Présentation « produit » : centré sous le titre, puis au centre de l'écran
     const lever = easeInOut(range(p, 0, 0.6));
-    const base = portrait ? w * 0.13 : Math.min(w * 0.068, h * 0.1);
+    const base = centre ? Math.min(w * 0.12, h * 0.085) : portrait ? w * 0.13 : Math.min(w * 0.068, h * 0.1);
     g.scale.setScalar(base * THREE.MathUtils.lerp(1, 1.3, lever));
 
     // 1. Ouverture de la lame (0 → 0.55)
@@ -180,7 +180,7 @@ function Rasoir({ onReady }: { onReady?: () => void }) {
     b.rotation.z = THREE.MathUtils.lerp(2.55, Math.PI * 1.03, open);
 
     // 2. L'objet monte au centre, se redresse à l'horizontale et pivote lentement
-    const yRepos = portrait ? -0.14 * h : -0.17 * h;
+    const yRepos = centre ? 0 : portrait ? -0.14 * h : -0.17 * h;
     g.position.set(0, THREE.MathUtils.lerp(yRepos, 0, lever) + Math.sin(t * 1.1) * 0.03 * base, 0);
     const tour = easeInOut(range(p, 0.3, 1));
     g.rotation.set(
@@ -213,7 +213,7 @@ function Rasoir({ onReady }: { onReady?: () => void }) {
   );
 }
 
-export default function RasoirScene({ active, onReady }: { active: boolean; onReady?: () => void }) {
+export default function RasoirScene({ active, onReady, centre }: { active: boolean; onReady?: () => void; centre?: boolean }) {
   return (
     <Canvas
       frameloop={active ? "always" : "demand"}
@@ -235,10 +235,10 @@ export default function RasoirScene({ active, onReady }: { active: boolean; onRe
         <Lightformer form="rect" intensity={5} position={[0, 4, 4]} rotation-x={Math.PI / 2.5} scale={[10, 1.2, 1]} />
         <Lightformer form="rect" intensity={2} position={[-5, 0, 2]} rotation-y={Math.PI / 2} scale={[8, 1.4, 1]} />
         <Lightformer form="rect" intensity={1.4} position={[5, -1, 1]} rotation-y={-Math.PI / 2} scale={[8, 0.6, 1]} />
-        <Lightformer form="ring" color="#f2ede4" intensity={2.5} position={[0, 0, -6]} scale={3} />
+        <Lightformer form="ring" color="#e6c48c" intensity={2.5} position={[0, 0, -6]} scale={3} />
         <Lightformer form="rect" color="#ffffff" intensity={0.8} position={[0, -4, 1]} rotation-x={Math.PI / 2} scale={[6, 0.4, 1]} />
       </Environment>
-      <Rasoir onReady={onReady} />
+      <Rasoir onReady={onReady} centre={centre} />
     </Canvas>
   );
 }

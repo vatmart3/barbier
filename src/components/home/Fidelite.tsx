@@ -84,7 +84,7 @@ export function Fidelite() {
 
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
           <div data-reveal="monte">
-          <div className="relative mx-auto max-w-xl papier rotate-[-2deg] rounded-[1.75rem] bg-creme p-5 text-charbon shadow-paper sm:p-8">
+          <div className="relative mx-auto max-w-xl papier rotate-[-2deg] rounded-[1.75rem] border border-rouge/30 bg-creme p-5 text-charbon shadow-[0_30px_60px_-20px_rgb(0_0_0/0.8)] sm:p-8">
             <div className="flex items-baseline justify-between border-b border-charbon/20 pb-3">
               <p className="font-display text-3xl leading-none">Dégradé</p>
               <p className="eyebrow text-acier-fonce">Carte n° 0427</p>
@@ -107,7 +107,7 @@ export function Fidelite() {
                       </span>
                     ) : null}
                     {filled ? (
-                      <span className="tampon absolute -inset-1 text-rouge mix-blend-multiply" style={{ "--r": `${ROT[i]}deg` } as CSSProperties}>
+                      <span className="tampon absolute -inset-1 text-rouge" style={{ "--r": `${ROT[i]}deg` } as CSSProperties}>
                         <Tampon n={i + 1} />
                       </span>
                     ) : null}
@@ -137,7 +137,7 @@ export function Fidelite() {
             {complet ? (
               <p aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <span
-                  className="tampon block border-4 border-rouge px-5 py-2 font-display text-6xl text-rouge mix-blend-multiply"
+                  className="tampon block border-4 border-rouge px-5 py-2 font-display text-6xl text-rouge"
                   style={{ "--r": "-12deg" } as CSSProperties}
                 >
                   Offerte

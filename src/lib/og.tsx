@@ -11,7 +11,7 @@ import { site } from "@/config/site";
 export const OG_SIZE = { width: 1200, height: 630 };
 
 const fonts = Promise.all([
-  readFile(join(process.cwd(), "src/assets/fonts/Fraunces-Soft-600.ttf")),
+  readFile(join(process.cwd(), "src/assets/fonts/Fraunces-Soft.ttf")),
   readFile(join(process.cwd(), "src/assets/fonts/Figtree-Medium.ttf")),
 ]);
 
@@ -24,8 +24,8 @@ export async function ogImage({ eyebrow, titre }: Og) {
   const [titres, texte] = await fonts;
   const blanc = "#f5f5f7";
   const gris = "#86868b";
-  const ambre = "#f5a25d";
-  const cuivre = "#b3541e";
+  const ambre = "#d6b47d";
+  const cuivre = "#c9a064";
 
   return new ImageResponse(
     (
@@ -52,19 +52,19 @@ export async function ogImage({ eyebrow, titre }: Og) {
             marginTop: 18,
             fontFamily: "Fraunces",
             fontSize: 108,
-            fontWeight: 600,
+            fontWeight: 400,
             lineHeight: 1.04,
             letterSpacing: -1,
           }}
         >
           {titre.map((l, i) => (
-            <div key={l} style={{ color: i > 0 ? gris : blanc }}>
+            <div key={l} style={{ color: i > 0 ? ambre : blanc }}>
               {l}
             </div>
           ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 28, marginTop: 48, fontSize: 26 }}>
-          <div style={{ display: "flex", background: cuivre, color: "#ffffff", padding: "14px 32px", borderRadius: 999 }}>
+          <div style={{ display: "flex", background: cuivre, color: "#1a140c", padding: "14px 32px", borderRadius: 999 }}>
             {site.phone.display}
           </div>
           <div style={{ display: "flex", color: gris }}>{`${site.address.street}, ${site.address.city}`}</div>
@@ -74,7 +74,7 @@ export async function ogImage({ eyebrow, titre }: Og) {
     {
       ...OG_SIZE,
       fonts: [
-        { name: "Fraunces", data: titres, weight: 600, style: "normal" },
+        { name: "Fraunces", data: titres, weight: 400, style: "normal" },
         { name: "Figtree", data: texte, weight: 500, style: "normal" },
       ],
     },

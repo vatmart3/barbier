@@ -219,7 +219,7 @@ export function Formulaire({ prestation, devis: d, date, heure, barbier, debut, 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-full bg-rouge px-6 text-sm font-semibold text-white transition-colors hover:bg-rouge-fonce disabled:cursor-wait disabled:opacity-80"
+          className="group mt-6 flex min-h-14 w-full items-center justify-between rounded-xl bg-rouge px-6 text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-sur-accent transition-colors hover:bg-rouge-fonce disabled:cursor-wait disabled:opacity-80"
         >
           {isSubmitting ? (
             <span className="flex items-center gap-3">

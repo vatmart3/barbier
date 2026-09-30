@@ -29,7 +29,7 @@ export function CoupesHorizontal() {
       <Carrousel label="Les six coupes" className="mt-10">
         {coupes.map((c) => (
           <li key={c.id} className="w-[84%] max-w-[23rem] shrink-0 snap-start sm:w-[22rem]">
-            <article aria-labelledby={`coupe-${c.id}`} className="flex h-full flex-col rounded-[1.75rem] bg-charbon p-3 shadow-[0_1px_2px_rgb(0_0_0/0.04),0_8px_24px_-12px_rgb(0_0_0/0.12)]">
+            <article aria-labelledby={`coupe-${c.id}`} className="flex h-full flex-col rounded-[1.75rem] bg-charbon p-3">
               <div className="relative overflow-hidden rounded-[1.25rem] bg-charbon-2 px-6 pt-10" style={{ ["--paper" as string]: "var(--color-charbon-2)" }}>
                 <p className="absolute left-4 top-4 rounded-full bg-charbon px-3 py-1 text-xs font-semibold">
                   <span className="text-acier">Sabot </span>

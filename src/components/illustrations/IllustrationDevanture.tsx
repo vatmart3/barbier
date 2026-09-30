@@ -1,11 +1,11 @@
 /**
- * La devanture, Grand'Rue, dessinée en aplats arrondis : façade noire,
- * store festonné cuivre, vitrine éclairée, porte en arche, enseigne de
+ * La devanture, Grand'Rue, un soir, dessinée en aplats arrondis : façade noire,
+ * store festonné or, vitrine éclairée, porte en arche, enseigne de
  * barbier et un vélo garé devant. En attendant de vraies photos (ASSETS.md).
  */
-const ENCRE = "#1d1d1f";
-const CUIVRE = "#b3541e";
-const CREME = "#f5efe6";
+const ENCRE = "#0b0b0b";
+const CUIVRE = "#c9a064";
+const CREME = "#ece2cf";
 
 export function IllustrationDevanture({ className, title }: { className?: string; title: string }) {
   return (
@@ -24,19 +24,19 @@ export function IllustrationDevanture({ className, title }: { className?: string
       </defs>
 
       {/* mur en pierre claire */}
-      <rect width={800} height={500} fill="#ece2d4" />
+      <rect width={800} height={500} fill="#1c1916" />
       {Array.from({ length: 6 }, (_, r) =>
         Array.from({ length: 9 }, (_, c) => (
-          <rect key={`${r}-${c}`} x={c * 100 - (r % 2) * 50 + 6} y={r * 70 + 6} width={88} height={58} rx={14} fill="#e4d8c7" />
+          <rect key={`${r}-${c}`} x={c * 100 - (r % 2) * 50 + 6} y={r * 70 + 6} width={88} height={58} rx={14} fill="#221e1a" />
         )),
       )}
 
       {/* façade */}
       <rect x={110} y={92} width={580} height={368} rx={30} fill={ENCRE} />
-      <text x={400} y={160} textAnchor="middle" fill={CREME} style={{ font: "600 56px var(--font-display), Georgia, serif" }}>
+      <text x={400} y={160} textAnchor="middle" fill="#f2eee8" style={{ font: "600 56px var(--font-display), Georgia, serif" }}>
         Dégradé
       </text>
-      <text x={400} y={184} textAnchor="middle" fill="#d9a57c" style={{ font: "600 13px var(--font-sans), sans-serif", letterSpacing: "0.3em" }}>
+      <text x={400} y={184} textAnchor="middle" fill="#d6b47d" style={{ font: "600 13px var(--font-sans), sans-serif", letterSpacing: "0.3em" }}>
         BARBIER · SÈTE
       </text>
 
@@ -49,7 +49,7 @@ export function IllustrationDevanture({ className, title }: { className?: string
       {Array.from({ length: 14 }, (_, i) => (
         <circle key={i} cx={140 + i * 40} cy={242} r={20} fill={i % 2 ? CREME : CUIVRE} />
       ))}
-      <rect x={116} y={190} width={568} height={10} rx={5} fill="#8a3d14" />
+      <rect x={116} y={190} width={568} height={10} rx={5} fill="#8a6a3a" />
 
       {/* vitrine */}
       <rect x={146} y={284} width={300} height={150} rx={24} fill="url(#dev-vitrine)" />
@@ -61,12 +61,12 @@ export function IllustrationDevanture({ className, title }: { className?: string
       <rect x={146} y={284} width={300} height={150} rx={24} fill="none" stroke="#3a3a3e" strokeWidth={8} />
 
       {/* porte en arche */}
-      <path d="M482 460 V330 a62 62 0 0 1 124 0 V460 Z" fill="#2c2c30" />
+      <path d="M482 460 V330 a62 62 0 0 1 124 0 V460 Z" fill="#1a1a1a" />
       <circle cx={544} cy={336} r={30} fill="url(#dev-vitrine)" />
       <circle cx={586} cy={402} r={6} fill={CUIVRE} />
       <line x1={528} y1={362} x2={528} y2={378} stroke="#8a8a90" strokeWidth={2} />
       <line x1={560} y1={362} x2={560} y2={378} stroke="#8a8a90" strokeWidth={2} />
-      <rect x={512} y={376} width={64} height={26} rx={13} fill={CREME} />
+      <rect x={512} y={376} width={64} height={26} rx={13} fill="#f2eee8" />
       <text x={544} y={394} textAnchor="middle" fill={ENCRE} style={{ font: "700 13px var(--font-sans), sans-serif" }}>
         Ouvert
       </text>
@@ -82,9 +82,9 @@ export function IllustrationDevanture({ className, title }: { className?: string
       ))}
 
       {/* enseigne de barbier au mur */}
-      <rect x={90} y={250} width={22} height={8} rx={4} fill={ENCRE} />
-      <rect x={50} y={188} width={40} height={16} rx={8} fill={ENCRE} />
-      <rect x={50} y={306} width={40} height={16} rx={8} fill={ENCRE} />
+      <rect x={90} y={250} width={22} height={8} rx={4} fill={CUIVRE} />
+      <rect x={50} y={188} width={40} height={16} rx={8} fill={CUIVRE} />
+      <rect x={50} y={306} width={40} height={16} rx={8} fill={CUIVRE} />
       <g clipPath="url(#dev-poteau)">
         <rect x={58} y={200} width={24} height={110} fill="#fff" />
         {Array.from({ length: 7 }, (_, i) => (
@@ -93,11 +93,11 @@ export function IllustrationDevanture({ className, title }: { className?: string
       </g>
 
       {/* trottoir */}
-      <rect y={460} width={800} height={40} fill="#d8cab7" />
-      <rect y={458} width={800} height={6} rx={3} fill="#cbbba5" />
+      <rect y={460} width={800} height={40} fill="#292521" />
+      <rect y={458} width={800} height={6} rx={3} fill="#35302a" />
 
       {/* vélo garé */}
-      <g stroke={ENCRE} strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <g stroke="#cbc5bb" strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" fill="none">
         <circle cx={660} cy={452} r={30} />
         <circle cx={752} cy={452} r={30} />
         <path d="M660 452 L690 412 H736 L752 452 M690 412 L708 452 H660 M708 452 L736 412 M686 400 h14 M736 412 l-6 -16 h16" />

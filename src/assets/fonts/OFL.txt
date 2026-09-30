@@ -1,2 +1,2 @@
 Fraunces (Undercase Type) et Figtree (Erik Kennedy) — SIL Open Font License 1.1.
-https://openfontlicense.org — Fraunces-Soft-600 : instance « SOFT » demi-grasse (fonttools varLib.instancer), utilisée sur le site (woff2) et dans les images Open Graph (ttf). Figtree-Medium : images Open Graph.
+https://openfontlicense.org — Fraunces-Soft : instance « SOFT » en graisse 420 (fonttools varLib.instancer), utilisée sur le site (woff2) et dans les images Open Graph (ttf). Figtree-Medium : images Open Graph.

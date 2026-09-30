@@ -47,7 +47,7 @@ function Option({
     <label
       className={cn(
         "group relative flex min-h-16 cursor-pointer items-center gap-4 border px-4 py-3 transition-colors duration-300",
-        checked ? "border-charbon bg-charbon text-creme" : "border-charbon/20 hover:border-charbon",
+        checked ? "border-rouge bg-rouge/10 text-charbon" : "border-charbon/20 hover:border-charbon/50",
         disabled && "cursor-not-allowed opacity-40 hover:border-charbon/20",
         "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-rouge",
       )}
@@ -73,7 +73,7 @@ function Option({
       </span>
       <span className="flex-1">
         <span className="block font-display text-2xl leading-none">{titre}</span>
-        <span className={cn("mt-1 block text-xs", checked ? "text-creme/75" : "text-acier-fonce")}>{detail}</span>
+        <span className={cn("mt-1 block text-xs", checked ? "text-charbon/80" : "text-acier-fonce")}>{detail}</span>
       </span>
       {aside ? <span className="tabular text-sm">{aside}</span> : null}
     </label>
@@ -283,11 +283,11 @@ export function Configurateur() {
 
         {/* Récapitulatif */}
         {d ? (
-          <div className="mt-8 rounded-[2rem] bg-charbon p-7 text-creme">
+          <div className="papier mt-8 rounded-[2rem] border border-rouge/40 bg-creme p-7 text-charbon">
             <div className="flex items-end justify-between gap-6">
               <div>
                 <p className="eyebrow text-acier">Total</p>
-                <p className="font-display text-7xl leading-none">
+                <p className="font-display text-7xl leading-none text-rouge-fonce">
                   <Compteur value={d.prix} duration={600} /> €
                 </p>
               </div>
@@ -298,10 +298,10 @@ export function Configurateur() {
                 </p>
               </div>
             </div>
-            <ul className="mt-5 space-y-1 border-t border-creme/15 pt-4 text-sm">
+            <ul className="mt-5 space-y-1 border-t border-charbon/15 pt-4 text-sm">
               {d.lignes.map((l) => (
                 <li key={l.label} className="flex justify-between">
-                  <span className="text-creme/80">{l.label}</span>
+                  <span className="text-charbon/80">{l.label}</span>
                   <span className="tabular">{euros(l.prix)}</span>
                 </li>
               ))}
@@ -309,7 +309,7 @@ export function Configurateur() {
             <AnimatePresence>
               {d.economie > 0 ? (
                 <motion.p
-                  className="mt-3 inline-block bg-rouge px-2 py-1 text-xs font-semibold"
+                  className="mt-3 inline-block rounded-full bg-rouge px-3 py-1 text-xs font-semibold text-sur-accent"
                   initial={{ scale: 0.6, opacity: 0, rotate: -6 }}
                   animate={{ scale: 1, opacity: 1, rotate: -2 }}
                   exit={{ opacity: 0 }}

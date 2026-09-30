@@ -2,8 +2,8 @@
 @import "../design/tokens.css";
 
 /* ==========================================================================
-   Base — clair, arrondi, beaucoup d'air. Titres en Fraunces « SOFT »
-   (empattements ronds), texte en Figtree, notes à la main en Caveat.
+   Base — salon de nuit : anthracite, or, formes arrondies. Titres en
+   Fraunces « SOFT » fine, texte en Figtree, notes à la main en Caveat.
    ========================================================================== */
 
 @layer base {
@@ -25,13 +25,13 @@
     overflow-x: clip;
   }
 
-  /* Titres : Fraunces arrondie, demi-gras, approche légèrement resserrée */
+  /* Titres : Fraunces arrondie, graisse fine, approche légèrement resserrée */
   .font-display,
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 420;
     font-optical-sizing: auto;
     letter-spacing: -0.012em;
     text-wrap: balance;
@@ -108,51 +108,48 @@
    Portées de couleur
    ========================================================================== */
 
-/* Sections gris clair (alternance blanc / gris, comme les pages produit) */
+/* Sections alternées : un ton au-dessus du fond */
 .salon {
-  --color-creme: #f5f5f7;       /* surface de la section                   */
-  --color-creme-2: #ffffff;     /* cartes posées sur la section            */
-  --color-creme-3: #86868b;
-  --color-charbon: #1d1d1f;     /* encre (et cartes sombres éventuelles)   */
-  --color-acier-fonce: #6e6e73;
-  --color-acier: #a1a1a6;       /* texte secondaire sur les cartes sombres */
-  --color-rouge-fonce: #a84d19;
+  --color-creme: #141414;       /* surface de la section                   */
+  --color-creme-2: #1b1b1b;     /* cartes posées sur la section            */
+  --color-creme-3: #8b857c;
+  --color-charbon: #f2eee8;     /* encre                                   */
+  --color-acier-fonce: #a39d93;
+  --color-acier: #a39d93;
+  --color-rouge-fonce: #d6b47d;
 }
 
-/* Hero noir, façon page produit */
+/* Hero : noir profond */
 .nuit {
-  --color-charbon: #000000;
-  --color-charbon-2: #1d1d1f;
-  --color-charbon-3: #333336;
-  --color-creme: #f5f5f7;
-  --color-creme-2: #d2d2d7;
-  --color-acier: #a1a1a6;
-  --color-acier-clair: #a1a1a6;
-  --color-rouge-fonce: #f5a25d;
-  --color-ambre: #f5a25d;
+  --color-charbon: #0a0a0a;
+  --color-charbon-2: #161616;
+  --color-charbon-3: #2a2a2a;
+  --color-creme: #f2eee8;
+  --color-creme-2: #cbc5bb;
+  --color-acier: #a39d93;
+  --color-acier-clair: #a39d93;
+  --color-rouge-fonce: #d6b47d;
+  --color-ambre: #d6b47d;
   color-scheme: dark;
 }
 
-/* Cartes blanches (carte de fidélité, ticket, récapitulatifs) */
+/* Cartes (carte de fidélité, ticket, récapitulatifs) */
 .papier {
-  --color-creme: #ffffff;
-  --color-creme-2: #f5f5f7;
-  --color-charbon: #1d1d1f;
-  --color-acier-fonce: #6e6e73;
-  --color-rouge-fonce: #a84d19;
+  --color-creme: #1b1b1b;
+  --color-creme-2: #232323;
+  --color-charbon: #f2eee8;
+  --color-acier-fonce: #a39d93;
+  --color-rouge-fonce: #d6b47d;
 }
 
-/* Titres en deux tons : la seconde ligne en gris (et non en couleur d'accent) */
+/* Titres en deux tons : la seconde ligne en or */
 :is(h1, h2) :is(.text-acier, .text-acier-fonce) {
-  color: var(--color-acier-fonce);
-}
-.nuit :is(h1, h2) :is(.text-acier, .text-acier-fonce) {
-  color: var(--color-acier);
+  color: var(--color-rouge-fonce);
 }
 
 /* Titre du hero : léger dégradé titane */
 .metal {
-  background: linear-gradient(180deg, #ffffff 0%, #e8e8ed 55%, #a1a1a6 100%);
+  background: linear-gradient(180deg, #f3dcb2 0%, #d6b47d 50%, #a9803f 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

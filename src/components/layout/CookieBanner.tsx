@@ -82,7 +82,7 @@ export function CookieBanner() {
         <section
           role="region"
           aria-label="Gestion des cookies"
-          className="fixed inset-x-3 bottom-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+0.75rem)] z-[70] max-w-md rounded-[1.5rem] bg-creme p-5 text-charbon shadow-card animate-[monte-doux_450ms_var(--ease-out-cut)_both] sm:left-auto sm:right-6 lg:bottom-6"
+          className="fixed inset-x-3 bottom-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+0.75rem)] z-[70] papier max-w-md rounded-[1.5rem] border border-rouge/30 bg-creme p-5 text-charbon shadow-[0_24px_60px_-12px_rgb(0_0_0/0.9)] animate-[monte-doux_450ms_var(--ease-out-cut)_both] sm:left-auto sm:right-6 lg:bottom-6"
         >
           <h2 className="font-display text-2xl leading-none">Cookies</h2>
           <p className="mt-3 text-sm text-charbon/80">

@@ -1,31 +1,33 @@
 /* ==========================================================================
-   DÉGRADÉ — Design system (style « Apple » : clair, sobre, arrondi)
+   DÉGRADÉ — Design system (salon de nuit : anthracite, encre chaude, or)
    Source unique des tokens visuels. Les équivalents JS (easings, durées)
    sont dans src/design/motion.ts et DOIVENT rester alignés avec ce fichier.
 
    RÔLES DES COULEURS (les noms historiques sont conservés dans les classes) :
-   --color-charbon*  = FONDS   (blanc, gris très clair, traits)
+   --color-charbon*  = FONDS   (anthracite, panneaux, traits)
    --color-creme*    = ENCRES  (texte principal, puis nuances)
-   Les portées .salon (sections gris clair), .nuit (hero noir) et .papier
-   (cartes blanches) redéfinissent ces rôles localement — voir globals.css.
+   --color-rouge*    = ACCENT  (or : fonds de boutons, puis texte)
+   Les portées .salon (sections alternées), .nuit (hero) et .papier
+   (cartes) redéfinissent ces rôles localement — voir globals.css.
    ========================================================================== */
 
 @theme {
   /* ---- Couleurs ---------------------------------------------------------- */
-  --color-charbon: #ffffff;     /* fond principal                           */
-  --color-charbon-2: #f5f5f7;   /* tuiles, cartes                           */
-  --color-charbon-3: #e8e8ed;   /* traits                                   */
-  --color-creme: #1d1d1f;       /* encre principale                         */
-  --color-creme-2: #424245;
-  --color-creme-3: #86868b;
-  --color-acier: #6e6e73;       /* texte secondaire (5.1:1 sur blanc)       */
-  --color-acier-clair: #6e6e73;
-  --color-acier-fonce: #6e6e73;
-  --color-rouge: #b3541e;       /* ACCENT cuivre : fonds de boutons (5:1 avec le blanc) */
-  --color-rouge-fonce: #a84d19; /* accent en texte sur fond clair (5.2:1)   */
-  --color-ambre: #a84d19;       /* accent texte (redéfini en clair sur fond noir) */
-  --color-ambre-2: #b3541e;
-  --color-erreur: #d70015;
+  --color-charbon: #0f0f0f;     /* fond principal                           */
+  --color-charbon-2: #171717;   /* panneaux, cartes                         */
+  --color-charbon-3: #2a2a2a;   /* traits, cases                            */
+  --color-creme: #f2eee8;       /* encre principale (blanc chaud)           */
+  --color-creme-2: #cbc5bb;
+  --color-creme-3: #8b857c;
+  --color-acier: #a39d93;       /* texte secondaire (6,9:1 sur #171717)     */
+  --color-acier-clair: #a39d93;
+  --color-acier-fonce: #a39d93;
+  --color-rouge: #c9a064;       /* ACCENT or : fonds de boutons             */
+  --color-rouge-fonce: #d6b47d; /* accent en texte sur fond sombre (9:1)    */
+  --color-ambre: #d6b47d;
+  --color-ambre-2: #c9a064;
+  --color-sur-accent: #1a140c;  /* texte posé sur l'or (8:1)                */
+  --color-erreur: #ff7b6e;
 
   /* ---- Typographies ---------------------------------------------------- */
   /* Fraunces SOFT (titres arrondis) · Figtree (texte) · Caveat (notes à la main) */
@@ -95,7 +97,7 @@
 }
 
 :root {
-  --header-h: 3.25rem;
+  --header-h: 4.25rem;
   --mobile-bar-h: 3.75rem;
   --focus-ring: 0 0 0 2px var(--color-charbon), 0 0 0 4px var(--color-rouge);
   /* Trace de tondeuse : lignes fines répétées, utilisées en fond ou en masque */

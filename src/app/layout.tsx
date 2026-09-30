@@ -13,11 +13,11 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Revelateur } from "@/components/layout/Revelateur";
 import "./globals.css";
 
-// Titres : Fraunces « SOFT » (empattements arrondis), instance demi-grasse
-// avec tailles optiques 24–96 : 32 Ko au lieu de 120 Ko (voir ASSETS.md)
+// Titres : Fraunces « SOFT » (empattements arrondis), graisse fine et
+// tailles optiques 24–144 : 33 Ko au lieu de 120 Ko (voir ASSETS.md)
 const titres = localFont({
-  src: "../assets/fonts/Fraunces-Soft-600.woff2",
-  weight: "600",
+  src: "../assets/fonts/Fraunces-Soft.woff2",
+  weight: "420",
   display: "swap",
   variable: "--font-fraunces",
   fallback: ["Georgia", "serif"],
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
-  colorScheme: "light",
+  themeColor: "#0e0e0e",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",

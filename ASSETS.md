@@ -9,8 +9,8 @@ Le téléchargement de photos libres (Unsplash, Pexels, Wikimedia) est bloqué d
 |---|---|---|
 | Rasoir coupe-chou 3D (hero) | `src/components/three/RasoirScene.tsx` | Géométries extrudées procédurales, acier `MeshPhysicalMaterial`, corne en texture canvas, reflets Lightformer — aucun modèle ni HDR téléchargé |
 | Enseigne de barbier 3D (progression) | `src/components/three/EnseigneScene.tsx` | Cylindre + shader GLSL maison (spirale pilotée par le scroll) |
-| Intérieur du salon (fauteuils, miroirs en arche, Sabot le chat) | `src/components/illustrations/IllustrationSalon.tsx` | SVG dessiné, aplats arrondis |
-| Devanture Grand'Rue (store festonné, vitrine, vélo) | `src/components/illustrations/IllustrationDevanture.tsx` | SVG dessiné, aplats arrondis |
+| Intérieur du salon, le soir (fauteuils, miroirs en arche cerclés d'or, Sabot le chat) | `src/components/illustrations/IllustrationSalon.tsx` | SVG dessiné, aplats arrondis |
+| Devanture Grand'Rue, le soir (store festonné or, vitrine éclairée, vélo) | `src/components/illustrations/IllustrationDevanture.tsx` | SVG dessiné, aplats arrondis |
 | Rasoir SVG (repli sans WebGL) | `src/components/illustrations/RasoirSVG.tsx` | SVG dessiné à la main |
 | Profils gravés (coupes, configurateur, avant/après, portraits) | `src/components/illustrations/profil-*.ts(x)` | SVG paramétrique : hachures « traces de tondeuse », masque de fondu, morphing |
 | Carte de Sète | `src/components/illustrations/CarteSete.tsx` | SVG stylisé (étang de Thau, canal royal, Mont Saint-Clair en courbes de niveau) — pas de carte tierce |
@@ -25,11 +25,11 @@ Toutes sous **SIL Open Font License 1.1** (fichiers et licence dans `src/assets/
 
 | Police | Rôle | Chargement |
 |---|---|---|
-| **Fraunces** (Undercase Type), axe « SOFT » à 100 | Titres, prix : empattements arrondis, chaleureux | Instance locale demi-grasse, tailles optiques 24–96 (`Fraunces-Soft-600.woff2`, 32 Ko, préchargée). Générée avec `fonttools varLib.instancer` depuis Google Fonts |
+| **Fraunces** (Undercase Type), axe « SOFT » à 100 | Titres, prix : empattements arrondis, chaleureux | Instance locale en graisse fine (420), tailles optiques 24–144 (`Fraunces-Soft.woff2`, 33 Ko, préchargée). Générée avec `fonttools varLib.instancer` depuis Google Fonts |
 | **Figtree** (Erik Kennedy) | Texte courant, interface | `next/font/google`, préchargée (20 Ko) |
 | **Caveat** (Impallari Type) | Notes à la main : répliques des barbiers, signature de Karim | `next/font/google`, non préchargée (jamais critique) |
 
-Les images Open Graph utilisent `Fraunces-Soft-600.ttf` et `Figtree-Medium.ttf`.
+Les images Open Graph utilisent `Fraunces-Soft.ttf` et `Figtree-Medium.ttf`.
 
 ## 3. Photos à prévoir pour un vrai client
 

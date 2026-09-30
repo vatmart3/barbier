@@ -22,17 +22,17 @@ interface Common {
 type LinkProps = Common & { href: string; external?: boolean } & Omit<ComponentProps<"a">, "href" | "children" | "className">;
 type ButtonProps = Common & { href?: undefined } & Omit<ComponentProps<"button">, "children" | "className">;
 
-/** Pilules : pleine (accent), claire, ou contour. Retour immédiat à l'appui. */
+/** Boutons arrondis : plein (or), clair, ou contour or. Capitales espacées. Retour immédiat à l'appui. */
 const variants: Record<Variant, string> = {
-  rouge: "bg-rouge text-white hover:brightness-110",
-  creme: "bg-creme text-charbon hover:opacity-90",
-  ligne: "border border-creme/30 text-creme hover:border-creme/60 hover:bg-creme/5",
+  rouge: "bg-rouge text-sur-accent hover:brightness-110",
+  creme: "bg-rouge text-sur-accent hover:brightness-110",
+  ligne: "border border-rouge/70 text-rouge-fonce hover:border-rouge hover:bg-rouge/10",
   "ligne-sombre": "border border-charbon/30 text-charbon hover:border-charbon/60",
 };
 
 const sizes = {
-  md: "min-h-11 px-5 text-[0.9375rem] gap-2",
-  lg: "min-h-12 px-6 text-[1.0625rem] gap-2.5",
+  md: "min-h-11 px-5 text-[0.8125rem] gap-2",
+  lg: "min-h-13 px-7 text-[0.875rem] gap-2.5",
 };
 
 export function Bouton(props: LinkProps | ButtonProps) {
@@ -41,13 +41,13 @@ export function Bouton(props: LinkProps | ButtonProps) {
   const inner = (
     <>
       {icon ? <span className="shrink-0">{icon}</span> : null}
-      <span className="whitespace-nowrap font-medium">{children}</span>
+      <span className="whitespace-nowrap font-semibold uppercase tracking-[0.08em]">{children}</span>
       {iconEnd ? <span className="shrink-0 transition-transform duration-300 ease-(--ease-out-cut) group-hover:translate-x-0.5">{iconEnd}</span> : null}
     </>
   );
 
   const cls = cn(
-    "group inline-flex items-center justify-center rounded-full transition-[filter,opacity,background-color,border-color,transform] duration-200 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50",
+    "group inline-flex items-center justify-center rounded-xl transition-[filter,opacity,background-color,border-color,transform] duration-200 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50",
     variants[variant],
     sizes[size],
     pleine && "w-full",

@@ -53,7 +53,7 @@ export function Question() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: ease.outCut }}
         >
-          <span className="grid size-12 place-items-center bg-charbon text-creme">
+          <span className="grid size-12 place-items-center rounded-full bg-rouge text-sur-accent">
             <IconCheck size={24} />
           </span>
           <p className="mt-6 font-display text-4xl leading-none">Question reçue.</p>
@@ -116,7 +116,7 @@ export function Question() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-charbon px-6 text-[1.0625rem] font-medium text-creme transition-colors hover:bg-rouge-fonce disabled:cursor-wait disabled:opacity-80"
+            className="group inline-flex min-h-12 items-center gap-3 rounded-xl bg-rouge px-6 text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-sur-accent transition-[filter] hover:brightness-110 disabled:cursor-wait disabled:opacity-80"
           >
             {isSubmitting ? "Envoi…" : "Envoyer la question"}
             <IconFleche size={20} className="transition-transform group-hover:translate-x-1" />

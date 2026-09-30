@@ -46,21 +46,21 @@ export function Tarifs({ n = "05", titre = true }: { n?: string; titre?: boolean
 
         {/* Formule vedette */}
         <div className="col-span-12 lg:col-span-5">
-          <div className="relative rounded-[2rem] bg-charbon p-7 text-creme shadow-card sm:p-10 lg:sticky lg:top-24">
+          <div className="relative rounded-[2rem] border border-rouge/40 bg-creme-2 p-7 text-charbon sm:p-10 lg:sticky lg:top-24">
             <p className="eyebrow flex items-center justify-between text-acier">
               <span>La plus demandée</span>
-              <span className="rounded-full bg-rouge px-2.5 py-1 text-white">−{economie} €</span>
+              <span className="rounded-full bg-rouge px-2.5 py-1 text-sur-accent">−{economie} €</span>
             </p>
             <p className="mt-6 font-display text-d1">{formuleVedette.nom}</p>
-            <p className="mt-2 text-sm text-creme/75">{formuleVedette.detail}</p>
+            <p className="mt-2 text-sm text-acier">{formuleVedette.detail}</p>
             <div className="mt-8 flex items-end gap-5">
-              <p className="font-display text-d3 leading-[0.8]">
+              <p className="font-display text-d3 leading-[0.8] text-rouge-fonce">
                 <Compteur value={formuleVedette.prix} duration={1200} />
                 <span className="text-d1"> €</span>
               </p>
               <div className="pb-2 text-sm">
                 <p className="text-acier line-through decoration-rouge decoration-2">{formuleVedette.prixSepare} € séparément</p>
-                <p className="tabular text-creme/80">{formuleVedette.duree} min au fauteuil</p>
+                <p className="tabular text-charbon/80">{formuleVedette.duree} min au fauteuil</p>
               </div>
             </div>
             <div className="mt-8">

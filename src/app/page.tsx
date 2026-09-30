@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Page } from "@/components/layout/Page";
 import { Hero } from "@/components/home/Hero";
-import { ProchainCreneau } from "@/components/home/ProchainCreneau";
+import { ReservationExpress } from "@/components/home/ReservationExpress";
+import { Atouts } from "@/components/home/Atouts";
 import { CoupesHorizontal } from "@/components/home/CoupesHorizontal";
 import { Barbiers } from "@/components/home/Barbiers";
 import { MotDuPatron } from "@/components/home/MotDuPatron";
@@ -24,7 +25,8 @@ export default function Accueil() {
   return (
     <Page>
       <Hero />
-      <ProchainCreneau />
+      <ReservationExpress />
+      <Atouts />
       {/* Une frontière Suspense par section : hydratation sélective, en tâches courtes */}
       <Suspense>
         <CoupesHorizontal />

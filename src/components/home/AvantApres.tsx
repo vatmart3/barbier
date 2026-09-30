@@ -161,7 +161,7 @@ export function AvantApres() {
             </div>
 
             <span className="eyebrow absolute left-4 top-4 rounded-full bg-charbon px-3 py-1 text-creme">Avant</span>
-            <span className="eyebrow absolute right-4 top-4 rounded-full bg-rouge px-3 py-1 text-white">Après</span>
+            <span className="eyebrow absolute right-4 top-4 rounded-full bg-rouge px-3 py-1 text-sur-accent">Après</span>
 
             {/* La lame */}
             <div

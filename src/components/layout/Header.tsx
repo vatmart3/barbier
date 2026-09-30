@@ -10,7 +10,6 @@ import { useCallback, useState } from "react";
 import { nav } from "@/config/site";
 import { cn } from "@/lib/cn";
 import { IconCalendrier, IconCiseaux, IconMenu } from "@/components/ui/Icons";
-import { Enseigne } from "./Enseigne";
 import { ProchainCreneauPastille } from "./ProchainCreneauPastille";
 import { Menu } from "./Menu";
 
@@ -60,7 +59,6 @@ export function Header() {
           <span className="contents lg:hidden">
             <ProchainCreneauPastille compact />
           </span>
-          <Enseigne className="hidden sm:flex" />
 
           <Link
             href="/reserver"

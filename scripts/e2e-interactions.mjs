@@ -1,4 +1,4 @@
-// Interactions clés : menu, fidélité, configurateur, avant/après clavier, FAQ, question
+// Interactions clés : menu, galerie, configurateur, FAQ, question
 import { chromium } from "playwright";
 import { existsSync } from "node:fs";
 // Chromium de l'environnement si présent, sinon celui de Playwright (npx playwright install chromium)
@@ -18,23 +18,11 @@ console.log("menu focus :", await p.evaluate(() => document.activeElement?.textC
 await p.keyboard.press("Escape");
 await p.waitForTimeout(700);
 console.log("menu fermé :", await p.evaluate(() => !document.querySelector("#menu-principal")?.hasAttribute("data-ouvert")));
-// Fidélité
-const tamp = p.getByRole("button", { name: "Tamponner" });
-await tamp.scrollIntoViewIfNeeded();
+// Galerie : les photos se chargent
+const photos = p.locator("section[aria-labelledby=galerie-titre] img");
+await photos.first().scrollIntoViewIfNeeded();
 await p.waitForTimeout(1200);
-for (let i = 0; i < 10; i++) { if (await tamp.isVisible()) await tamp.click(); await p.waitForTimeout(150); }
-await p.waitForTimeout(600);
-console.log("fidélité :", await p.locator("text=Coupe offerte").count() > 0 ? "coupe offerte affichée" : "KO");
-await p.screenshot({ path: `${out}/i-fid.png` });
-// Avant / après clavier
-const slider = p.getByRole("slider", { name: /Comparer/ });
-await slider.scrollIntoViewIfNeeded();
-await p.waitForTimeout(1500);
-await slider.focus();
-await p.keyboard.press("Home");
-const v0 = await slider.getAttribute("aria-valuenow");
-await p.keyboard.press("ArrowRight"); await p.keyboard.press("ArrowRight");
-console.log("slider :", v0, "→", await slider.getAttribute("aria-valuenow"));
+console.log("galerie :", await photos.evaluateAll((l) => l.filter((i) => i.naturalWidth > 0).length), "photos chargées");
 // Configurateur
 await p.goto(base + "/coupes?coupe=fade-haut#configurateur", { waitUntil: "networkidle" });
 await p.waitForTimeout(800);

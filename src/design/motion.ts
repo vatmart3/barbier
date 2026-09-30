@@ -19,15 +19,6 @@ export const duration = {
   long: 1.1,
 } as const;
 
-/** Easings GSAP natifs les plus proches de nos courbes (pas de plugin payant). */
-export const gsapEase = {
-  blade: "power3.inOut",
-  outCut: "expo.out",
-  inCut: "power3.in",
-  thud: "back.out(1.8)",
-  comb: "sine.inOut",
-} as const;
-
 export const spring = {
   magnetic: { stiffness: 220, damping: 18, mass: 0.4 },
   soft: { stiffness: 120, damping: 20, mass: 0.8 },

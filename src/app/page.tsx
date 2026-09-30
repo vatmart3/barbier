@@ -8,9 +8,7 @@ import { CoupesHorizontal } from "@/components/home/CoupesHorizontal";
 import { Barbiers } from "@/components/home/Barbiers";
 import { MotDuPatron } from "@/components/home/MotDuPatron";
 import { Galerie } from "@/components/home/Galerie";
-import { AvantApres } from "@/components/home/AvantApres";
 import { Tarifs } from "@/components/home/Tarifs";
-import { Fidelite } from "@/components/home/Fidelite";
 import { Avis } from "@/components/home/Avis";
 import { Acces } from "@/components/home/Acces";
 import { pageMetadata } from "@/lib/seo";
@@ -29,26 +27,16 @@ export default function Accueil() {
       <ReservationExpress />
       <Atouts />
       {/* Une frontière Suspense par section : hydratation sélective, en tâches courtes */}
-      <Suspense>
-        <CoupesHorizontal />
-      </Suspense>
-      <Suspense>
-        <Barbiers />
-      </Suspense>
+      <CoupesHorizontal />
+      <Barbiers />
       <Galerie />
       <Suspense>
-        <AvantApres />
+        <Avis />
       </Suspense>
       <Suspense>
         <Tarifs />
       </Suspense>
-      <Suspense>
-        <Fidelite />
-      </Suspense>
       <MotDuPatron />
-      <Suspense>
-        <Avis />
-      </Suspense>
       <Suspense>
         <Acces />
       </Suspense>

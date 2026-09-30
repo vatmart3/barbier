@@ -1,99 +1,88 @@
 /**
- * « Les coupes » — une carte arrondie par coupe, dans un carrousel natif
- * (glisser au doigt, flèches rondes au clavier / à la souris).
- * Profil gravé, prix et durée, rythme d'entretien. Dernière carte : le configurateur.
+ * « Les coupes » — la carte, comme au comptoir : six fiches typographiques
+ * (numéro de sabot, nom, prix, durée, rythme d'entretien) et un bandeau vers
+ * le configurateur. Aucune animation, rien à charger.
  */
 import Link from "next/link";
 import { coupes } from "@/data/prestations";
-import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
-import { Carrousel } from "@/components/ui/Carrousel";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { TondeuseVitrine } from "./TondeuseVitrine";
+import { Bouton } from "@/components/ui/Bouton";
+import { cn } from "@/lib/cn";
+
+const VEDETTE = "fade-moyen";
 
 export function CoupesHorizontal() {
   return (
     <section id="coupes" aria-labelledby="coupes-titre" className="clair scroll-mt-12 bg-charbon-2 py-(--spacing-section) text-creme">
-      <div className="container-page grid items-center gap-x-10 lg:grid-cols-[1fr_1fr]">
-        <div>
-          <Etiquette>Les coupes</Etiquette>
-          <Lignes id="coupes-titre" className="mt-4 text-d2" lines={["Six coupes.", <span key="b" className="text-acier">Aucune au hasard.</span>]} />
-          <p className="mt-5 max-w-md text-acier">
-            Du sabot 0 au peigne seul. Chaque coupe a son geste, sa durée et son rythme d&apos;entretien.
-          </p>
-          <p aria-hidden className="font-script mt-5 inline-block -rotate-2 text-2xl text-rouge-fonce">
-            la plus demandée ? le fade moyen, de loin.
-          </p>
+      <div className="container-page">
+        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+          <div>
+            <Etiquette>Les coupes</Etiquette>
+            <Lignes id="coupes-titre" className="mt-4 text-d2" lines={["Six coupes.", <span key="b" className="text-acier">Aucune au hasard.</span>]} />
+          </div>
+          <p className="max-w-sm text-acier">Du sabot 0 au peigne seul. Chaque coupe a son geste, sa durée et son rythme d&apos;entretien.</p>
         </div>
-        <TondeuseVitrine className="mt-6 h-56 sm:h-72 lg:mt-0 lg:h-80" />
-      </div>
 
-      <Carrousel label="Les six coupes" className="mt-10">
-        {coupes.map((c) => (
-          <li key={c.id} className="w-[84%] max-w-[23rem] shrink-0 snap-start sm:w-[22rem]">
-            <article aria-labelledby={`coupe-${c.id}`} className="flex h-full flex-col rounded-[1.75rem] bg-charbon p-3">
-              <div className="relative overflow-hidden rounded-[1.25rem] bg-charbon-2 px-6 pt-10" style={{ ["--paper" as string]: "var(--color-charbon-2)" }}>
-                <p className="absolute left-4 top-4 rounded-full bg-charbon px-3 py-1 text-xs font-semibold">
-                  <span className="text-acier">Sabot </span>
-                  <span className="tabular">{c.repere}</span>
-                </p>
-                <ProfilStatique
-                  id={`h-${c.id}`}
-                  {...c.profil}
-                  dessus={c.dessusPossibles.includes("court") ? "court" : c.dessusPossibles[0]}
-                  barbe="aucune"
-                  className="mx-auto w-[78%] text-creme"
-                />
-              </div>
-              <div className="flex flex-1 flex-col px-3 pb-3 pt-5">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 id={`coupe-${c.id}`} className="text-[1.75rem] leading-tight">
+        <ul className="mt-12 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+          {coupes.map((c) => {
+            const vedette = c.id === VEDETTE;
+            return (
+              <li key={c.id}>
+                <article
+                  aria-labelledby={`coupe-${c.id}`}
+                  className={cn(
+                    "group relative flex h-full flex-col rounded-[1.5rem] border bg-charbon p-7 transition-[border-color,box-shadow] duration-300 hover:shadow-[0_20px_40px_-24px_rgb(27_33_30/0.35)]",
+                    vedette ? "border-rouge/60" : "border-charbon-3 hover:border-creme/25",
+                  )}
+                >
+                  {vedette ? (
+                    <span className="absolute -top-3 right-6 rounded-full bg-rouge px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.12em] whitespace-nowrap text-sur-accent">
+                      La plus demandée
+                    </span>
+                  ) : null}
+                  <p className="leading-none">
+                    <span className="font-display tabular block text-[3.25rem] text-rouge-fonce">{c.repere}</span>
+                    <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.14em] text-acier">{c.repereLegende}</span>
+                  </p>
+                  <h3 id={`coupe-${c.id}`} className="mt-8 text-[1.75rem] leading-tight">
                     {c.nom}
                   </h3>
-                  <p className="font-display tabular shrink-0 text-2xl">{c.prix} €</p>
-                </div>
-                <p className="mt-1 text-acier">
-                  {c.accroche} <span className="tabular whitespace-nowrap">· {c.duree} min</span>
-                </p>
-                <p className="mt-4 text-sm text-acier">{c.entretien}</p>
-                <Link
-                  href={`/reserver?coupe=${c.id}`}
-                  className="mt-auto inline-flex min-h-11 items-center gap-1 pt-4 font-semibold text-rouge-fonce hover:underline"
-                >
-                  Réserver un {c.nom.toLowerCase()} <span aria-hidden>›</span>
-                </Link>
-              </div>
-            </article>
-          </li>
-        ))}
+                  <p className="mt-2 text-acier">{c.accroche}</p>
+                  <dl className="mt-6 flex gap-6 border-t border-charbon-3 pt-4 text-sm">
+                    <div>
+                      <dt className="text-acier">Prix</dt>
+                      <dd className="font-display tabular mt-0.5 text-2xl">{c.prix} €</dd>
+                    </div>
+                    <div>
+                      <dt className="text-acier">Durée</dt>
+                      <dd className="font-display tabular mt-0.5 text-2xl">{c.duree} min</dd>
+                    </div>
+                  </dl>
+                  <p className="mt-4 text-sm text-acier">{c.entretien}</p>
+                  <Link
+                    href={`/reserver?coupe=${c.id}`}
+                    className="mt-auto inline-flex min-h-11 items-center gap-1 pt-5 font-semibold text-rouge-fonce after:absolute after:inset-0 after:rounded-[1.5rem] after:content-[''] hover:underline"
+                  >
+                    Réserver cette coupe <span aria-hidden>›</span>
+                  </Link>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
 
-        {/* Dernière carte : entrée du configurateur */}
-        <li className="w-[84%] max-w-[23rem] shrink-0 snap-start sm:w-[22rem]">
-          <div className="nuit flex h-full flex-col justify-between gap-8 rounded-[1.75rem] bg-charbon-2 p-7 text-creme">
-            <div>
-              <p className="text-sm font-semibold text-ambre">Pas sûr ?</p>
-              <p className="font-display mt-2 text-[2rem] leading-tight">Composez la vôtre.</p>
-              <p className="mt-3 text-creme-2">Hauteur du dégradé, longueur du dessus, barbe. Le prix et la durée se calculent au fur et à mesure.</p>
-            </div>
-            <ul className="grid grid-cols-3 gap-2" aria-label="Choisir la hauteur du dégradé">
-              {(["fade-bas", "fade-moyen", "fade-haut"] as const).map((id) => {
-                const c = coupes.find((x) => x.id === id)!;
-                return (
-                  <li key={id}>
-                    <Link
-                      href={`/coupes?coupe=${id}#configurateur`}
-                      className="flex min-h-24 flex-col justify-between rounded-2xl bg-white/10 p-4 transition-colors hover:bg-white/18"
-                    >
-                      <span className="font-display tabular text-3xl leading-none">{c.repere}</span>
-                      <span className="text-xs text-creme-2">{c.nom.replace("Skin fade haut", "Fade haut")}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+        {/* Bandeau : le configurateur */}
+        <div className="nuit mt-4 flex flex-wrap items-center justify-between gap-6 rounded-[1.5rem] bg-charbon-2 px-7 py-7 text-creme sm:px-10">
+          <div>
+            <p className="font-display text-[1.75rem] leading-tight">Pas sûr de ce qu&apos;il vous faut ?</p>
+            <p className="mt-1 text-creme-2">Hauteur du dégradé, longueur du dessus, barbe : le prix et la durée se calculent en direct.</p>
           </div>
-        </li>
-      </Carrousel>
+          <Bouton href="/coupes#configurateur" variant="ligne">
+            Composer ma coupe
+          </Bouton>
+        </div>
+      </div>
     </section>
   );
 }

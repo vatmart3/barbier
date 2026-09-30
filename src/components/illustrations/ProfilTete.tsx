@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Profil gravé ANIMÉ (configurateur, avant/après) : les tracés se transforment
+ * Profil gravé ANIMÉ (configurateur) : les tracés se transforment
  * (morphing Motion) quand les paramètres changent. Pour un affichage fixe,
  * utiliser <ProfilStatique> (rendu serveur, aucun JS).
  */

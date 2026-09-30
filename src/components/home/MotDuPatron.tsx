@@ -2,19 +2,24 @@
  * Le mot de Karim : la maison racontée à la première personne, signée à la
  * main. Texte de démonstration, à réécrire avec le vrai patron.
  */
-import { IllustrationSalon } from "@/components/illustrations/IllustrationSalon";
+import Image from "next/image";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
 
 export function MotDuPatron() {
   return (
-    <section aria-labelledby="mot-titre" className="clair bg-charbon-2 py-(--spacing-section) text-creme">
+    <section aria-labelledby="mot-titre" className="bg-charbon py-(--spacing-section)">
       <div className="container-page grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <figure data-reveal="monte">
-          <IllustrationSalon
-            title="Le salon Dégradé : trois fauteuils face aux miroirs en arche, suspensions cuivre, et le chat qui dort par terre"
-            className="h-auto w-full rounded-[1.75rem]"
-          />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:aspect-[4/3] lg:aspect-[4/5]">
+            <Image
+              src="/images/salon-hero.jpg"
+              alt="Les miroirs en arche et le mur en tasseaux de noyer du salon, suspensions allumées"
+              fill
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="object-cover object-[30%_32%]"
+            />
+          </div>
         </figure>
 
         <div className="max-w-xl">
@@ -35,7 +40,6 @@ export function MotDuPatron() {
             <p className="font-script -rotate-3 text-[2.75rem] leading-none text-rouge-fonce">Karim</p>
             <p className="pb-1 text-sm text-acier">fondateur, fauteuil n° 1</p>
           </div>
-          <p className="mt-6 text-sm text-acier">P.-S. Le chat s&apos;appelle Sabot. Il ne se laisse pas couper.</p>
         </div>
       </div>
     </section>

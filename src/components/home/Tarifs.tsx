@@ -88,7 +88,7 @@ export function Tarifs({ n = "05", titre = true }: { n?: string; titre?: boolean
               ))}
             </ul>
           </div>
-          <p className="text-xs text-acier-fonce">Dessus long texturisé : +3 €. Paiement carte, sans contact ou espèces. Bons cadeaux au salon.</p>
+          <p className="text-xs text-acier-fonce">Dessus long texturisé : +3 €. Carte de fidélité : la dixième coupe est offerte. Paiement carte, sans contact ou espèces. Bons cadeaux au salon.</p>
         </div>
       </div>
     </section>

@@ -50,7 +50,7 @@ export default function MentionsLegales() {
             </p>
             <h2>Propriété intellectuelle</h2>
             <p>
-              L&apos;ensemble des contenus (textes, illustrations, profils gravés, tondeuse 3D, logo, mise en page) est protégé par le droit d&apos;auteur. Toute
+              L&apos;ensemble des contenus (textes, illustrations, logo, mise en page) est protégé par le droit d&apos;auteur. Toute
               reproduction sans autorisation écrite est interdite, à l&apos;exception des photos ci-dessous, qui restent sous leur propre licence.
             </p>
             <h2>Crédits photos</h2>

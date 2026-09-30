@@ -3,11 +3,9 @@
  * fond teinté à gauche, tout le détail à droite. Empilées, sans défilement forcé.
  */
 import { barbiers } from "@/data/barbiers";
-import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
 import { Bouton } from "@/components/ui/Bouton";
 import { IconFleche } from "@/components/ui/Icons";
 import { DispoSemaine } from "./DispoSemaine";
-import { cn } from "@/lib/cn";
 
 const JOURS_COURTS: Record<string, string> = { mardi: "mar", mercredi: "mer", jeudi: "jeu", vendredi: "ven", samedi: "sam" };
 
@@ -23,19 +21,28 @@ export function EquipeHorizontal() {
             aria-labelledby={`nom-${b.id}`}
             className="grid scroll-mt-20 gap-3 rounded-[2rem] bg-charbon-2 p-3 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
           >
-            <div className="flex flex-col justify-between rounded-[1.5rem] p-7 sm:p-9" style={{ background: b.teinte, ["--paper" as string]: b.teinte }}>
+            <div className="flex flex-col justify-between gap-10 rounded-[1.5rem] border border-creme/8 bg-charbon p-7 sm:p-9">
               <div>
-                <p className="tabular text-sm text-creme-2">
+                <p className="tabular text-sm text-acier">
                   Fauteuil {i + 1} · {b.role} · depuis {b.depuis}
                 </p>
-                <h2 id={`nom-${b.id}`} className="mt-1 text-[clamp(2.75rem,2rem+3vw,4.5rem)] leading-none">
+                <h2 id={`nom-${b.id}`} className="mt-2 text-[clamp(2.75rem,2rem+3vw,4.5rem)] leading-none">
                   {b.prenom}
                 </h2>
-                <p className="font-script mt-4 max-w-xs -rotate-1 text-[1.6rem] text-rouge-fonce">{b.replique.replace(/[«»]/g, "").trim()}</p>
+                <blockquote className="font-display mt-6 max-w-sm border-l-2 border-rouge/70 pl-4 text-lg leading-relaxed text-creme-2">
+                  {b.replique.replace(/[«»]/g, "").trim()}
+                </blockquote>
               </div>
-              <div className={cn("mx-auto mt-8 w-2/3 max-w-72", i === 1 && "-scale-x-100")}>
-                <ProfilStatique id={`e-${b.id}`} {...b.portrait} title={b.alt} className="w-full text-creme" />
-              </div>
+              <dl className="grid grid-cols-2 gap-4 border-t border-creme/8 pt-6 text-sm">
+                <div>
+                  <dt className="text-acier">Au fauteuil depuis</dt>
+                  <dd className="font-display tabular mt-1 text-3xl">{b.depuis}</dd>
+                </div>
+                <div>
+                  <dt className="text-acier">Fauteuil</dt>
+                  <dd className="font-display tabular mt-1 text-3xl">n° {i + 1}</dd>
+                </div>
+              </dl>
             </div>
 
             <div className="flex flex-col gap-7 p-5 sm:p-8">

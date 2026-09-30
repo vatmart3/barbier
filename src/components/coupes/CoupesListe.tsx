@@ -1,36 +1,24 @@
 import Link from "next/link";
 import { coupes } from "@/data/prestations";
-import { ProfilStatique } from "@/components/illustrations/ProfilStatique";
 import { Bouton } from "@/components/ui/Bouton";
-import { cn } from "@/lib/cn";
 
-/** Fiches coupes : une carte arrondie par coupe, profil dans sa tuile, gestes, prix, durée, entretien. */
+/** Fiches coupes : numéro de sabot, description, gestes, prix, durée, entretien. */
 export function CoupesListe() {
   return (
     <ol className="container-page space-y-4">
-      {coupes.map((c, i) => {
-        const inverse = i % 2 === 1;
+      {coupes.map((c) => {
         return (
           <li key={c.id} id={c.id} className="scroll-mt-24">
-            <article aria-labelledby={`t-${c.id}`} className="grid gap-3 rounded-[2rem] bg-charbon-2 p-3 md:grid-cols-2">
-              <div
-                className={cn("relative flex items-end justify-center rounded-[1.5rem] bg-charbon px-8 pt-16", inverse && "md:order-2")}
-                style={{ ["--paper" as string]: "var(--color-charbon)" }}
-              >
-                <p className="absolute left-5 top-5 rounded-full bg-charbon-2 px-3.5 py-1.5 text-sm font-semibold">
-                  Sabot <span className="tabular">{c.repere}</span> <span className="font-normal text-acier">· {c.repereLegende}</span>
+            <article aria-labelledby={`t-${c.id}`} className="grid gap-6 rounded-[2rem] border border-creme/8 bg-charbon-2 p-6 sm:p-9 md:grid-cols-[9rem_1fr] md:gap-10">
+              <div className="flex items-baseline gap-4 md:block">
+                <p className="font-display tabular text-[4.5rem] leading-none text-rouge-fonce md:text-[6rem]">{c.repere}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-acier md:mt-3">
+                  Sabot
+                  <span className="mt-1 block font-normal normal-case tracking-normal">{c.repereLegende}</span>
                 </p>
-                <ProfilStatique
-                  id={`l-${c.id}`}
-                  {...c.profil}
-                  dessus={c.dessusPossibles.includes("court") ? "court" : c.dessusPossibles[0]}
-                  barbe="aucune"
-                  title={`${c.nom} : illustration de la coupe réalisée chez Dégradé, barbier à Sète`}
-                  className="w-[72%] max-w-sm text-creme"
-                />
               </div>
 
-              <div className="flex flex-col p-4 sm:p-8">
+              <div className="flex flex-col">
                 <h2 id={`t-${c.id}`} className="text-d1">
                   {c.nom}
                 </h2>

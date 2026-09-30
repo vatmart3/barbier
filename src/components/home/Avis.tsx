@@ -28,7 +28,7 @@ export function Avis() {
             <Etiquette>Entendu au fauteuil</Etiquette>
             <Lignes id="avis-titre" className="mt-4 text-d2" lines={["Ce qu'ils disent", <span key="b" className="text-acier">en se levant.</span>]} />
           </div>
-          <p aria-hidden className="font-script -rotate-2 text-2xl text-rouge-fonce">recopiés du cahier près de la caisse</p>
+          <p className="max-w-sm text-acier">Six mots laissés au comptoir ces derniers mois, recopiés tels quels.</p>
         </div>
 
         <ul className="mt-12 gap-4 sm:columns-2 lg:columns-3">

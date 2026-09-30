@@ -4,7 +4,6 @@ import { EnTete } from "@/components/ui/EnTete";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { Lignes } from "@/components/ui/Lignes";
-import { IllustrationDevanture } from "@/components/illustrations/IllustrationDevanture";
 import { Acces } from "@/components/home/Acces";
 import { Faq } from "@/components/infos/Faq";
 import { Question } from "@/components/infos/Question";
@@ -37,18 +36,7 @@ export default function InfosPage() {
           </p>
         }
       />
-      <Acces n="01" />
-      <figure className="bg-charbon pb-(--spacing-section) text-creme">
-        <div className="container-page">
-          <div data-reveal="clip-bas">
-            <IllustrationDevanture
-              title="Devanture noire du barbier Dégradé avec son store cuivre et son poteau de barbier, Grand'Rue Mario Roustan à Sète"
-              className="h-auto w-full rounded-[2rem]"
-            />
-          </div>
-          <figcaption className="eyebrow mt-3 text-acier">La devanture noire, Grand&apos;Rue. Le vélo se gare en face, aux arceaux de la pharmacie.</figcaption>
-        </div>
-      </figure>
+      <Acces n="01" clair={false} />
 
       <section aria-labelledby="faq-titre" className="salon bg-creme py-(--spacing-section) text-charbon">
         <div className="container-page grid-page gap-y-12">

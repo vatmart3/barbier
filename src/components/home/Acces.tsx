@@ -14,13 +14,13 @@ import { CarteSete } from "@/components/illustrations/CarteSete";
 import { cn } from "@/lib/cn";
 
 /** Accès — adresse, statut d'ouverture en direct, horaires, carte dessinée. */
-export function Acces({ n = "08", as = "h2" }: { n?: string; as?: "h2" | "h1" }) {
+export function Acces({ n = "08", as = "h2", clair = true }: { n?: string; as?: "h2" | "h1"; clair?: boolean }) {
   const now = useParisNow();
   const statut = useMemo(() => (now ? statutOuverture(now) : null), [now]);
   const semaine = horairesSemaine();
 
   return (
-    <section aria-labelledby="acces-titre" className="clair bg-charbon-2 py-(--spacing-section) text-creme">
+    <section aria-labelledby="acces-titre" className={`${clair ? "clair bg-charbon-2" : "bg-charbon"} py-(--spacing-section) text-creme`}>
       <div className="container-page grid-page gap-y-14">
         <div className="col-span-12 lg:col-span-5">
           <Etiquette n={n} className="text-acier">

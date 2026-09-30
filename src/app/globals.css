@@ -1,26 +1,312 @@
 @import "tailwindcss";
+@import "../design/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ==========================================================================
+   Base
+   ========================================================================== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    background: var(--color-charbon);
+    color: var(--color-creme);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scrollbar-color: var(--color-charbon-3) var(--color-charbon);
+    -webkit-tap-highlight-color: transparent;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  /* Big Shoulders : on force l'optique "Display" (opsz 72) */
+  .font-display,
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 72;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  ::selection {
+    background: var(--color-rouge);
+    color: var(--color-creme);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rouge);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  label {
+    touch-action: manipulation;
+  }
+
+  button:not(:disabled),
+  [role="button"],
+  label[for] {
+    cursor: pointer;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1em); /* pas de zoom iOS */
+  }
+
+  img,
+  svg,
+  canvas {
+    display: block;
+  }
+
+  [hidden] {
+    display: none !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ==========================================================================
+   Utilitaires maison
+   ========================================================================== */
+
+@utility container-page {
+  width: 100%;
+  max-width: 120rem;
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+/* Grille éditoriale 12 colonnes */
+@utility grid-page {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--spacing-gutter);
+}
+
+/* Traces de tondeuse en fond */
+@utility traces {
+  background-image: var(--traces);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  line-height: var(--text-micro--line-height);
+  letter-spacing: var(--text-micro--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+@utility sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  &:focus-visible {
+    position: fixed;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    z-index: 100;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Lenis
+   ========================================================================== */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* ==========================================================================
+   Loader d'entrée — CSS pur, ne dépend pas de l'hydratation
+   ========================================================================== */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background: var(--color-charbon);
+  animation: loader-out 420ms var(--ease-blade) 880ms forwards;
+  pointer-events: none;
+}
+.loader__stack {
+  height: 1em;
+  overflow: hidden;
+  font-size: clamp(7rem, 30vw, 16rem);
+  line-height: 1;
+}
+.loader__reel {
+  display: flex;
+  flex-direction: column;
+  animation: loader-reel 780ms var(--ease-comb) forwards;
+}
+.loader__reel > span {
+  height: 1em;
+  display: block;
+  text-align: center;
+}
+.loader__pass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--color-rouge);
+  transform-origin: left;
+  animation: loader-pass 820ms var(--ease-blade) forwards;
+}
+.loader__label {
+  position: absolute;
+  bottom: calc(var(--spacing-gutter) + 0.25rem);
+  left: var(--spacing-gutter);
+  right: var(--spacing-gutter);
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-acier);
+}
+@keyframes loader-reel {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3em); }
+}
+@keyframes loader-pass {
+  0% { transform: translateY(0) scaleX(0); }
+  30% { transform: translateY(0) scaleX(1); }
+  100% { transform: translateY(100dvh) scaleX(1); }
+}
+@keyframes loader-out {
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    visibility: hidden;
+  }
+}
+.loader {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+html[data-seen] .loader {
+  display: none;
+}
+
+/* ==========================================================================
+   Grain photo animé
+   ========================================================================== */
+
+.grain {
+  position: fixed;
+  inset: -10%;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("/textures/grain.png");
+  background-size: 180px 180px;
+  animation: var(--animate-grain);
+}
+
+/* ==========================================================================
+   Transitions de page (View Transitions API) — coup de lame diagonal
+   ========================================================================== */
+
+::view-transition-old(.page-cut) {
+  animation: page-cut-out 520ms var(--ease-blade) both;
+}
+::view-transition-new(.page-cut) {
+  animation: page-cut-in 620ms var(--ease-out-cut) 120ms both;
+}
+@keyframes page-cut-out {
+  from {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translateY(0);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 30%);
+    transform: translateY(-6vh);
+  }
+}
+@keyframes page-cut-in {
+  from {
+    clip-path: polygon(0 70%, 100% 100%, 100% 100%, 0 100%);
+    transform: translateY(8vh);
+  }
+  to {
+    clip-path: polygon(0 -40%, 100% 0, 100% 100%, 0 100%);
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Mouvement réduit : tout devient fondu simple
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 180ms !important;
+    transition-property: opacity, color, background-color, border-color !important;
+    scroll-behavior: auto !important;
+  }
+  .loader {
+    animation: loader-fade 300ms linear 200ms forwards !important;
+    animation-duration: 300ms !important;
+  }
+  .loader__reel,
+  .loader__pass {
+    animation: none !important;
+  }
+  .grain {
+    animation: none;
+  }
+  ::view-transition-old(.page-cut),
+  ::view-transition-new(.page-cut) {
+    animation: none !important;
+  }
+}
+@keyframes loader-fade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }

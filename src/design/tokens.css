@@ -1,0 +1,116 @@
+/* ==========================================================================
+   DÉGRADÉ — Design system
+   Source unique des tokens visuels. Les équivalents JS (easings, durées)
+   sont dans src/design/motion.ts et DOIVENT rester alignés avec ce fichier.
+   ========================================================================== */
+
+@theme inline {
+  /* ---- Couleurs ---------------------------------------------------------- */
+  --color-charbon: #111111;
+  --color-charbon-2: #1a1a1a;   /* surfaces surélevées sur fond charbon     */
+  --color-charbon-3: #242424;   /* traits, bordures sur fond charbon         */
+  --color-creme: #f2ede4;
+  --color-creme-2: #e7e0d3;     /* surfaces sur fond crème                   */
+  --color-creme-3: #d6cdbd;     /* traits sur fond crème                     */
+  --color-acier: #9aa0a6;       /* texte secondaire sur charbon (7.1:1)      */
+  --color-acier-clair: #c3c8cc;
+  --color-acier-fonce: #5c6167; /* texte secondaire sur crème (5.4:1)        */
+  --color-rouge: #c8102e;       /* enseigne : actions & détails uniquement   */
+  --color-rouge-fonce: #a50d26; /* hover / texte rouge sur crème (6.7:1)     */
+
+  /* ---- Typographies ----------------------------------------------------- */
+  --font-display: var(--font-big-shoulders), "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+
+  /* Échelle : ruptures fortes. Les tailles "display" sont fluides. */
+  --text-micro: 0.6875rem;      /* 11px — légendes, numéros de colonne       */
+  --text-micro--line-height: 1.2;
+  --text-micro--letter-spacing: 0.14em;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.4;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.45;
+  --text-xl: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --text-xl--line-height: 1.15;
+  --text-d1: clamp(2.5rem, 1.6rem + 3.6vw, 4.75rem);   /* titres de section  */
+  --text-d1--line-height: 0.9;
+  --text-d2: clamp(3.5rem, 2rem + 7vw, 9rem);          /* grands titres      */
+  --text-d2--line-height: 0.84;
+  --text-d3: clamp(6rem, 3rem + 15vw, 19rem);          /* chiffres de sabot  */
+  --text-d3--line-height: 0.78;
+  --text-mega: clamp(7rem, 1rem + 24vw, 30rem);        /* « DÉGRADÉ » hero   */
+  --text-mega--line-height: 0.74;
+
+  /* ---- Espacements (base 4px, + silences éditoriaux) -------------------- */
+  --spacing: 0.25rem;
+  --spacing-gutter: clamp(1rem, 0.6rem + 1.6vw, 2.5rem);
+  --spacing-section: clamp(6rem, 4rem + 8vw, 14rem);
+  --spacing-silence: clamp(8rem, 5rem + 12vw, 20rem);
+
+  /* ---- Rayons : quasi droits, c'est un métier de lignes ----------------- */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-pill: 999px;
+
+  /* ---- Ombres ----------------------------------------------------------- */
+  --shadow-press: 0 1px 0 rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  --shadow-card: 0 30px 60px -30px rgb(0 0 0 / 0.55), 0 2px 6px rgb(0 0 0 / 0.25);
+  --shadow-paper: 0 1px 0 rgb(17 17 17 / 0.08), 0 24px 40px -24px rgb(17 17 17 / 0.45);
+
+  /* ---- Easings maison --------------------------------------------------- */
+  --ease-blade: cubic-bezier(0.7, 0, 0.2, 1);     /* coup net, début retenu  */
+  --ease-out-cut: cubic-bezier(0.16, 1, 0.3, 1);  /* sortie longue, douce    */
+  --ease-in-cut: cubic-bezier(0.55, 0, 0.9, 0.35);
+  --ease-thud: cubic-bezier(0.34, 1.56, 0.64, 1); /* tampon qui tape         */
+  --ease-comb: cubic-bezier(0.45, 0.05, 0.25, 1); /* peigne régulier         */
+
+  /* ---- Durées ----------------------------------------------------------- */
+  --duration-snap: 200ms;
+  --duration-ui: 320ms;
+  --duration-reveal: 700ms;
+  --duration-long: 1100ms;
+
+  /* ---- Breakpoints supplémentaires ------------------------------------- */
+  --breakpoint-3xl: 120rem;
+
+  /* ---- Animations utilitaires ------------------------------------------ */
+  --animate-grain: grain 0.9s steps(6) infinite;
+  --animate-blink: blink 1.6s var(--ease-comb) infinite;
+}
+
+:root {
+  --header-h: 4.25rem;
+  --mobile-bar-h: 4rem;
+  --focus-ring: 0 0 0 2px var(--color-charbon), 0 0 0 4px var(--color-rouge);
+  /* Trace de tondeuse : lignes fines répétées, utilisées en fond ou en masque */
+  --traces: repeating-linear-gradient(
+    180deg,
+    currentColor 0 1px,
+    transparent 1px 7px
+  );
+}
+
+@keyframes grain {
+  0% { transform: translate3d(0, 0, 0); }
+  17% { transform: translate3d(-4%, 3%, 0); }
+  33% { transform: translate3d(3%, -5%, 0); }
+  50% { transform: translate3d(-6%, -2%, 0); }
+  67% { transform: translate3d(5%, 4%, 0); }
+  83% { transform: translate3d(-2%, 6%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

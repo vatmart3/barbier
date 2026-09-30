@@ -10,7 +10,7 @@ import { getBarbier } from "@/data/barbiers";
 import { Compteur } from "@/components/ui/Compteur";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { ease } from "@/design/motion";
+import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 
 export function Avis() {
@@ -46,10 +46,10 @@ export function Avis() {
               <li key={a.auteur} className="overflow-hidden border-b border-charbon/15">
                 <motion.figure
                   className="grid-page gap-y-4 py-10 md:py-14"
-                  initial={reduce ? { opacity: 0 } : { clipPath: droite ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)", x: droite ? 40 : -40 }}
-                  whileInView={reduce ? { opacity: 1 } : { clipPath: "inset(0 0% 0 0%)", x: 0 }}
+                  initial={{ clipPath: droite ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)", x: droite ? 40 : -40, opacity: 0 }}
+                  whileInView={{ clipPath: "inset(0 0% 0 0%)", x: 0, opacity: 1 }}
                   viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-                  transition={{ duration: 1, ease: ease.outCut }}
+                  transition={transition(reduce, { duration: 1, ease: ease.outCut, opacity: { duration: 0.3 } })}
                 >
                   <figcaption className={cn("col-span-12 text-sm md:col-span-3", droite && "md:order-2 md:col-start-10 md:text-right")}>
                     <span className="block font-semibold">{a.auteur}</span>

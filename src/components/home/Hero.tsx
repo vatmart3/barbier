@@ -77,10 +77,10 @@ function HeroFace({ decor = false }: { decor?: boolean }) {
         </div>
 
         <H className="relative mt-6 md:mt-8">
-          <span className="eyebrow mb-3 block text-acier" data-hero-in>
+          <span className="eyebrow mb-7 block text-acier md:mb-4" data-hero-in>
             Barbier à Sète — fade, taper, barbe au coupe-chou
           </span>
-          <span aria-hidden={decor || undefined} className="relative -mb-[0.1em] -mt-[0.3em] block select-none font-display text-[min(30vw,40svh)] leading-[0.74] tracking-[-0.02em]">
+          <span aria-hidden={decor || undefined} className="relative -mb-[0.1em] -mt-[0.12em] block select-none font-display text-[min(30vw,40svh)] leading-[0.74] tracking-[-0.02em]">
             {/* Le mot « DÉGRADÉ » est lui-même un dégradé : plein à gauche, traces à droite.
                 Le padding haut garde les accents dans la zone peinte (background-clip / mask). */}
             <span data-hero-word className="block bg-[repeating-linear-gradient(180deg,var(--color-creme)_0_2px,transparent_2px_6px)] bg-clip-text pt-[0.3em] text-transparent">
@@ -239,7 +239,7 @@ export function Hero({ children }: { children: ReactNode }) {
           <div
             data-rasoir-svg
             className={cn(
-              "absolute left-1/2 top-[40%] w-[78vw] max-w-[640px] -translate-x-1/2 -translate-y-1/2 -rotate-12 transition-opacity duration-700 md:left-[62%] md:w-[44vw]",
+              "absolute left-1/2 top-[27%] w-[72vw] max-w-[640px] -translate-x-1/2 -translate-y-1/2 -rotate-12 transition-opacity duration-700 md:left-[62%] md:top-[40%] md:w-[44vw]",
               ready3d && "opacity-0",
             )}
           >

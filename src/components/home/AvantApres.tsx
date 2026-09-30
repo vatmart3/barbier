@@ -12,7 +12,7 @@ import { getBarbier } from "@/data/barbiers";
 import { ProfilTete } from "@/components/illustrations/ProfilTete";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { ease } from "@/design/motion";
+import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 
 function Lame() {
@@ -120,10 +120,10 @@ export function AvantApres() {
             ref={stage}
             className="relative aspect-[5/6] w-full touch-pan-y select-none overflow-hidden bg-creme text-charbon sm:aspect-[4/3]"
             style={{ ["--paper" as string]: "var(--color-creme)" }}
-            initial={reduce ? { opacity: 0 } : { clipPath: "inset(100% 0 0 0)" }}
-            whileInView={reduce ? { opacity: 1 } : { clipPath: "inset(0% 0 0 0)" }}
+            initial={{ clipPath: "inset(100% 0 0 0)", opacity: 0 }}
+            whileInView={{ clipPath: "inset(0% 0 0 0)", opacity: 1 }}
             viewport={{ once: true, margin: "0px 0px -20% 0px" }}
-            transition={{ duration: 1.1, ease: ease.blade }}
+            transition={transition(reduce, { duration: 1.1, ease: ease.blade, opacity: { duration: 0.3 } })}
             onPointerDown={(e) => {
               dragging.current = true;
               (e.target as HTMLElement).setPointerCapture?.(e.pointerId);

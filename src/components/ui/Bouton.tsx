@@ -34,7 +34,7 @@ const variants: Record<Variant, string> = {
 
 const sizes = {
   md: "min-h-11 px-5 text-sm gap-3",
-  lg: "min-h-14 px-7 text-base gap-4",
+  lg: "min-h-14 px-5 text-sm gap-3 sm:px-7 sm:text-base sm:gap-4",
 };
 
 export function Bouton(props: LinkProps | ButtonProps) {
@@ -65,7 +65,7 @@ export function Bouton(props: LinkProps | ButtonProps) {
         className="pointer-events-none absolute inset-0 bg-(--wipe) transition-[clip-path] duration-500 ease-(--ease-blade) [clip-path:polygon(0_100%,0_100%,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,130%_0,100%_100%,0_100%)] group-focus-visible:[clip-path:polygon(0_0,130%_0,100%_100%,0_100%)]"
       />
       {icon ? <span className="relative shrink-0">{icon}</span> : null}
-      <span className="relative font-semibold tracking-wide">{children}</span>
+      <span className="relative whitespace-nowrap font-semibold tracking-wide">{children}</span>
       {iconEnd ? (
         <span className="relative shrink-0 transition-transform duration-300 ease-(--ease-out-cut) group-hover:translate-x-1">{iconEnd}</span>
       ) : null}

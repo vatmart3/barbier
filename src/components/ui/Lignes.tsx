@@ -6,7 +6,7 @@
  */
 import { motion, useReducedMotion } from "motion/react";
 import { createElement, type ReactNode } from "react";
-import { ease } from "@/design/motion";
+import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -28,10 +28,10 @@ export function Lignes({ lines, as = "h2", className, lineClassName, delay = 0, 
       <span key={i} className={cn("-mb-[0.08em] -mt-[0.2em] block overflow-hidden pb-[0.08em] pt-[0.2em]", lineClassName)}>
         <motion.span
           className="block will-change-transform"
-          initial={reduce ? { opacity: 0 } : { y: "108%", rotate: 1.5 }}
-          whileInView={reduce ? { opacity: 1 } : { y: "0%", rotate: 0 }}
+          initial={{ y: "108%", rotate: 1.5, opacity: 0 }}
+          whileInView={{ y: "0%", rotate: 0, opacity: 1 }}
           viewport={{ once: true, margin: "0px 0px -8% 0px" }}
-          transition={{ duration: reduce ? 0.3 : 0.9, ease: ease.outCut, delay: delay + i * stagger }}
+          transition={transition(reduce, { duration: 0.9, ease: ease.outCut, delay: delay + i * stagger, opacity: { duration: 0.4, delay: delay + i * stagger } })}
         >
           {line}
         </motion.span>

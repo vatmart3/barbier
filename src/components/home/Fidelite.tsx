@@ -9,7 +9,7 @@ import { useRef, useState } from "react";
 import { fidelite } from "@/data/fidelite";
 import { Etiquette } from "@/components/ui/Etiquette";
 import { Lignes } from "@/components/ui/Lignes";
-import { ease } from "@/design/motion";
+import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 
 const ROT = [-8, 5, -3, 9, -6, 2, -10, 6, -4, 0];
@@ -35,7 +35,7 @@ function Tampon({ n }: { n: number }) {
 export function Fidelite() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const [auto, setAuto] = useState(reduce ? fidelite.tamponsDemo : 0);
+  const [auto, setAuto] = useState(0);
   const [extra, setExtra] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.8", "center 0.5"] });
 
@@ -68,10 +68,10 @@ export function Fidelite() {
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
           <motion.div
             className="relative mx-auto max-w-xl rotate-[-2deg] bg-creme p-5 text-charbon shadow-paper sm:p-8"
-            initial={reduce ? { opacity: 0 } : { y: 60, rotate: -8, opacity: 0 }}
-            whileInView={reduce ? { opacity: 1 } : { y: 0, rotate: -2, opacity: 1 }}
+            initial={{ y: 60, rotate: -8, opacity: 0 }}
+            whileInView={{ y: 0, rotate: -2, opacity: 1 }}
             viewport={{ once: true, margin: "0px 0px -15% 0px" }}
-            transition={{ duration: 1, ease: ease.outCut }}
+            transition={transition(reduce, { duration: 1, ease: ease.outCut })}
           >
             <div className="flex items-baseline justify-between border-b border-charbon/20 pb-3">
               <p className="font-display text-3xl leading-none">Dégradé</p>
@@ -98,10 +98,10 @@ export function Fidelite() {
                       {filled ? (
                         <motion.span
                           className="absolute -inset-1 text-rouge mix-blend-multiply"
-                          initial={reduce ? { opacity: 0 } : { scale: 1.9, opacity: 0, rotate: ROT[i] - 20 }}
+                          initial={{ scale: 1.9, opacity: 0, rotate: ROT[i] - 20 }}
                           animate={{ scale: 1, opacity: 0.92, rotate: ROT[i] }}
                           exit={{ opacity: 0 }}
-                          transition={{ duration: 0.38, ease: ease.thud }}
+                          transition={transition(reduce, { duration: 0.38, ease: ease.thud })}
                         >
                           <Tampon n={i + 1} />
                         </motion.span>

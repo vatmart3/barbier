@@ -6,16 +6,13 @@
  * tondeuse), Méditerranée. Les tracés se dessinent à l'entrée.
  */
 import { motion, useReducedMotion } from "motion/react";
-import { ease } from "@/design/motion";
+import { ease, transition } from "@/design/motion";
 
-const draw = (i: number, reduce: boolean | null) =>
-  reduce
-    ? { initial: { opacity: 0 }, whileInView: { opacity: 1 }, transition: { duration: 0.3 } }
-    : {
-        initial: { pathLength: 0, opacity: 0 },
-        whileInView: { pathLength: 1, opacity: 1 },
-        transition: { duration: 1.6, ease: ease.comb, delay: 0.1 + i * 0.08 },
-      };
+const draw = (i: number, reduce: boolean | null) => ({
+  initial: { pathLength: 0, opacity: 0 },
+  whileInView: { pathLength: 1, opacity: 1 },
+  transition: transition(reduce, { duration: 1.6, ease: ease.comb, delay: 0.1 + i * 0.08 }),
+});
 
 export function CarteSete({ title }: { title: string }) {
   const reduce = useReducedMotion();
@@ -100,10 +97,10 @@ export function CarteSete({ title }: { title: string }) {
 
       {/* Le salon */}
       <motion.g
-        initial={reduce ? { opacity: 0 } : { scale: 0, opacity: 0 }}
+        initial={{ scale: 0, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={v}
-        transition={{ duration: 0.5, ease: ease.thud, delay: reduce ? 0 : 1.4 }}
+        transition={transition(reduce, { duration: 0.5, ease: ease.thud, delay: 1.4 })}
         style={{ transformOrigin: "330px 252px" }}
       >
         <circle cx="330" cy="252" r="22" fill="var(--color-rouge)" opacity="0.18" />

@@ -185,7 +185,7 @@ function Rasoir({ onReady }: { onReady?: () => void }) {
     const aim = Math.atan2(dir.y, dir.x) - Math.PI; // la lame (côté -x local) mène le geste
     const start = R.clone().addScaledVector(dir, -0.12);
     const end = R.clone().addScaledVector(dir, 1.45);
-    const rest = new THREE.Vector3(portrait ? 0.08 * w : 0.2 * w, portrait ? 0.02 * h : 0.03 * h, 0);
+    const rest = new THREE.Vector3(portrait ? 0.02 * w : 0.2 * w, portrait ? 0.22 * h : 0.03 * h, 0);
 
     if (p < 0.3) {
       g.position.copy(rest);

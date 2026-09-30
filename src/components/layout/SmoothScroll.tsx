@@ -5,6 +5,7 @@
  * Désactivé si prefers-reduced-motion : défilement natif.
  */
 import Lenis from "lenis";
+import { MotionConfig } from "motion/react";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
@@ -51,5 +52,9 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     return () => window.clearTimeout(id);
   }, [pathname, lenis]);
 
-  return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
+  return (
+    <LenisContext.Provider value={lenis}>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </LenisContext.Provider>
+  );
 }

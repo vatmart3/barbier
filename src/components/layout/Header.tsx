@@ -35,16 +35,20 @@ export function Header() {
           scrolled ? "border-b border-creme/10 bg-charbon/92 backdrop-blur-md" : "border-b border-transparent bg-transparent",
         )}
       >
-        <div className="container-page flex h-full items-center gap-4">
+        <div className="container-page flex h-full items-center gap-3 sm:gap-4">
           <Link href="/" className="group mr-auto flex items-baseline gap-2.5 lg:mr-0" aria-label="Dégradé, barbier à Sète — accueil">
             <span className="font-display text-[1.9rem] leading-none tracking-tight">Dégradé</span>
-            <span className="eyebrow hidden text-acier sm:inline">Barbier · Sète</span>
+            <span className="eyebrow hidden text-acier xl:inline">Barbier · Sète</span>
           </Link>
 
-          <div className="flex items-center gap-3 lg:ml-8 lg:mr-auto">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3 lg:ml-8 lg:mr-auto">
             <Enseigne />
-            <ProchainCreneauPastille className="hidden md:inline-flex" />
-            <ProchainCreneauPastille className="md:hidden" compact />
+            <span className="hidden xl:contents">
+              <ProchainCreneauPastille />
+            </span>
+            <span className="contents xl:hidden">
+              <ProchainCreneauPastille compact />
+            </span>
           </div>
 
           <nav aria-label="Navigation principale" className="hidden lg:block">
@@ -74,9 +78,9 @@ export function Header() {
             </ul>
           </nav>
 
-          <Bouton href="/reserver" className="hidden sm:inline-flex" magnetic>
-            Réserver
-          </Bouton>
+          <span className="hidden sm:contents">
+            <Bouton href="/reserver">Réserver</Bouton>
+          </span>
 
           <button
             type="button"

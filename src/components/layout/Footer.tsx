@@ -8,14 +8,14 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-creme/10 bg-charbon pb-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom))] text-creme lg:pb-0">
       <div className="container-page grid-page gap-y-12 pt-20 pb-10">
-        <div className="col-span-12 md:col-span-5">
+        <div className="col-span-12 lg:col-span-5">
           <p className="font-display text-d1">On coupe. On taille. On rase.</p>
           <p className="mt-4 max-w-sm text-sm text-acier">
             Du mardi au samedi, Grand&apos;Rue à Sète. Nocturne le jeudi jusqu&apos;à 21 h pour ceux qui travaillent sur le port.
           </p>
         </div>
 
-        <address className="col-span-12 not-italic sm:col-span-6 md:col-span-3">
+        <address className="col-span-12 not-italic sm:col-span-6 md:col-span-4 lg:col-span-3">
           <h2 className="eyebrow mb-4 text-acier">Le salon</h2>
           <p className="text-sm leading-relaxed">
             {site.fullName}
@@ -39,7 +39,7 @@ export function Footer() {
           </a>
         </address>
 
-        <div className="col-span-12 sm:col-span-6 md:col-span-2">
+        <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-2">
           <h2 className="eyebrow mb-4 text-acier">Horaires</h2>
           <dl className="space-y-2 text-sm">
             {groupes.map((g) => (
@@ -51,7 +51,7 @@ export function Footer() {
           </dl>
         </div>
 
-        <nav aria-label="Pied de page" className="col-span-12 md:col-span-2">
+        <nav aria-label="Pied de page" className="col-span-12 md:col-span-4 lg:col-span-2">
           <h2 className="eyebrow mb-4 text-acier">Pages</h2>
           <ul className="text-sm">
             {[...nav, { href: "/reserver", label: "Réserver", sabot: "" }].map((n) => (

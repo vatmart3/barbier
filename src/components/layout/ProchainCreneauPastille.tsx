@@ -27,7 +27,7 @@ export function ProchainCreneauPastille({ className, compact = false }: { classN
     <Link
       href={href}
       className={cn(
-        "group inline-flex min-h-11 items-center gap-2.5 rounded-pill border border-creme/15 bg-charbon/60 px-3.5 text-xs text-creme backdrop-blur-sm transition-colors duration-300 hover:border-creme/50",
+        "group inline-flex min-h-11 shrink-0 items-center gap-2 rounded-pill border border-creme/15 bg-charbon/60 px-3 text-xs text-creme sm:px-3.5 backdrop-blur-sm transition-colors duration-300 hover:border-creme/50",
         className,
       )}
       aria-label={slot && barbier ? `Prochain créneau libre : ${jour} à ${formatHeure(slot.start)} avec ${barbier.prenom}. Réserver ce créneau.` : "Voir les créneaux libres"}
@@ -41,7 +41,7 @@ export function ProchainCreneauPastille({ className, compact = false }: { classN
           <span className="tabular whitespace-nowrap">
             <span className="text-acier">{jour === "aujourd'hui" ? "Auj." : jour === "demain" ? "Demain" : jour} </span>
             <strong className="font-semibold">{formatHeure(slot.start)}</strong>
-            <span className="text-acier"> · {barbier.prenom}</span>
+            <span className="text-acier max-[359px]:hidden"> · {barbier.prenom}</span>
           </span>
         ) : (
           <span className="tabular whitespace-nowrap">

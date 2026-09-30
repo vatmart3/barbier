@@ -15,7 +15,7 @@ import { ProfilTete } from "@/components/illustrations/ProfilTete";
 import { Compteur } from "@/components/ui/Compteur";
 import { Bouton } from "@/components/ui/Bouton";
 import { IconFleche } from "@/components/ui/Icons";
-import { ease } from "@/design/motion";
+import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 
 type Etape = 0 | 1 | 2;
@@ -117,17 +117,17 @@ export function Configurateur() {
     <div className="grid-page gap-y-10">
       {/* Profil en direct */}
       <div className="col-span-12 lg:col-span-6">
-        <div className="relative bg-creme-2 text-charbon lg:sticky lg:top-24" style={{ ["--paper" as string]: "var(--color-creme-2)" }}>
+        <div className="sticky top-(--header-h) z-10 bg-creme-2 text-charbon shadow-[0_12px_24px_-16px_rgba(17,17,17,0.4)] lg:top-24 lg:shadow-none" style={{ ["--paper" as string]: "var(--color-creme-2)" }}>
           <div className="absolute left-4 top-4 z-10">
             <p className="eyebrow text-acier-fonce">Votre coupe</p>
             <AnimatePresence mode="wait">
               <motion.p
                 key={d?.libelle}
                 className="font-display text-3xl leading-none"
-                initial={reduce ? { opacity: 0 } : { y: 12, opacity: 0 }}
+                initial={{ y: 12, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={reduce ? { opacity: 0 } : { y: -12, opacity: 0 }}
-                transition={{ duration: 0.3, ease: ease.outCut }}
+                exit={{ y: -12, opacity: 0 }}
+                transition={transition(reduce, { duration: 0.3, ease: ease.outCut })}
               >
                 {d?.libelle}
               </motion.p>
@@ -144,7 +144,7 @@ export function Configurateur() {
             vapeur
             guides
             title={`Aperçu : ${d?.libelle}, ${d?.detail}`}
-            className="mx-auto w-full max-w-[520px] pt-16"
+            className="mx-auto h-[34svh] w-auto pt-12 lg:h-auto lg:w-full lg:max-w-[520px] lg:pt-16"
           />
         </div>
       </div>
@@ -209,10 +209,10 @@ export function Configurateur() {
             role="tabpanel"
             aria-labelledby={`tab-etape-${etape}`}
             className="space-y-2"
-            initial={reduce ? { opacity: 0 } : { x: 30, opacity: 0 }}
+            initial={{ x: 30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={reduce ? { opacity: 0 } : { x: -30, opacity: 0 }}
-            transition={{ duration: 0.35, ease: ease.outCut }}
+            exit={{ x: -30, opacity: 0 }}
+            transition={transition(reduce, { duration: 0.35, ease: ease.outCut })}
           >
             <legend className="sr-only">{ETAPES[etape]}</legend>
             {etape === 0

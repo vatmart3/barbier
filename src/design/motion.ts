@@ -32,3 +32,12 @@ export const spring = {
   magnetic: { stiffness: 220, damping: 18, mass: 0.4 },
   soft: { stiffness: 120, damping: 20, mass: 0.8 },
 } as const;
+
+/**
+ * Transition « mouvement réduit » : les états initiaux restent identiques
+ * côté serveur et client (pas d'écart d'hydratation) ; seul le déroulé change —
+ * déplacements instantanés, simple fondu sur l'opacité.
+ */
+export function transition<T extends object>(reduce: boolean | null, normal: T) {
+  return reduce ? { default: { duration: 0 }, opacity: { duration: 0.3 } } : normal;
+}

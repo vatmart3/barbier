@@ -16,7 +16,7 @@ import { devis, euros, prestationFromParams, type Prestation } from "@/lib/prici
 import { estLibre, getCreneaux, joursReservables, premierLibre, type ChoixBarbier } from "@/lib/slots";
 import { formatDateCourte, formatDateLongue, formatHeure, formatJourRelatif, diffDays } from "@/lib/time";
 import { planningConfig } from "@/data/planning";
-import { ease } from "@/design/motion";
+import { ease, transition } from "@/design/motion";
 import { cn } from "@/lib/cn";
 import { ProfilTete } from "@/components/illustrations/ProfilTete";
 import { IconFleche } from "@/components/ui/Icons";
@@ -134,10 +134,10 @@ export function Reservation() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={etape}
-          initial={reduce ? { opacity: 0 } : { opacity: 0, x: 40 }}
+          initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={reduce ? { opacity: 0 } : { opacity: 0, x: -40 }}
-          transition={{ duration: 0.4, ease: ease.outCut }}
+          exit={{ opacity: 0, x: -40 }}
+          transition={transition(reduce, { duration: 0.4, ease: ease.outCut })}
         >
           {etape === 1 ? (
             <EtapePrestation
